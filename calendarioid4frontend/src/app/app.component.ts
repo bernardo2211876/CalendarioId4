@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'calendarioid4frontend';
 
   constructor(private router: Router) {
-    this.router.navigate(['/register']);
+    //this.router.navigate(['/register']);
   }
 
 }
