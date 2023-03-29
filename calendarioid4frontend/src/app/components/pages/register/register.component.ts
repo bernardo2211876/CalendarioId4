@@ -9,8 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  displayMsg: string="";
-  isAccountCreated: boolean = false;
+
+
   constructor(private authService: AuthService){
 
   }
@@ -56,27 +56,16 @@ export class RegisterComponent implements OnInit {
 
   registerSubmited(){
     this.authService.registerUser(this.registerForm.getRawValue())
-      /*[
-      this.registerForm.value.nome,
-     this.registerForm.value.email,
-      this.registerForm.value.password,
-      this.registerForm.value.nif,
-      this.registerForm.value.codpostal,
-      this.registerForm.value.morada,
-      this.registerForm.value.telemovel,
-      this.registerForm.value.funcao,
-      this.registerForm.value.isAdmin,
-    ]*/
     .subscribe(res=>{
-      if(res == 'Success'){
-        this.displayMsg ='Account created Successfully!';
-        this.isAccountCreated = true;
-      }else if(res == 'Already Exist'){
-        this.displayMsg ='Account Already Exist. Try another email.';
-        this.isAccountCreated = false;
+      if(res == 200){
+        alert('Account created Successfully!');
+
+      }else if(res == 58){
+        alert('Account Already Exist. Try another email.');
+
       }else{
-        this.displayMsg ='Something went wrong';
-        this.isAccountCreated = false;
+        alert('Something went wrong');
+
       }
     });
   }

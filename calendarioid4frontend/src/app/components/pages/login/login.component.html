@@ -1,4 +1,7 @@
 <div class="container">
+ <!-- <p class="text-center fs-3" [ngClass]="isUserlogin ? 'text-success pb-1':'text-danger pb-1' ">
+    {{displayMsg}}
+  </p>-->
 <form class="border p-3 rounded-3" [formGroup]="loginForm" (ngSubmit)="loginSubmited()">
   <img class="mb-4" src="../../../../assets/id4logo.png" alt="" width="72" height="57">
   <h1 class="h3 mb-3 fw-normal">Por favor faça login</h1>

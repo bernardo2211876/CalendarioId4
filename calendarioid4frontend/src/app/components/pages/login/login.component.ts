@@ -9,7 +9,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginAuth: AuthService){
+
+
+  constructor(private authService: AuthService){
 
   }
 
@@ -27,8 +29,19 @@ export class LoginComponent implements OnInit {
   });
 
   loginSubmited(){
-   // this.loginAuth.loginUser([this.loginForm.value.email,
-    //this.loginForm.value.password]).subscribe();
+    this.authService.loginUser(this.loginForm.getRawValue())
+    .subscribe(res=>{
+      if(res == 200){
+        alert('Login efetuado com sucesso!');
+
+      }else if(res == 400){
+        alert('Credenciais Inválidas');
+
+      }else{
+        alert('Alguma coisa correu mal');
+
+      }
+    });
   }
 
   get Email(): FormControl {

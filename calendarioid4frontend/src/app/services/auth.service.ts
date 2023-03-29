@@ -15,12 +15,7 @@ baseServerUrl="https://localhost:7272/api/";
     return this.http.post(this.baseServerUrl+"Utilizador/CreateUser",user);
   }
 
-  loginUser(loginInfo: Array<string>){
-    return this.http.post(this.baseServerUrl + 'Utilizador/LoginUser',{
-      Email: loginInfo[0],
-      Password: loginInfo[1]
-    },{
-      responseType: 'text',
-    });
+  loginUser(user:any){
+    return this.http.post(this.baseServerUrl + 'Utilizador/LoginUser',user);
   }
 }

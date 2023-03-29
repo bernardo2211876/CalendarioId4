@@ -55,10 +55,10 @@ namespace calendarioid4backend.Controllers
             Utilizador newuser= JsonConvert.DeserializeObject<Utilizador>(task.Result);
                 
             
-                /*if (Context.Utilizadors.Where(u => u.Email == newuser.Email).FirstOrDefault() != null)
+                if (Context.Utilizadors.Where(u => u.Email == newuser.Email).FirstOrDefault() != null)
                 {
-                    return Ok("Already Exist");
-                }*/
+                    return Ok(58);
+                }
 
                 newuser.Idutilizadorcriador = 1;
                 newuser.Datacriacao = DateTime.Now;
@@ -67,7 +67,7 @@ namespace calendarioid4backend.Controllers
                 newuser.Estadoid = 1;
                 Context.Utilizadors.Add(newuser);
                 Context.SaveChanges();
-                return Ok("Success");
+                return Ok(200);
 
             }
             catch (Exception ex)
@@ -78,14 +78,29 @@ namespace calendarioid4backend.Controllers
         }
 
         [HttpPost("LoginUser")]
-        public IActionResult Login(Login user)
+        public IActionResult Login()
         {
-            var userAvailable = Context.Utilizadors.Where(u => u.Email == user.Email && u.Password == user.Password).FirstOrDefault();
-            if(userAvailable != null)
+            try
             {
-                return Ok("Sucess");
-            } 
-            return Ok("Failure");
+                Task<string> task = null;
+                using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
+                {
+                    task = reader.ReadToEndAsync();
+                };
+                Utilizador user = JsonConvert.DeserializeObject<Utilizador>(task.Result);
+
+                var userAvailable = Context.Utilizadors.Where(u => u.Email == user.Email && u.Password == user.Password).FirstOrDefault();
+                if (userAvailable != null)
+                {
+                    return Ok(200);
+                }
+                return Ok(400);
+
+            }catch(Exception ex)
+            {
+                return Ok("Error"+ex);
+            }
+            
         }
 
 
