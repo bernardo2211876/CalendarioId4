@@ -53,11 +53,12 @@ namespace calendarioid4backend.Controllers
             };
              
             Utilizador newuser= JsonConvert.DeserializeObject<Utilizador>(task.Result);
+                
             
-                if (Context.Utilizadors.Where(u => u.Email == newuser.Email).FirstOrDefault() != null)
+                /*if (Context.Utilizadors.Where(u => u.Email == newuser.Email).FirstOrDefault() != null)
                 {
                     return Ok("Already Exist");
-                }
+                }*/
 
                 newuser.Idutilizadorcriador = 1;
                 newuser.Datacriacao = DateTime.Now;
@@ -71,7 +72,7 @@ namespace calendarioid4backend.Controllers
             }
             catch (Exception ex)
             {
-                return Ok("Error");
+                return Ok("Error"+ex);
             }
             
         }
