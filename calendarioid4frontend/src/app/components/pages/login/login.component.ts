@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
 
 
 
@@ -31,18 +33,17 @@ export class LoginComponent implements OnInit {
   loginSubmited(){
     this.authService.loginUser(this.loginForm.getRawValue())
     .subscribe(res=>{
-      if(res == 200){
-        alert('Login efetuado com sucesso!');
 
-      }else if(res == 400){
+       if(res == 400){
         alert('Credenciais Inválidas');
 
       }else{
-        alert('Alguma coisa correu mal');
-
+        this.authService.setToken(res.toString());
       }
     });
   }
+
+
 
   get Email(): FormControl {
     return this.loginForm.get('email') as FormControl;

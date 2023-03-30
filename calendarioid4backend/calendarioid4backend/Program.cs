@@ -1,6 +1,10 @@
 global using calendarioid4backend.Models;
 global using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Cryptography;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var builder2 = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: false);
@@ -26,6 +30,21 @@ builder.Services.AddCors(options =>
         });
 });*/
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(x =>
+{
+    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = "localhost",
+        ValidAudience = "localhost",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["jwtConfig:Key"])),
+        ClockSkew = TimeSpan.Zero
+    };
+});
+
 builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
 {
     build.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
@@ -48,5 +67,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.UseCors("corspolicy");
+app.UseAuthentication();
 //app.UseCors(MyAllowSpecificOrigins);
 app.Run();  
