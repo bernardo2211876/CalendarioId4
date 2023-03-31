@@ -11,6 +11,8 @@ import { ButtonsComponent } from './components/partials/buttons/buttons.componen
 import { NotificationsComponent } from './components/partials/notifications/notifications.component';
 import { ModalsComponent } from './components/partials/modals/modals.component';
 import { FormsComponent } from './components/pages/forms/forms.component';
+import { LoginComponent } from './components/pages/login/login.component';
+import { RegisterComponent } from './components/pages/register/register.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -24,6 +26,9 @@ const routes: Routes = [
   { path: 'notifications', component: NotificationsComponent },
   { path: 'modals', component: ModalsComponent },
   { path: 'forms', component: FormsComponent },
+  {path:'login', component: LoginComponent},
+  {path:'register', component: RegisterComponent},
+
 ];
 
 @NgModule({

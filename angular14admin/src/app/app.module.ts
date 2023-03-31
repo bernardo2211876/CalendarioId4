@@ -17,6 +17,13 @@ import { ButtonsComponent } from './components/partials/buttons/buttons.componen
 import { FormsComponent } from './components/pages/forms/forms.component';
 import { ModalsComponent } from './components/partials/modals/modals.component';
 import { NotificationsComponent } from './components/partials/notifications/notifications.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthService } from './services/auth.service';
+import { CommonModule } from '@angular/common';
+import { LoginComponent } from './components/pages/login/login.component';
+import { RegisterComponent } from './components/pages/register/register.component';
 
 
 @NgModule({
@@ -35,14 +42,24 @@ import { NotificationsComponent } from './components/partials/notifications/noti
     FormsComponent,
     ModalsComponent,
     NotificationsComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     BsDropdownModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    CommonModule,
+    FormsModule,
+
   ],
-  providers: [],
+  providers: [
+    AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
