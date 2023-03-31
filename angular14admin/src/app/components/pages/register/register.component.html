@@ -1,0 +1,124 @@
+<div class="container">
+
+  <p class="text-center fs-3" [ngClass]="isAccountCreated ? 'text-success pb-1':'text-danger pb-1' ">
+    {{displayMsg}}
+  </p>
+  <form class="border p-3 rounded-3" [formGroup]="registerForm" (ngSubmit)="registerSubmited()">
+    <img class="mb-4" src="../../../../assets/id4logo.png" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Por favor faça o Registo de um novo utilizador</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="nome" placeholder="Bernardo Costa"
+      formControlName="nome">
+      <label for="floatingInput">Nome</label>
+      <div class="form-text text-danger" *ngIf="Nome.errors?.['required'] && (Nome.dirty || Nome.touched)">
+        Nome é obrigatório
+      </div>
+    </div>
+
+    <div class="form-floating">
+      <input type="email" class="form-control" id="email" placeholder="name@example.com"
+      formControlName="email">
+      <label for="floatingInput">Email</label>
+      <div class="form-text text-danger" *ngIf="Email.errors?.['required'] && (Email.dirty || Email.touched)">
+        Email é obrigatório
+      </div>
+      <div class="form-text text-danger" *ngIf="Email.errors?.['email'] && (Email.dirty || Email.touched)">
+        Email é inválido
+      </div>
+    </div>
+
+  <br/>
+
+    <div class="form-floating">
+      <input type="password" class="form-control" id="password" placeholder="Password"
+      formControlName="password">
+      <label for="floatingPassword">Password</label>
+      <div class="form-text text-danger" *ngIf="Password.errors?.['minLength'] || Password.errors?.['maxLength'] && (Password.dirty || Password.touched)">
+        A password tem no mínimo 8 caracteres
+      </div>
+      <div class="form-text text-danger" *ngIf="Password.errors?.['required'] && (Password.dirty || Password.touched)">
+        Password é obrigatória
+      </div>
+    </div>
+
+    <br/>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="nif" placeholder="638193784"
+      formControlName="nif">
+      <label for="floatingInput">NIF</label>
+      <div class="form-text text-danger" *ngIf="Nif.errors?.['required'] && (Nif.dirty || Nif.touched)">
+        NIF é obrigatório
+      </div>
+      <div class="form-text text-danger" *ngIf="Nif.errors?.['minLength'] || Nif.errors?.['maxLength'] && (Nif.dirty || Nif.touched)">
+        O nif tem de ter 9 caracteres
+      </div>
+    </div>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="codpostal" placeholder="2490-427"
+      formControlName="codpostal">
+      <label for="floatingInput">Código Postal</label>
+      <div class="form-text text-danger" *ngIf="Codpostal.errors?.['required'] && (Codpostal.dirty || Codpostal.touched)">
+        Código Postal é obrigatório
+      </div>
+    </div>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="morada" placeholder="Rua ..."
+      formControlName="morada">
+      <label for="floatingInput">Morada</label>
+      <div class="form-text text-danger" *ngIf="Morada.errors?.['required'] && (Morada.dirty || Morada.touched)">
+        Morada é obrigatório
+      </div>
+    </div>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="telemovel" placeholder="913627821"
+      formControlName="telemovel">
+      <label for="floatingInput">Contacto Telefónico</label>
+      <div class="form-text text-danger" *ngIf="Telemovel.errors?.['required'] && (Telemovel.dirty || Telemovel.touched)">
+        Contacto Telefónico é obrigatório
+      </div>
+      <div class="form-text text-danger" *ngIf="Telemovel.errors?.['minLength'] || Telemovel.errors?.['maxLength'] && (Telemovel.dirty || Telemovel.touched)">
+        O contacto telefónico tem de ter 9 caracteres
+      </div>
+    </div>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="funcao" placeholder="913627821"
+      formControlName="funcao">
+      <label for="floatingInput">Função</label>
+      <div class="form-text text-danger" *ngIf="Funcao.errors?.['required'] && (Funcao.dirty || Funcao.touched)">
+        Função é obrigatório
+      </div>
+    </div>
+
+    <div>
+      <label class="form-check-labe">É Admin?</label>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" id="isAdmin" name="isAdmin" checked
+      formControlName="isAdmin" value="false">
+      <label class="form-check-label" for="flexRadioDefault1">
+        Não
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" id="isAdmin" name="isAdmin"
+      formControlName="isAdmin" value="true">
+      <label class="form-check-label" for="flexRadioDefault2">
+      Sim
+      </label>
+    </div>
+  </div>
+
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="registerForm.invalid">Registar</button>
+
+  </form>
+  </div>
+  <!--<app-footer></app-footer>-->
+
+
+
