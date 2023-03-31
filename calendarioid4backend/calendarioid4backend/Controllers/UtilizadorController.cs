@@ -65,7 +65,7 @@ namespace calendarioid4backend.Controllers
                     return Ok(58);
                 }
 
-                newuser.Password=Encodepassword(newuser.Password);
+                //newuser.Password=Encodepassword(newuser.Password);
                 newuser.Idutilizadorcriador = 1;
                 newuser.Datacriacao = DateTime.Now;
                 newuser.Idutilizadorultimaedicao = 1;
@@ -120,11 +120,11 @@ namespace calendarioid4backend.Controllers
             
         }
 
-     public String Encodepassword(String password)
+     /*public String Encodepassword(String password)
         {
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
             return passwordHash;
-        }
+        }*/
 
      
 
