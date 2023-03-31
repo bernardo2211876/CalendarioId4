@@ -98,11 +98,11 @@ namespace calendarioid4backend.Controllers
 
 
                 
-                var userAvailable = Context.Utilizadors.Where(u => u.Email == user.Email).FirstOrDefault();
-                bool passwordequal = BCrypt.Net.BCrypt.Verify(user.Password, userAvailable.Password);
+                var userAvailable = Context.Utilizadors.Where(u => u.Email == user.Email && u.Password == user.Password).FirstOrDefault();
+                //bool passwordequal = BCrypt.Net.BCrypt.Verify(user.Password, userAvailable.Password);
 
 
-                if (passwordequal == true)
+                if (userAvailable != null)
                 {
                     return Ok(new JwtService(Config).GenerateToken(
                         user.Id.ToString(),
