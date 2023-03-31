@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  router: any;
 
   constructor(private authService: AuthService){
 
@@ -36,7 +37,9 @@ export class LoginComponent implements OnInit {
         alert('Credenciais Inválidas');
 
       }else{
-        this.authService.setToken(res.toString());
+        //this.authService.setToken(res.toString());
+        //this.router.navigate(['/dashboard']);
+        alert('login com sucesso')
       }
     });
   }

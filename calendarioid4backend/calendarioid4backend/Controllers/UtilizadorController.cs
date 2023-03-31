@@ -104,12 +104,13 @@ namespace calendarioid4backend.Controllers
 
                 if (userAvailable != null)
                 {
-                    return Ok(new JwtService(Config).GenerateToken(
-                        user.Id.ToString(),
-                        user.Nome,
-                        user.Email,
-                        user.Telemovel.ToString()
-                        ));
+                    /* return Ok(new JwtService(Config).GenerateToken(
+                         user.Id.ToString(),
+                         user.Nome,
+                         user.Email,
+                         user.Telemovel.ToString()
+                         ));*/
+                    return Ok(200);
                 }
                 return Ok(400);
 
