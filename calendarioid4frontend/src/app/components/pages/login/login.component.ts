@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,9 +9,9 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  router: any;
 
-  constructor(private authService: AuthService){
+
+  constructor(private authService: AuthService, private router : Router){
 
   }
 
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
 
       }else{
         //this.authService.setToken(res.toString());
-        //this.router.navigate(['/dashboard']);
+        this.router.navigateByUrl('');
         alert('login com sucesso')
       }
     });
