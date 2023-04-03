@@ -24,22 +24,22 @@ public partial class Id4calendariobdContext : DbContext
     public virtual DbSet<EstadoAusencium> EstadoAusencia { get; set; }
 
     public virtual DbSet<EstadoUtilizador> EstadoUtilizadors { get; set; }
-    
+
     public virtual DbSet<TipoAusencium> TipoAusencia { get; set; }
 
     public virtual DbSet<Utilizador> Utilizadors { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-A7F0QOT;Database=id4calendariobd;trusted_connection=true;encrypt=false;");
-
-    //DESKTOP-A7F0QOT
-    //DESKTOP-RJUJ03S
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=192.168.16.11\\SQL2019LAB;database=id4calendariobd;Integrated Security=False;User ID=id4calendariouser;Password=Id4Cal123!;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasDefaultSchema("db_owner");
+
         modelBuilder.Entity<Aprovador>(entity =>
         {
-            entity.ToTable("aprovador");
+            entity.ToTable("aprovador", "dbo");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Aprovadorid).HasColumnName("aprovadorid");
@@ -56,17 +56,17 @@ public partial class Id4calendariobdContext : DbContext
             entity.HasOne(d => d.AprovadorNavigation).WithMany(p => p.AprovadorAprovadorNavigations)
                 .HasForeignKey(d => d.Aprovadorid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_aprovador_utilizador_aprovador");
+                .HasConstraintName("FK_aprovador_utilizador1");
 
             entity.HasOne(d => d.Utilizador).WithMany(p => p.AprovadorUtilizadors)
                 .HasForeignKey(d => d.Utilizadorid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_aprovador_utilizador_utilizador");
+                .HasConstraintName("FK_aprovador_utilizador");
         });
 
         modelBuilder.Entity<Ausencium>(entity =>
         {
-            entity.ToTable("ausencia");
+            entity.ToTable("ausencia", "dbo");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Datacriacao)
@@ -109,7 +109,7 @@ public partial class Id4calendariobdContext : DbContext
 
         modelBuilder.Entity<Comentario>(entity =>
         {
-            entity.ToTable("comentario");
+            entity.ToTable("comentario", "dbo");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Ausenciaid).HasColumnName("ausenciaid");
@@ -140,7 +140,7 @@ public partial class Id4calendariobdContext : DbContext
 
         modelBuilder.Entity<EstadoAusencium>(entity =>
         {
-            entity.ToTable("estado_ausencia");
+            entity.ToTable("estado_ausencia", "dbo");
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
@@ -153,7 +153,7 @@ public partial class Id4calendariobdContext : DbContext
 
         modelBuilder.Entity<EstadoUtilizador>(entity =>
         {
-            entity.ToTable("estado_utilizador");
+            entity.ToTable("estado_utilizador", "dbo");
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
@@ -166,7 +166,7 @@ public partial class Id4calendariobdContext : DbContext
 
         modelBuilder.Entity<TipoAusencium>(entity =>
         {
-            entity.ToTable("tipo_ausencia");
+            entity.ToTable("tipo_ausencia", "dbo");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Designacao)
@@ -177,7 +177,7 @@ public partial class Id4calendariobdContext : DbContext
 
         modelBuilder.Entity<Utilizador>(entity =>
         {
-            entity.ToTable("utilizador");
+            entity.ToTable("utilizador", "dbo");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Codpostal)

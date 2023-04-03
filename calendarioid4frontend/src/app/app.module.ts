@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,12 +18,14 @@ import { FormsComponent } from './components/pages/forms/forms.component';
 import { ModalsComponent } from './components/partials/modals/modals.component';
 import { NotificationsComponent } from './components/partials/notifications/notifications.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
+import { LoadingComponent } from './components/partials/loading/loading.component';
+import { LoadingInterceptor } from './shared/interceptors/loading.interceptor';
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import { RegisterComponent } from './components/pages/register/register.componen
     ModalsComponent,
     NotificationsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +62,8 @@ import { RegisterComponent } from './components/pages/register/register.componen
   ],
   providers: [
     AuthService,
+    {provide:HTTP_INTERCEPTORS, useClass:LoadingInterceptor, multi:true }
+
   ],
   bootstrap: [AppComponent]
 })
