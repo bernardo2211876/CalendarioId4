@@ -13,9 +13,11 @@ import { ModalsComponent } from './components/partials/modals/modals.component';
 import { FormsComponent } from './components/pages/forms/forms.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
+import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-foud.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
+  {path:'**', component: PageNotFoudComponent},
   { path: 'settings', component: SettingsComponent },
   { path: 'tables', component: TablesComponent },
   { path: 'sign-in', component: SigninComponent },

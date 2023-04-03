@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -38,8 +38,8 @@ export class LoginComponent implements OnInit {
 
       }else{
         //this.authService.setToken(res.toString());
-        //this.router.navigate(['/dashboard']);
-        alert('login com sucesso')
+        alert('login com sucesso');
+        this.router.navigatebyurl('dashboard');
       }
     });
   }
