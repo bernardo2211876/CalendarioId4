@@ -17,9 +17,9 @@ public partial class Comentario
     public DateTime Dataultimaedicao { get; set; }
 
     public string Descricao { get; set; } = null!;
-    
+
     public int Utilizadorid { get; set; }
-    
+
     public int Ausenciaid { get; set; }
     [JsonIgnore]
     public virtual Ausencium Ausencia { get; set; } = null!;
