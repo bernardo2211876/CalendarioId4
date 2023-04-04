@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,16 +18,17 @@ import { FormsComponent } from './components/pages/forms/forms.component';
 import { ModalsComponent } from './components/partials/modals/modals.component';
 import { NotificationsComponent } from './components/partials/notifications/notifications.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { LoadingComponent } from './components/partials/loading/loading.component';
+import { MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { LoadingComponent } from './components/partials/loading/loading.component';
+import { LoadingInterceptor } from './shared/interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { MatIconModule } from '@angular/material/icon';
     NotificationsComponent,
     LoginComponent,
     RegisterComponent,
-    LoadingComponent
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,13 +60,14 @@ import { MatIconModule } from '@angular/material/icon';
     HttpClientModule,
     CommonModule,
     FormsModule,
-    MatProgressSpinnerModule,
+    MatProgressBarModule,
     MatButtonModule,
     MatIconModule,
 
   ],
   providers: [
     AuthService,
+    {provide:HTTP_INTERCEPTORS, useClass:LoadingInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

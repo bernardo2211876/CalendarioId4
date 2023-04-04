@@ -1,23 +1,8 @@
-<!--
-<mat-progress-spinner
-  class="example-margin"
-  [color]="color"
-  [mode]="mode"
-  [value]="value">
-</mat-progress-spinner>
--->
-
-<div class="loader-wrapper">
-  <span class="loader"><span class="loader-inner"></span></span>
+<div class="container" *ngIf="isLoading">
+  <div class="details">
+    <img src="../../../../assets/img/load_foodmine.svg" />
+    <h1>Loading...</h1>
+  </div>
 </div>
-
-<script>
-    $(window).on("load",function(){
-      $(".loader-wrapper").fadeOut("slow");
-    });
-</script>
-
-
-
 
 
