@@ -29,6 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { LoadingComponent } from './components/partials/loading/loading.component';
 import { LoadingInterceptor } from './shared/interceptors/loading.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { LoadingInterceptor } from './shared/interceptors/loading.interceptor';
     MatProgressBarModule,
     MatButtonModule,
     MatIconModule,
+    ToastrModule,
 
   ],
   providers: [

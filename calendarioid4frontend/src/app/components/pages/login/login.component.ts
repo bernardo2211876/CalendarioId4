@@ -41,7 +41,10 @@ export class LoginComponent implements OnInit {
         //this.authService.setToken(res.toString());
         this.router.navigateByUrl('');
         alert('login com sucesso')
+
       }
+
+      
     });
   }
 
@@ -53,3 +56,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password') as FormControl;
   }
 }
+function showSuccess() {
+  throw new Error('Function not implemented.');
+}
+
