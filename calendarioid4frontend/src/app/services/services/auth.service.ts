@@ -8,6 +8,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 })
 export class AuthService {
 
+
   constructor(private http: HttpClient) { }
 
   currentUser : BehaviorSubject<any> = new BehaviorSubject(null);
@@ -24,6 +25,7 @@ jwtHelperService = new JwtHelperService();
 
   setToken(token: string){
     localStorage.setItem("access_token", token);
+    this.loadCurrentUser();
   }
 
   loadCurrentUser(){
@@ -36,5 +38,13 @@ jwtHelperService = new JwtHelperService();
       telemovel: userInfo.telemovel
     } : null;
     this.currentUser.next(data);
+  }
+
+  isLoggedin(): boolean  {
+    return localStorage.getItem("access_token") ? true : false;
+  }
+
+  removeToken(){
+    localStorage.removeItem("access_token");
   }
 }

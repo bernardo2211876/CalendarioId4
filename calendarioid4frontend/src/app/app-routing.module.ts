@@ -14,9 +14,10 @@ import { FormsComponent } from './components/pages/forms/forms.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
 import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-foud.component';
+import { AuthGuard } from './services/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'**', component: PageNotFoudComponent},
   { path: 'settings', component: SettingsComponent },
   { path: 'tables', component: TablesComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'forms', component: FormsComponent },
   {path:'login', component: LoginComponent},
   {path:'register', component: RegisterComponent},
+  {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
 
 ];
 

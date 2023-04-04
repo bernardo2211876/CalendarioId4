@@ -68,10 +68,10 @@ export class RegisterComponent implements OnInit {
       this.registerForm.value.isAdmin,
     ]*/
     .subscribe(res=>{
-      if(res == 'Success'){
+      if(res == 200){
         this.displayMsg ='Account created Successfully!';
         this.isAccountCreated = true;
-      }else if(res == 'Already Exist'){
+      }else if(res == 58){
         this.displayMsg ='Account Already Exist. Try another email.';
         this.isAccountCreated = false;
       }else{
