@@ -24,7 +24,10 @@ import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { LoadingComponent } from './components/partials/loading/loading.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,8 @@ import { RegisterComponent } from './components/pages/register/register.componen
     ModalsComponent,
     NotificationsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +59,9 @@ import { RegisterComponent } from './components/pages/register/register.componen
     HttpClientModule,
     CommonModule,
     FormsModule,
+    MatProgressSpinnerModule,
+    MatButtonModule,
+    MatIconModule,
 
   ],
   providers: [
