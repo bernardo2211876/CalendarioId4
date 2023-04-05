@@ -23,10 +23,11 @@ export class LoadingInterceptor implements HttpInterceptor {
     pendingRequests = pendingRequests + 1;
 
     return next.handle(request).pipe(
+
       tap({
         next:(event) => {
           if(event.type === HttpEventType.Response){
-            this.handleHideLoading();
+            this.handleHideLoading()
           }
         },
         error: (_) => {

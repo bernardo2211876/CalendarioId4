@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   });
 
   loginSubmited(){
-   // this.loginAuth.loginUser([this.loginForm.value.email,
+    //this.loginAuth.loginUser([this.loginForm.value.email,
     //this.loginForm.value.password]).subscribe();
     this.authService.loginUser(this.loginForm.getRawValue())
     .subscribe(res=>{
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
 
       }
 
-      
+
     });
   }
 
@@ -55,8 +55,5 @@ export class LoginComponent implements OnInit {
   get Password(): FormControl {
     return this.loginForm.get('password') as FormControl;
   }
-}
-function showSuccess() {
-  throw new Error('Function not implemented.');
 }
 
