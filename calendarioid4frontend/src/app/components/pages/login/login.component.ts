@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
 
-  constructor(private authService: AuthService, private router : Router){
+  constructor(private authService: AuthService, private router : Router, private toastservice:ToastrService){
 
   }
 
@@ -35,12 +36,19 @@ export class LoginComponent implements OnInit {
     .subscribe(res=>{
 
        if(res == 400){
-        alert('Credenciais Inválidas');
+        this.toastservice.success(
+          'Credencias inválidas',
+          'Login'
+        )
 
       }else{
         //this.authService.setToken(res.toString());
-        this.router.navigateByUrl('');
-        alert('login com sucesso')
+
+        this.toastservice.success(
+          'Login efetuado com sucesso',
+          'Login'
+        )
+        this.router.navigateByUrl('/dashboard');
       }
     });
   }

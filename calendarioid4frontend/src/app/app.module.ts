@@ -24,6 +24,7 @@ import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -55,6 +56,11 @@ import { RegisterComponent } from './components/pages/register/register.componen
     HttpClientModule,
     CommonModule,
     FormsModule,
+    ToastrModule.forRoot({
+      timeOut:3000,
+      positionClass:'toast-bottom-right',
+      newestOnTop:true
+    })
 
   ],
   providers: [
