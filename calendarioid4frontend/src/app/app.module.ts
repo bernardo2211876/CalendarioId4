@@ -24,7 +24,6 @@ import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
-
 import { MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -70,7 +69,7 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot({
       timeOut:3000,
       positionClass:'toast-bottom-right',
-      newestOnTop:true
+      newestOnTop:false
     })
 
   ],

@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     .subscribe(res=>{
 
        if(res == 400){
-        this.toastservice.success(
+        this.toastservice.error(
           'Credencias inválidas',
           'Login'
         )
