@@ -53,7 +53,6 @@ import { LoadingComponent } from './components/partials/loading/loading.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     NgbModule,
     BsDropdownModule,
     BrowserAnimationsModule,
@@ -61,7 +60,7 @@ import { LoadingComponent } from './components/partials/loading/loading.componen
     HttpClientModule,
     CommonModule,
     FormsModule,
-
+    AppRoutingModule,
   ],
   providers: [
     AuthService,

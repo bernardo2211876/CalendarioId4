@@ -6,6 +6,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
 
@@ -23,7 +24,7 @@ jwtHelperService = new JwtHelperService();
     return this.http.post(this.baseServerUrl + 'Utilizador/LoginUser',user);
   }
 
-  setToken(token: string){
+  setToken(token: any){
     localStorage.setItem("access_token", token);
     this.loadCurrentUser();
   }

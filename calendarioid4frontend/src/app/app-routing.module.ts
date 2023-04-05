@@ -17,8 +17,7 @@ import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-
 import { AuthGuard } from './services/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  {path:'**', component: PageNotFoudComponent},
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'settings', component: SettingsComponent },
   { path: 'tables', component: TablesComponent },
   { path: 'sign-in', component: SigninComponent },
@@ -32,7 +31,7 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'register', component: RegisterComponent},
   {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-
+  {path:'**', pathMatch: 'full', component: PageNotFoudComponent},
 ];
 
 @NgModule({

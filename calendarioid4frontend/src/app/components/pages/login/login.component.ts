@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         alert('Credenciais Inválidas');
 
       }else{
-        this.authService.setToken(res.toString());
+        this.authService.setToken(res);
         alert('login com sucesso');
         this.router.navigateByUrl('/dashboard');
       }
