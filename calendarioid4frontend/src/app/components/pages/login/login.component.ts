@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
           'Login efetuado com sucesso',
           'Login'
         )
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('');
       }
 
 
