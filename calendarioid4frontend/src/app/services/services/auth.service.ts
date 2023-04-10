@@ -24,7 +24,7 @@ jwtHelperService = new JwtHelperService();
     return this.http.post(this.baseServerUrl + 'Utilizador/LoginUser',user);
   }
 
-  setToken(token: any){
+  setToken(token: string){
     localStorage.setItem("access_token", token);
     this.loadCurrentUser();
   }

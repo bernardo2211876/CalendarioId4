@@ -30,8 +30,6 @@ export class LoginComponent implements OnInit {
   });
 
   loginSubmited(){
-   // this.loginAuth.loginUser([this.loginForm.value.email,
-    //this.loginForm.value.password]).subscribe();
     this.authService.loginUser(this.loginForm.getRawValue())
     .subscribe(res=>{
 
@@ -39,8 +37,8 @@ export class LoginComponent implements OnInit {
         alert('Credenciais Inválidas');
 
       }else{
-        this.authService.setToken(res);
-        alert('login com sucesso');
+        this.authService.setToken(res.toString());
+        alert(res);
         this.router.navigateByUrl('/dashboard');
       }
     });
