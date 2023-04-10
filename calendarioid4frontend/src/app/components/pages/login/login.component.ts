@@ -1,6 +1,8 @@
+import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AuthService } from 'src/app/services/services/auth.service';
 
 @Component({
@@ -31,14 +33,14 @@ export class LoginComponent implements OnInit {
 
   loginSubmited(){
     this.authService.loginUser(this.loginForm.getRawValue())
-    .subscribe(res=>{
+    .subscribe( (res: any)=>{
 
        if(res == 400){
         alert('Credenciais Inválidas');
 
       }else{
-        this.authService.setToken(res.toString());
-        alert(res);
+        let token = res.token;
+        this.authService.setToken(token);
         this.router.navigateByUrl('/dashboard');
       }
     });

@@ -24,7 +24,7 @@ jwtHelperService = new JwtHelperService();
     return this.http.post(this.baseServerUrl + 'Utilizador/LoginUser',user);
   }
 
-  setToken(token: string){
+  setToken(token: any){
     localStorage.setItem("access_token", token);
     this.loadCurrentUser();
   }
@@ -32,6 +32,7 @@ jwtHelperService = new JwtHelperService();
   loadCurrentUser(){
     const token = localStorage.getItem("access_token");
     const userInfo = token != null ? this.jwtHelperService.decodeToken(token) : null;
+    console.log(userInfo);
     const data = userInfo ?{
       id: userInfo.id,
       nome: userInfo.nome,

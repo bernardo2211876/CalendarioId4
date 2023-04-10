@@ -8,11 +8,12 @@ import { AuthService } from 'src/app/services/services/auth.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+data: any;
 
   constructor(private authService : AuthService, private router : Router) { }
 
   ngOnInit(): void {
-
+     this.data = this.authService.loadCurrentUser();
   }
 
   logOut(){
