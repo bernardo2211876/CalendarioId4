@@ -7,7 +7,7 @@ import {
   HttpEventType
 } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { LoadingService } from 'src/app/services/loading.service';
+import { LoadingService } from 'src/app/services/services/loading.service';
 
 
 var pendingRequests = 0;
