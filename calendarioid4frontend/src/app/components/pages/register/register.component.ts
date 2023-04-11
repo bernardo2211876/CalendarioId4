@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators ,ReactiveFormsModule} from '@angular
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/services/auth.service';
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
