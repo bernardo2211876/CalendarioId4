@@ -20,7 +20,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void{
     if(this.authService.isLoggedin()==true){
-     // this.toastr.info('Já se encontra logado');
+      this.toastservice.info(
+        'Já se encontra com a sessão iniciada',
+        'Sessão Inciada'
+      )
       this.router.navigateByUrl('/dashboard');
     }
   }
@@ -41,15 +44,15 @@ export class LoginComponent implements OnInit {
        if(res == 400){
         this.toastservice.error(
           'Credencias inválidas',
-          'Login'
+          'Sessão não iniciada'
         )
 
       }else{
         let token = res.token;
         this.authService.setToken(token);
         this.toastservice.success(
-          'Login efetuado com sucesso',
-          'Login'
+          'Sessão iniciada com sucesso',
+          'Sessão iniciada'
         )
         this.router.navigateByUrl('/dashboard');
 
