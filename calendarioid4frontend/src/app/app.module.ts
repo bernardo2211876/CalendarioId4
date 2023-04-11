@@ -18,7 +18,7 @@ import { ModalsComponent } from './components/partials/modals/modals.component';
 import { NotificationsComponent } from './components/partials/notifications/notifications.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './services/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
@@ -29,7 +29,11 @@ import { LoadingComponent } from './components/partials/loading/loading.componen
 import { LoadingInterceptor } from './shared/interceptors/loading.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserModule } from '@angular/platform-browser';
+import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-foud.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+
 
 
 @NgModule({
@@ -51,10 +55,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     RegisterComponent,
     LoadingComponent,
+    PageNotFoudComponent
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     NgbModule,
     BsDropdownModule,
     BrowserAnimationsModule,
@@ -62,7 +67,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     CommonModule,
     FormsModule,
-
     MatProgressBarModule,
     MatButtonModule,
     MatIconModule,
@@ -71,11 +75,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       positionClass:'toast-bottom-right',
       newestOnTop:false
     })
-
   ],
   providers: [
     AuthService,
-    {provide:HTTP_INTERCEPTORS, useClass:LoadingInterceptor, multi: true}
+    {provide:HTTP_INTERCEPTORS, useClass:LoadingInterceptor, multi: true},
+    AppRoutingModule,
   ],
   bootstrap: [AppComponent]
 })

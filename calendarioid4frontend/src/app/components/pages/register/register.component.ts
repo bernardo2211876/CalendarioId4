@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators ,ReactiveFormsModule} from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/services/auth.service';
 
 
 @Component({
@@ -58,25 +58,14 @@ export class RegisterComponent implements OnInit {
 
   registerSubmited(){
     this.authService.registerUser(this.registerForm.getRawValue())
-      /*[
-      this.registerForm.value.nome,
-     this.registerForm.value.email,
-      this.registerForm.value.password,
-      this.registerForm.value.nif,
-      this.registerForm.value.codpostal,
-      this.registerForm.value.morada,
-      this.registerForm.value.telemovel,
-      this.registerForm.value.funcao,
-      this.registerForm.value.isAdmin,
-    ]*/
     .subscribe(res=>{
-      if(res == 'Success'){
+      if(res == 200){
         this.toastservice.success(
           'Conta criada com sucesso',
           'Registo'
         )
-      }else if(res == 'Already Exist'){
-        this.toastservice.warning(
+      }else if(res == 58){
+         this.toastservice.warning(
           'A conta já existe. Tente outro e-mail!',
           'Registo'
         )

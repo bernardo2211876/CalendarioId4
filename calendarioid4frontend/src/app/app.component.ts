@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from './services/services/auth.service';
+
 
 @Component({
   selector: 'app-root',
@@ -9,8 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AppComponent {
   title = 'Ausências';
-  constructor(private router: Router) {
-    this.router.navigate(['/login']);
+  constructor(private router: Router, private authService: AuthService) {
+
   }
 
 }

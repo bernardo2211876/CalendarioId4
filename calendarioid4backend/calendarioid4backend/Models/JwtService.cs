@@ -12,15 +12,15 @@ namespace calendarioid4backend.Models
         
         public String SecretKey { get; set; }
         public int TokenDuration { get; set; }
-        private readonly IConfiguration config;
+        private readonly IConfiguration Config;
         
-        public JwtService(IConfiguration _config) { 
-            config= _config;
-            this.SecretKey = config.GetSection("jwtConfig").GetSection("Key").Value;
-            this.TokenDuration = Int32.Parse(config.GetSection("jwtConfig").GetSection("Duration").Value);
+        public JwtService(IConfiguration config) { 
+            Config= config;
+            this.SecretKey = Config.GetSection("jwtConfig").GetSection("Key").Value;
+            this.TokenDuration = Int32.Parse(Config.GetSection("jwtConfig").GetSection("Duration").Value);
         }
 
-        public String GenerateToken(String id, String nome,String email,String telemovel)
+        public String GenerateToken(String id, String nome,String email,String telemovel, String isAdmin)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.SecretKey));
             var signature = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -29,18 +29,19 @@ namespace calendarioid4backend.Models
                 new Claim("id",id),
                 new Claim("nome",nome),
                 new Claim("email",email),
-                new Claim("telemovel",telemovel)
+                new Claim("telemovel",telemovel),
+                new Claim("isAdmin", isAdmin)
             };
 
             var jwtToken = new JwtSecurityToken(
-                issuer:"localhost",
-                audience: "localhost",
+                issuer: Config["Jwt:Issuer"],
+                audience: Config["Jwt:Audience"],
                 claims: payload,
                 expires : DateTime.Now.AddMinutes(TokenDuration),
                 signingCredentials: signature
                 );
 
-            return new JwtSecurityTokenHandler().WriteToken(jwtToken);
+            return   new JwtSecurityTokenHandler().WriteToken(jwtToken);
 
            
         }

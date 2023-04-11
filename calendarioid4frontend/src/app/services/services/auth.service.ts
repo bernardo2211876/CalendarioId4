@@ -6,7 +6,9 @@ import {BehaviorSubject, Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
+
 
   constructor(private http: HttpClient) { }
 
@@ -22,19 +24,32 @@ jwtHelperService = new JwtHelperService();
     return this.http.post(this.baseServerUrl + 'Utilizador/LoginUser',user);
   }
 
-  setToken(token: string){
+  setToken(token: any){
     localStorage.setItem("access_token", token);
+    this.loadCurrentUser();
   }
 
   loadCurrentUser(){
     const token = localStorage.getItem("access_token");
     const userInfo = token != null ? this.jwtHelperService.decodeToken(token) : null;
+    console.log(userInfo);
     const data = userInfo ?{
       id: userInfo.id,
       nome: userInfo.nome,
       email: userInfo.email,
-      telemovel: userInfo.telemovel
+      telemovel: userInfo.telemovel,
+      isAdmin: userInfo.isAdmin
+
     } : null;
     this.currentUser.next(data);
+    
+  }
+
+  isLoggedin(): boolean  {
+    return localStorage.getItem("access_token") ? true : false;
+  }
+
+  removeToken(){
+    localStorage.removeItem("access_token");
   }
 }

@@ -23,6 +23,7 @@ namespace calendarioid4backend.Controllers
         private readonly IConfiguration Config;
         private readonly Id4calendariobdContext Context ;
         
+        
 
         
 
@@ -65,7 +66,7 @@ namespace calendarioid4backend.Controllers
                     return Ok(58);
                 }
 
-                //newuser.Password=Encodepassword(newuser.Password);
+               // newuser.Password=Encriptacao.EncryptPassword(newuser.Password);
                 newuser.Idutilizadorcriador = 1;
                 newuser.Datacriacao = DateTime.Now;
                 newuser.Idutilizadorultimaedicao = 1;
@@ -94,23 +95,35 @@ namespace calendarioid4backend.Controllers
                 {
                     task = reader.ReadToEndAsync();
                 };
-                Utilizador user = JsonConvert.DeserializeObject<Utilizador>(task.Result);
+
+                
+                    Utilizador user = JsonConvert.DeserializeObject<Utilizador>(task.Result);
+                
 
 
                 
-                var userAvailable = Context.Utilizadors.Where(u => u.Email == user.Email && u.Password == user.Password).FirstOrDefault();
+                var userAvailable = Context.Utilizadors.Where(u => u.Email == user.Email && /*Encriptacao.DecryptPassword(*/u.Password == user.Password).FirstOrDefault();
                 //bool passwordequal = BCrypt.Net.BCrypt.Verify(user.Password, userAvailable.Password);
 
 
                 if (userAvailable != null)
                 {
-                    /* return Ok(new JwtService(Config).GenerateToken(
-                         user.Id.ToString(),
-                         user.Nome,
-                         user.Email,
-                         user.Telemovel.ToString()
-                         ));*/
-                    return Ok(200);
+                    var token = new JwtService(Config).GenerateToken(
+                        userAvailable.Id.ToString(),
+                        userAvailable.Nome,
+                        userAvailable.Email,
+                        userAvailable.Telemovel.ToString(),
+                        userAvailable.IsAdmin.ToString()
+                        );
+                    Token res = new Token() { token = token };
+                    return Ok(res);
+                   /* return Ok( new JwtService(Config).GenerateToken(
+                        userAvailable.Id.ToString(),
+                        userAvailable.Nome,
+                        userAvailable.Email,
+                        userAvailable.Telemovel.ToString())
+                        );*/
+                    //return Ok(200);
                 }
                 return Ok(400);
 
