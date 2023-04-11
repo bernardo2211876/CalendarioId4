@@ -37,9 +37,12 @@ jwtHelperService = new JwtHelperService();
       id: userInfo.id,
       nome: userInfo.nome,
       email: userInfo.email,
-      telemovel: userInfo.telemovel
+      telemovel: userInfo.telemovel,
+      isAdmin: userInfo.isAdmin
+
     } : null;
     this.currentUser.next(data);
+    
   }
 
   isLoggedin(): boolean  {

@@ -17,7 +17,7 @@ import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-
 import { AuthGuard } from './services/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'settings', component: SettingsComponent },
   { path: 'tables', component: TablesComponent },
   { path: 'sign-in', component: SigninComponent },
