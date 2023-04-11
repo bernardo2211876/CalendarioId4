@@ -54,11 +54,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NotificationsComponent,
     LoginComponent,
     RegisterComponent,
-    LoadingComponent,
-    PageNotFoudComponent
+    PageNotFoudComponent,
+    LoadingComponent
 
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     NgbModule,
     BsDropdownModule,
@@ -79,7 +80,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [
     AuthService,
     {provide:HTTP_INTERCEPTORS, useClass:LoadingInterceptor, multi: true},
-    AppRoutingModule,
   ],
   bootstrap: [AppComponent]
 })

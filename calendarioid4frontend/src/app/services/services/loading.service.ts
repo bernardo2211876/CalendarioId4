@@ -22,5 +22,4 @@ private isLoadingSubject = new BehaviorSubject<boolean>(false);
     return this.isLoadingSubject.asObservable();
   }
 
-
 }
