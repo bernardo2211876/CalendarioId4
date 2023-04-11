@@ -19,7 +19,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void{
-
+    if(this.authService.isLoggedin()==true){
+     // this.toastr.info('Já se encontra logado');
+      this.router.navigateByUrl('/dashboard');
+    }
   }
 
   loginForm= new FormGroup({

@@ -32,7 +32,6 @@ jwtHelperService = new JwtHelperService();
   loadCurrentUser(){
     const token = localStorage.getItem("access_token");
     const userInfo = token != null ? this.jwtHelperService.decodeToken(token) : null;
-    console.log(userInfo);
     const data = userInfo ?{
       id: userInfo.id,
       nome: userInfo.nome,
@@ -42,7 +41,9 @@ jwtHelperService = new JwtHelperService();
 
     } : null;
     this.currentUser.next(data);
-    
+   return userInfo;
+
+
   }
 
   isLoggedin(): boolean  {
