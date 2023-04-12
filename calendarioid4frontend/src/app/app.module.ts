@@ -31,7 +31,7 @@ import { LoadingInterceptor } from './shared/interceptors/loading.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserModule } from '@angular/platform-browser';
 import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-foud.component';
-
+import { ForbiddenPageComponent } from './components/pages/forbidden-page/forbidden-page.component';
 
 
 
@@ -55,7 +55,8 @@ import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-
     LoginComponent,
     RegisterComponent,
     PageNotFoudComponent,
-    LoadingComponent
+    LoadingComponent,
+    ForbiddenPageComponent
 
   ],
   imports: [

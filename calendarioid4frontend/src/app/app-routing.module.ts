@@ -15,6 +15,7 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
 import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-foud.component';
 import { AuthGuard } from './services/guards/auth.guard';
+import { ForbiddenPageComponent } from './components/pages/forbidden-page/forbidden-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'register', component: RegisterComponent},
   {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path:'forbidden', component:ForbiddenPageComponent},
   {path:'**', pathMatch: 'full', component: PageNotFoudComponent},
 ];
 
