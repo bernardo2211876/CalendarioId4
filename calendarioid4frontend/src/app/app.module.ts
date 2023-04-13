@@ -32,6 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserModule } from '@angular/platform-browser';
 import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-foud.component';
 import { ForbiddenPageComponent } from './components/pages/forbidden-page/forbidden-page.component';
+import { NavbarComponent } from './components/partials/navbar/navbar.component';
 
 
 
@@ -56,7 +57,8 @@ import { ForbiddenPageComponent } from './components/pages/forbidden-page/forbid
     RegisterComponent,
     PageNotFoudComponent,
     LoadingComponent,
-    ForbiddenPageComponent
+    ForbiddenPageComponent,
+    NavbarComponent
 
   ],
   imports: [
