@@ -34,6 +34,8 @@ import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-
 import { ForbiddenPageComponent } from './components/pages/forbidden-page/forbidden-page.component';
 import { GridButtonsComponent } from './components/partials/grid-buttons/grid-buttons.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { NavbarComponent } from './components/partials/navbar/navbar.component';
+
 
 
 
@@ -59,7 +61,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     PageNotFoudComponent,
     LoadingComponent,
     ForbiddenPageComponent,
-    GridButtonsComponent
+    GridButtonsComponent,
+    NavbarComponent
 
   ],
   imports: [
