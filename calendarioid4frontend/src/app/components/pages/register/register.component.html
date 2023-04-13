@@ -1,6 +1,6 @@
 <app-header></app-header>
 <main class="content">
-<div class="container">
+
 <!-- NAV BAR-->
 <nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-dark ps-0 pe-2 pb-0">
   <div class="container-fluid px-0">
@@ -85,11 +85,11 @@
                     </a>
                     <a href="#" class="list-group-item list-group-item-action border-bottom">
                        <div class="row align-items-center">
-                          <div class="col-auto"> <img alt="Image placeholder" src="assets/img/profile-picture-5.jpg" class="avatar-md rounded"></div>
+                          <div class="col-auto"> <img alt="Image placeholder" src="assets/img/avatar.png" class="avatar-md rounded"></div>
                           <div class="col ps-0 ms-2">
                              <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                   <h4 class="h6 mb-0 text-small">Bonnie Green</h4>
+                                   <h4 class="h6 mb-0 text-small">{{data?.nome}}</h4>
                                 </div>
                                 <div class="text-end"><small>2 hrs ago</small></div>
                              </div>
@@ -110,8 +110,8 @@
            <li class="nav-item dropdown ms-lg-3">
               <a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                  <div class="media d-flex align-items-center">
-                    <img class="avatar rounded-circle" alt="Image placeholder" src="assets/img/profile-picture-3.jpg">
-                    <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block"><span class="mb-0 font-small fw-bold text-gray-900">Bonnie Green</span></div>
+                    <img class="avatar rounded-circle" alt="Image placeholder" src="assets/img/avatar.png">
+                    <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block"><span class="mb-0 font-small fw-bold text-gray-900">{{data?.nome}}</span></div>
                  </div>
               </a>
               <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1">
@@ -163,14 +163,21 @@
            </svg>
         </a>
      </li>
-     <li class="breadcrumb-item"><a href="#">Components</a></li>
-     <li class="breadcrumb-item active" aria-current="page">Buttons</li>
+     <li class="breadcrumb-item active" aria-current="page">Registar</li>
   </ol>
 </nav>
 <!------------------------------------------------------------------------------------------------------------>
-  <form class=" p-3 rounded-3" [formGroup]="registerForm" (ngSubmit)="registerSubmited()">
-    <img class="mb-4" src="../../../../assets/id4logo.png" alt="" width="72" height="57">
-    <h1 class="h3 mb-3 fw-normal">Por favor faça o Registo de um novo utilizador</h1>
+<!-- TITULO -->
+<div class="d-flex justify-content-between w-100 flex-wrap">
+  <div class="mb-3 mb-lg-0">
+     <h1 class="h4">Registar Utilizador</h1>
+     <p class="mb-0">Nesta página é possível criar uma conta de utilizador</p>
+  </div>
+  <div><a [routerLink]="['/userlist']" routerLinkActive="router-link-active"  class="btn btn-outline-gray"><i class="far fa-question-circle me-1"></i> Lista de Utilizador</a></div>
+</div>
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<form class=" p-3 rounded-3" [formGroup]="registerForm" (ngSubmit)="registerSubmited()">
+
 
     <div class="form-floating">
       <input type="text" class="form-control" id="nome" placeholder="Bernardo Costa"
@@ -282,7 +289,6 @@
     <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="registerForm.invalid">Registar</button>
 
   </form>
-  </div>
   <app-footer></app-footer>
 </main>
 

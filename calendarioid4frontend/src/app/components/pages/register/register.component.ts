@@ -10,13 +10,14 @@ import { AuthService } from 'src/app/services/services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
+  data:any;
   displayMsg: string="";
   isAccountCreated: boolean = false;
   constructor(private authService: AuthService, private toastservice:ToastrService){
 
   }
   ngOnInit(): void {
-
+    this.data = this.authService.loadCurrentUser();
   }
 
   registerForm = new FormGroup({
