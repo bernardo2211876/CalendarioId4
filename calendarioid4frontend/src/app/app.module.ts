@@ -32,6 +32,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserModule } from '@angular/platform-browser';
 import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-foud.component';
 import { ForbiddenPageComponent } from './components/pages/forbidden-page/forbidden-page.component';
+import { GridButtonsComponent } from './components/partials/grid-buttons/grid-buttons.component';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -56,7 +58,8 @@ import { ForbiddenPageComponent } from './components/pages/forbidden-page/forbid
     RegisterComponent,
     PageNotFoudComponent,
     LoadingComponent,
-    ForbiddenPageComponent
+    ForbiddenPageComponent,
+    GridButtonsComponent
 
   ],
   imports: [
@@ -72,6 +75,7 @@ import { ForbiddenPageComponent } from './components/pages/forbidden-page/forbid
     FormsModule,
     MatProgressBarModule,
     MatButtonModule,
+    MatGridListModule,
     MatIconModule,
     ToastrModule.forRoot({
       timeOut:3000,
