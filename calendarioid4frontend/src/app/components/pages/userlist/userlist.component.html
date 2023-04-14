@@ -1,0 +1,65 @@
+<app-header></app-header>
+<main class="content">
+
+<!-- NAV BAR-->
+<navbar></navbar><!------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!-- NAV PAGES-->
+<nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+  <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+     <li class="breadcrumb-item">
+        <a href="#">
+           <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+           </svg>
+        </a>
+     </li>
+     <li class="breadcrumb-item active" aria-current="page">Lista Utilizador</li>
+  </ol>
+</nav>
+<!------------------------------------------------------------------------------------------------------------>
+<!-- TITULO -->
+<div class="d-flex justify-content-between w-100 flex-wrap">
+  <div class="mb-3 mb-lg-0">
+     <h1 class="h4">Lista Utilizadores</h1>
+     <p class="mb-0">Nesta página é possível visualizar todos os utilizadores</p>
+  </div>
+  <div><a [routerLink]="['/register']" routerLinkActive="router-link-active"  class="btn btn-outline-gray"><i class="far fa-question-circle me-1"></i>Novo Utilizador</a></div>
+</div>
+<!------------------------------------------------------------------------------------------------------------>
+
+<table class="table table-striped" *ngIf="users && users.length> 0">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Email</th>
+      <th scope="col">Nif</th>
+      <th scope="col">Codpostal</th>
+      <th scope="col">Morada</th>
+      <th scope="col">Telemovel</th>
+      <th scope="col">Funcao</th>
+      <th scope="col">É Admin?</th>
+      <th scope="col">Funcionalidades</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <th scope="col">{{user.Id}}</th>
+      <td scope="col">{{user.Nome}}</td>
+      <td scope="col">{{user.Email}}</td>
+      <td scope="col">{{user.Nif}}</td>
+      <td scope="col">{{user.Codpostal}}</td>
+      <td scope="col">{{user.Morada}}</td>
+      <td scope="col">{{user.Telemovel}}</td>
+      <td scope="col">{{user.Funcao}}</td>
+      <td *ngIf="user.IsAdmin ==true" scope="col">Sim</td>
+      <td *ngIf="user.IsAdmin ==false" scope="col">Não</td>
+      <td scope="col"></td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="!users || users.length <= 0">Não foram encontrados Utilizadores</p>
+<app-footer></app-footer>
+</main>

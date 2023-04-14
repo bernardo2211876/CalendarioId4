@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators ,ReactiveFormsModule} from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/services/auth.service';
 
@@ -13,11 +14,19 @@ export class RegisterComponent implements OnInit {
   data:any;
   displayMsg: string="";
   isAccountCreated: boolean = false;
-  constructor(private authService: AuthService, private toastservice:ToastrService){
+  constructor(private _authService: AuthService, private _toastservice:ToastrService, private _router:Router){
 
   }
   ngOnInit(): void {
-    this.data = this.authService.loadCurrentUser();
+    this.data = this._authService.loadCurrentUser();
+    if(this.data.isAdmin=='False')
+    {
+      this._toastservice.warning(
+        'Necessita de ser admin para aceder a esta página',
+        'Acesso negado'
+      )
+      this._router.navigateByUrl('/dashboard');
+    }
   }
 
   registerForm = new FormGroup({
@@ -57,20 +66,20 @@ export class RegisterComponent implements OnInit {
   });
 
   registerSubmited(){
-    this.authService.registerUser(this.registerForm.getRawValue())
+    this._authService.registerUser(this.registerForm.getRawValue())
     .subscribe(res=>{
       if(res == 200){
-        this.toastservice.success(
+        this._toastservice.success(
           'Conta criada com sucesso',
           'Registo'
         )
       }else if(res == 58){
-         this.toastservice.warning(
+         this._toastservice.warning(
           'A conta já existe. Tente outro e-mail!',
           'Registo'
         )
       }else{
-        this.toastservice.error(
+        this._toastservice.error(
           'Não cumpre os requisitos',
           'Registo'
         )

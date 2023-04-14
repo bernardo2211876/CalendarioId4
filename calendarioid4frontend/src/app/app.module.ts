@@ -33,6 +33,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-foud.component';
 import { ForbiddenPageComponent } from './components/pages/forbidden-page/forbidden-page.component';
 import { NavbarComponent } from './components/partials/navbar/navbar.component';
+import { UserlistComponent } from './components/pages/userlist/userlist.component';
 
 
 
@@ -58,7 +59,8 @@ import { NavbarComponent } from './components/partials/navbar/navbar.component';
     PageNotFoudComponent,
     LoadingComponent,
     ForbiddenPageComponent,
-    NavbarComponent
+    NavbarComponent,
+    UserlistComponent
 
   ],
   imports: [

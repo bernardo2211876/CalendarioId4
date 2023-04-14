@@ -39,9 +39,9 @@ namespace calendarioid4backend.Controllers
         public async Task<ActionResult<List<Utilizador>>> GetUsers()
         {
             return Ok(await Context.Utilizadors
-                .Include(p => p.Ausencia)
-                .Include(p => p.AprovadorUtilizadors)
-                .Include(p => p.Estado)
+                //.Include(p => p.Ausencia)
+                //.Include(p => p.AprovadorUtilizadors)
+                //.Include(p => p.Estado)
                 .ToListAsync());
         }
 
@@ -117,13 +117,7 @@ namespace calendarioid4backend.Controllers
                         );
                     Token res = new Token() { token = token };
                     return Ok(res);
-                   /* return Ok( new JwtService(Config).GenerateToken(
-                        userAvailable.Id.ToString(),
-                        userAvailable.Nome,
-                        userAvailable.Email,
-                        userAvailable.Telemovel.ToString())
-                        );*/
-                    //return Ok(200);
+                  
                 }
                 return Ok(400);
 
