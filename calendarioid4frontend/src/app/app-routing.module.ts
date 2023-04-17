@@ -29,11 +29,11 @@ const routes: Routes = [
   { path: 'notifications', component: NotificationsComponent },
   { path: 'modals', component: ModalsComponent },
   { path: 'forms', component: FormsComponent },
-  {path:'login', component: LoginComponent},
-  {path:'register', component: RegisterComponent},
-  {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-  {path:'forbidden', component:ForbiddenPageComponent},
-  {path:'**', pathMatch: 'full', component: PageNotFoudComponent},
+  { path:'login', component: LoginComponent},
+  { path:'register', component: RegisterComponent},
+  { path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path:'forbidden', component:ForbiddenPageComponent},
+  { path:'**', pathMatch: 'full', component: PageNotFoudComponent},
 ];
 
 @NgModule({

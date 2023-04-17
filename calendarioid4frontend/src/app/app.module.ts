@@ -35,8 +35,12 @@ import { ForbiddenPageComponent } from './components/pages/forbidden-page/forbid
 import { GridButtonsComponent } from './components/partials/grid-buttons/grid-buttons.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { NavbarComponent } from './components/partials/navbar/navbar.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarComponent } from './components/partials/calendar/calendar.component';
 
-
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -60,9 +64,11 @@ import { NavbarComponent } from './components/partials/navbar/navbar.component';
     RegisterComponent,
     PageNotFoudComponent,
     LoadingComponent,
+
     ForbiddenPageComponent,
     GridButtonsComponent,
-    NavbarComponent
+    NavbarComponent,
+    CalendarComponent
 
   ],
   imports: [
@@ -84,8 +90,15 @@ import { NavbarComponent } from './components/partials/navbar/navbar.component';
       timeOut:3000,
       positionClass:'toast-bottom-right',
       newestOnTop:false
-    })
+
+    }),
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,}),
   ],
+
   providers: [
     AuthService,
     {provide:HTTP_INTERCEPTORS, useClass:LoadingInterceptor, multi: true},
