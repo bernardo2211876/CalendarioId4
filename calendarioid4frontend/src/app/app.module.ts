@@ -37,8 +37,6 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { NavbarComponent } from './components/partials/navbar/navbar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { CalendarComponent } from './components/partials/calendar/calendar.component';
-
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -64,11 +62,10 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     RegisterComponent,
     PageNotFoudComponent,
     LoadingComponent,
-
     ForbiddenPageComponent,
     GridButtonsComponent,
     NavbarComponent,
-    CalendarComponent
+
 
   ],
   imports: [
