@@ -34,6 +34,9 @@ import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-
 import { ForbiddenPageComponent } from './components/pages/forbidden-page/forbidden-page.component';
 import { NavbarComponent } from './components/partials/navbar/navbar.component';
 import { UserlistComponent } from './components/pages/userlist/userlist.component';
+import { UsereditComponent } from './components/pages/useredit/useredit.component';
+import { DataTablesModule } from 'angular-datatables';
+
 
 
 
@@ -60,7 +63,8 @@ import { UserlistComponent } from './components/pages/userlist/userlist.componen
     LoadingComponent,
     ForbiddenPageComponent,
     NavbarComponent,
-    UserlistComponent
+    UserlistComponent,
+    UsereditComponent
 
   ],
   imports: [
@@ -77,6 +81,7 @@ import { UserlistComponent } from './components/pages/userlist/userlist.componen
     MatProgressBarModule,
     MatButtonModule,
     MatIconModule,
+   DataTablesModule,
     ToastrModule.forRoot({
       timeOut:3000,
       positionClass:'toast-bottom-right',

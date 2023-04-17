@@ -17,9 +17,10 @@ import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-
 import { AuthGuard } from './services/guards/auth.guard';
 import { ForbiddenPageComponent } from './components/pages/forbidden-page/forbidden-page.component';
 import { UserlistComponent } from './components/pages/userlist/userlist.component';
+import { UsereditComponent } from './components/pages/useredit/useredit.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'settings', component: SettingsComponent },
   { path: 'tables', component: TablesComponent },
   { path: 'sign-in', component: SigninComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path:'register', component: RegisterComponent, canActivate: [AuthGuard]},
   {path:'userlist', component: UserlistComponent, canActivate: [AuthGuard]},
   {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+ { path:'useredit/:id', component: UsereditComponent, canActivate: [AuthGuard]},
   {path:'forbidden', component:ForbiddenPageComponent},
   {path:'**', pathMatch: 'full', component: PageNotFoudComponent},
 ];

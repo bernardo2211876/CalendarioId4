@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Toast, ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 import { AuthService } from 'src/app/services/services/auth.service';
 import { UserServiceService } from 'src/app/services/services/user.service.service';
 import { User } from 'src/app/shared/models/user.model';
@@ -11,13 +12,21 @@ import { User } from 'src/app/shared/models/user.model';
   styleUrls: ['./userlist.component.css']
 })
 export class UserlistComponent implements OnInit{
-  users: User[] = [];
+  users: any ;
   data:  any;
+  showContent: any;
+  dtoptions:DataTables.Settings={};
+  dttrigger:Subject<any>= new Subject<any>();
 
   constructor(private userService: UserServiceService, private _cdref : ChangeDetectorRef, private _authService: AuthService
     ,private _toastservice: ToastrService,private _router: Router) {}
 
   ngOnInit(): void {
+    setTimeout(()=>this.showContent=true, 250);
+    this.users=[];
+    this.dtoptions={
+      pagingType:'full_numbers'
+    };
     this.data = this._authService.loadCurrentUser();
     if(this.data.isAdmin=='False')
     {
@@ -34,9 +43,8 @@ export class UserlistComponent implements OnInit{
     this.userService.getAllUsers()
     .subscribe({
       next: (res)=> {
-       this.users = res;
-        this._cdref.detectChanges();
-        console.log(this.users);
+       this.users = res ;
+        this.dttrigger.next(null);
       },
       error: (res)=>{
         console.log(res);
