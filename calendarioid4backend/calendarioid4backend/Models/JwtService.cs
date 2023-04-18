@@ -20,7 +20,7 @@ namespace calendarioid4backend.Models
             this.TokenDuration = Int32.Parse(Config.GetSection("jwtConfig").GetSection("Duration").Value);
         }
 
-        public String GenerateToken(String id, String nome,String email,String telemovel, String isAdmin)
+        public String GenerateToken(String id, String nome,String email,String telemovel, String isAdmin, String isAprovador)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.SecretKey));
             var signature = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -30,7 +30,8 @@ namespace calendarioid4backend.Models
                 new Claim("nome",nome),
                 new Claim("email",email),
                 new Claim("telemovel",telemovel),
-                new Claim("isAdmin", isAdmin)
+                new Claim("isAdmin", isAdmin),
+                new Claim("isAprovador", isAprovador)
             };
 
             var jwtToken = new JwtSecurityToken(

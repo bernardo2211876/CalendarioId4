@@ -22,7 +22,7 @@ export class UserlistComponent implements OnInit{
     ,private _toastservice: ToastrService,private _router: Router) {}
 
   ngOnInit(): void {
-    setTimeout(()=>this.showContent=true, 250);
+
     this.users=[];
     this.dtoptions={
       pagingType:'full_numbers'
@@ -37,6 +37,7 @@ export class UserlistComponent implements OnInit{
       this._router.navigateByUrl('/dashboard');
     }
     this.carregarUsers();
+
   }
 
   carregarUsers(){
@@ -44,6 +45,7 @@ export class UserlistComponent implements OnInit{
     .subscribe({
       next: (res)=> {
        this.users = res ;
+       this._cdref.detectChanges();
         this.dttrigger.next(null);
       },
       error: (res)=>{

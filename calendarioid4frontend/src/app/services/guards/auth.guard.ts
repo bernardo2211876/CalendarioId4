@@ -18,7 +18,7 @@ export class AuthGuard {
    | UrlTree {
     if(!this.authService.isLoggedin()){
       this.toastservice.info(
-        'Para aceder ao dashboard tem que iniciar sessão',
+        'Para aceder ao id4calendário tem que iniciar sessão',
         'Sem sessão iniciada'
       )
       this.router.navigateByUrl('/login');

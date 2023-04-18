@@ -37,7 +37,8 @@ jwtHelperService = new JwtHelperService();
       nome: userInfo.nome,
       email: userInfo.email,
       telemovel: userInfo.telemovel,
-      isAdmin: userInfo.isAdmin
+      isAdmin: userInfo.isAdmin,
+      isAprovador: userInfo.isAprovador
 
     } : null;
     this.currentUser.next(data);

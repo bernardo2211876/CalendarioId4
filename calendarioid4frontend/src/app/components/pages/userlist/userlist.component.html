@@ -27,7 +27,7 @@
 </div>
 <!------------------------------------------------------------------------------------------------------------>
 
-<table id="table"  datatable="ng" [dtOptions]="dtoptions" [dtTrigger]="dttrigger" class="table table-striped" *ngIf="users && users.length> 0">
+<table id="table"  datatable [dtOptions]="dtoptions" [dtTrigger]="dttrigger" class="table table-striped" *ngIf="users && users.length> 0">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Id</th>
@@ -45,7 +45,7 @@
   </thead>
   <tbody *ngIf="users?.length != 0">
     <tr *ngFor="let user of users">
-      <th scope="col">{{user.Id}}</th>
+      <td scope="col">{{user.Id}}</td>
       <td scope="col">{{user.Nome}}</td>
       <td scope="col">{{user.Email}}</td>
       <td scope="col">{{user.Nif}}</td>

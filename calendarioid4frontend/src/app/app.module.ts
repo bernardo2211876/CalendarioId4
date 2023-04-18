@@ -81,7 +81,7 @@ import { DataTablesModule } from 'angular-datatables';
     MatProgressBarModule,
     MatButtonModule,
     MatIconModule,
-   DataTablesModule,
+    DataTablesModule,
     ToastrModule.forRoot({
       timeOut:3000,
       positionClass:'toast-bottom-right',

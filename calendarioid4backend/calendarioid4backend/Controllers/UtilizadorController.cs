@@ -103,6 +103,13 @@ namespace calendarioid4backend.Controllers
 
                 
                 var userAvailable = Context.Utilizadors.Where(u => u.Email == user.Email && /*Encriptacao.DecryptPassword(*/u.Password == user.Password).FirstOrDefault();
+                bool isaprovador = true;
+                var aprovador = Context.Aprovadors.Where(a => a.Aprovadorid == userAvailable.Id);
+                if(!aprovador.Any())
+                {
+                     isaprovador = false;
+                }
+               
                 //bool passwordequal = BCrypt.Net.BCrypt.Verify(user.Password, userAvailable.Password);
 
 
@@ -113,7 +120,8 @@ namespace calendarioid4backend.Controllers
                         userAvailable.Nome,
                         userAvailable.Email,
                         userAvailable.Telemovel.ToString(),
-                        userAvailable.IsAdmin.ToString()
+                        userAvailable.IsAdmin.ToString(),
+                        isaprovador.ToString()
                         );
                     Token res = new Token() { token = token };
                     return Ok(res);
