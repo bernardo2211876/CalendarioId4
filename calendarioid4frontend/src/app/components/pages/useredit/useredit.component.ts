@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Toast, ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/services/auth.service';
 import { UserServiceService } from 'src/app/services/services/user.service.service';
 import { User } from 'src/app/shared/models/user.model';
 
@@ -10,7 +12,7 @@ import { User } from 'src/app/shared/models/user.model';
   styleUrls: ['./useredit.component.css']
 })
 export class UsereditComponent implements OnInit {
-
+  data:any;
   user:User={
     Id :0,
 
@@ -42,11 +44,21 @@ export class UsereditComponent implements OnInit {
 
     Estadoid: 0
   };
-  constructor(private _route: ActivatedRoute, private userService: UserServiceService, private _router: Router){
+  constructor(private _route: ActivatedRoute, private userService: UserServiceService, private _router: Router,
+    private _authService: AuthService,private  _toastservice: ToastrService){
 
   }
 
   ngOnInit(): void {
+    this.data = this._authService.loadCurrentUser();
+    if(this.data.isAdmin=='False')
+    {
+      this._toastservice.warning(
+        'Necessita de ser admin para aceder a esta página',
+        'Acesso negado'
+      )
+      this._router.navigateByUrl('/dashboard');
+    }
     this.carregarUser();
   }
 

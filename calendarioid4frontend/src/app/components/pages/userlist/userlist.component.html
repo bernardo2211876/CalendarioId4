@@ -56,7 +56,10 @@
       <td scope="col">{{user.Funcao}}</td>
       <td  scope="col">Sim</td>
       <!--<td *ngIf="user.IsAdmin ==false" scope="col">Não</td>-->
-      <td scope="col"><a [routerLink]="['/useredit',user.Id]"><i class="fa-solid fa-pencil"></i></a></td>
+      <td scope="col">
+        <a [routerLink]="['/useredit',user.Id]"><i class="fa-solid fa-pencil"></i></a>
+        <a onclick="disableUser()"><i class="fa-solid fa-xmark" style="color: #f00000;"></i></a>
+      </td>
     </tr>
   </tbody>
 </table>
