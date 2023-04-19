@@ -12,6 +12,16 @@ export class UserServiceService {
 
   getAllUsers(): Observable<User[]>{
 
-      return this.http.get<any>(this.baseServerUrl+"Utilizador");
+      return this.http.get<User[]>(this.baseServerUrl+"Utilizador");
+  }
+
+  getUser(id : string): Observable<User>{
+
+    return this.http.get<User>(this.baseServerUrl+"Utilizador/GetUser/"+id);
+  }
+
+  updateUser(user:any):Observable<User>{
+    
+    return this.http.put<User>(this.baseServerUrl+"Utilizador/Edituser/"+user.id ,user);
   }
 }

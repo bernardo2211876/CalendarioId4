@@ -18,6 +18,7 @@
 </nav>
 <!------------------------------------------------------------------------------------------------------------>
 <!-- TITULO -->
+<div class="conteudo">
 <div class="d-flex justify-content-between w-100 flex-wrap">
   <div class="mb-3 mb-lg-0">
      <h1 class="h4">Lista Utilizadores</h1>
@@ -53,13 +54,14 @@
       <td scope="col">{{user.Morada}}</td>
       <td scope="col">{{user.Telemovel}}</td>
       <td scope="col">{{user.Funcao}}</td>
-      <td *ngIf="user.IsAdmin ==true" scope="col">Sim</td>
-      <td *ngIf="user.IsAdmin ==false" scope="col">Não</td>
+      <td  scope="col">Sim</td>
+      <!--<td *ngIf="user.IsAdmin ==false" scope="col">Não</td>-->
       <td scope="col"><a [routerLink]="['/useredit',user.Id]"><i class="fa-solid fa-pencil"></i></a></td>
     </tr>
   </tbody>
 </table>
 
 <p *ngIf="!users || users.length <= 0">Não foram encontrados Utilizadores</p>
+</div>
 <app-footer></app-footer>
 </main>

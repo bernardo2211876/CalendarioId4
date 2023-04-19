@@ -1,1 +1,117 @@
-<p>useredit works!</p>
+<app-header></app-header>
+<main class="content">
+
+<!-- NAV BAR-->
+<navbar></navbar>
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!-- NAV PAGES-->
+<nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+  <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+     <li class="breadcrumb-item">
+        <a href="#">
+           <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+           </svg>
+        </a>
+     </li>
+     <li class="breadcrumb-item active" aria-current="page">Editar Utilizador</li>
+  </ol>
+</nav>
+<!------------------------------------------------------------------------------------------------------------>
+<!-- TITULO -->
+<div class="d-flex justify-content-between w-100 flex-wrap">
+  <div class="mb-3 mb-lg-0">
+     <h1 class="h4">Editar Utilizador</h1>
+     <p class="mb-0">Nesta página é possível editar uma conta de utilizador</p>
+  </div>
+  <div><a [routerLink]="['/userlist']" routerLinkActive="router-link-active"  class="btn btn-outline-gray"><i class="far fa-question-circle me-1"></i> Lista de Utilizador</a></div>
+</div>
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<form class=" p-3 rounded-3" [formGroup]="editForm" (ngSubmit)="updateUser()">
+
+
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="nome"
+      formControlName="nome" [(ngModel)]="user.Nome" >
+      <label for="floatingInput">Nome</label>
+      <div class="form-text text-danger" *ngIf="Nome.errors?.['required'] && (Nome.dirty || Nome.touched)">
+        Nome é obrigatório
+      </div>
+    </div>
+
+    <div class="form-floating">
+      <input type="email" class="form-control" id="email"
+      formControlName="email" [(ngModel)]="user.Email">
+      <label for="floatingInput">Email</label>
+      <div class="form-text text-danger" *ngIf="Email.errors?.['required'] && (Email.dirty || Email.touched)">
+        Email é obrigatório
+      </div>
+      <div class="form-text text-danger" *ngIf="Email.errors?.['email'] && (Email.dirty || Email.touched)">
+        Email é inválido
+      </div>
+    </div>
+
+  <br/>
+
+    <br/>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="nif"
+      formControlName="nif" [(ngModel)]="user.Nif">
+      <label for="floatingInput">NIF</label>
+      <div class="form-text text-danger" *ngIf="Nif.errors?.['required'] && (Nif.dirty || Nif.touched)">
+        NIF é obrigatório
+      </div>
+      <div class="form-text text-danger" *ngIf="Nif.errors?.['minLength'] || Nif.errors?.['maxLength'] && (Nif.dirty || Nif.touched)">
+        O nif tem de ter 9 caracteres
+      </div>
+    </div>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="codpostal"
+      formControlName="codpostal" [(ngModel)]="user.Codpostal">
+      <label for="floatingInput">Código Postal</label>
+      <div class="form-text text-danger" *ngIf="Codpostal.errors?.['required'] && (Codpostal.dirty || Codpostal.touched)">
+        Código Postal é obrigatório
+      </div>
+    </div>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="morada"
+      formControlName="morada" [(ngModel)]="user.Morada">
+      <label for="floatingInput">Morada</label>
+      <div class="form-text text-danger" *ngIf="Morada.errors?.['required'] && (Morada.dirty || Morada.touched)">
+        Morada é obrigatório
+      </div>
+    </div>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="telemovel"
+      formControlName="telemovel" [(ngModel)]="user.Telemovel">
+      <label for="floatingInput">Contacto Telefónico</label>
+      <div class="form-text text-danger" *ngIf="Telemovel.errors?.['required'] && (Telemovel.dirty || Telemovel.touched)">
+        Contacto Telefónico é obrigatório
+      </div>
+      <div class="form-text text-danger" *ngIf="Telemovel.errors?.['minLength'] || Telemovel.errors?.['maxLength'] && (Telemovel.dirty || Telemovel.touched)">
+        O contacto telefónico tem de ter 9 caracteres
+      </div>
+    </div>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="funcao"
+      formControlName="funcao" [(ngModel)]="user.Funcao">
+      <label for="floatingInput">Função</label>
+      <div class="form-text text-danger" *ngIf="Funcao.errors?.['required'] && (Funcao.dirty || Funcao.touched)">
+        Função é obrigatório
+      </div>
+    </div>
+
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="editForm.invalid">Guardar</button>
+
+  </form>
+  <app-footer></app-footer>
+</main>
+
+
