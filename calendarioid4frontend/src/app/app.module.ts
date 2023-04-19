@@ -33,7 +33,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-foud.component';
 import { ForbiddenPageComponent } from './components/pages/forbidden-page/forbidden-page.component';
 import { GridButtonsComponent } from './components/partials/grid-buttons/grid-buttons.component';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule} from '@angular/material/grid-list';
 import { NavbarComponent } from './components/partials/navbar/navbar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
