@@ -84,17 +84,18 @@ import { CalendarComponent } from './components/partials/calendar/calendar.compo
     MatButtonModule,
     MatGridListModule,
     MatIconModule,
+    NgbModalModule,
+
     ToastrModule.forRoot({
       timeOut:3000,
       positionClass:'toast-bottom-right',
-      newestOnTop:false
+      newestOnTop:false}),
 
-    }),
-    NgbModalModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
-      useFactory: adapterFactory,}),
+      useFactory: adapterFactory}),
+
   ],
 
   providers: [
