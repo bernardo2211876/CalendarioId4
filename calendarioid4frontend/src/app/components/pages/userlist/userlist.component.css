@@ -3,3 +3,38 @@
   position: relative;
   height: 100%;
 }
+
+.example-spacer{
+  flex: 1 1 auto;
+}
+
+.main-body
+{
+  padding-top: 20px;
+  margin: 0 auto;
+
+}
+
+.main-body mat-form-field {
+  width: 25%;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 17px;
+  width: 100%;
+  height: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.btndisable{
+  padding: 0;
+border: none;
+background: none;
+}
