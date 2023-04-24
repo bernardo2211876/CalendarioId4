@@ -40,6 +40,14 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarComponent } from './components/partials/calendar/calendar.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import   interactionPlugin from '@fullcalendar/interaction';
+import   dayGridPlugin from '@fullcalendar/daygrid';
+import { Calendar2Component } from './components/partials/calendar2/calendar2.component';
+
+//FullCalendarModule.registerPlugins([interactionPlugin, dayGridPlugin]);
+
+
 
 
 @NgModule({
@@ -66,6 +74,7 @@ import { CalendarComponent } from './components/partials/calendar/calendar.compo
     GridButtonsComponent,
     NavbarComponent,
     CalendarComponent,
+    Calendar2Component,
 
 
   ],
@@ -85,11 +94,13 @@ import { CalendarComponent } from './components/partials/calendar/calendar.compo
     MatGridListModule,
     MatIconModule,
     NgbModalModule,
+    FullCalendarModule,
 
     ToastrModule.forRoot({
       timeOut:3000,
       positionClass:'toast-bottom-right',
       newestOnTop:false}),
+
 
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
