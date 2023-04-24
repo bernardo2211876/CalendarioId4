@@ -22,47 +22,47 @@
 <div class="d-flex justify-content-between w-100 flex-wrap">
   <div class="mb-3 mb-lg-0">
      <h1 class="h4">Visualizar Utilizador</h1>
-     <p class="mb-0">Nesta página é possível visualizar uma conta de utilizador</p>
   </div>
   <div><a [routerLink]="['/userlist']" routerLinkActive="router-link-active"  class="btn btn-outline-gray"><i class="far fa-question-circle me-1"></i> Lista de Utilizador</a></div>
 </div>
 <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<br/>
+  <table>
+    <tr>
+      <th class="titulo">Nome:</th>
+      <th class="descricao">{{user.Nome}}</th>
+    </tr>
 
+    <tr>
+      <th class="titulo">Email:</th>
+      <th class="descricao">{{user.Email}}</th>
+    </tr>
 
-    <div>
-      <label >Nome:</label>
-      <p>{{user.Nome}}</p>
-    </div>
+    <tr>
+      <th class="titulo">NIF:</th>
+      <th class="descricao">{{user.Nif}}</th>
+    </tr>
 
-    <div>
-      <label>Email:</label>
-      <p>{{user.Email}}</p>
-    </div>
+    <tr>
+      <th class="titulo">Código Postal:</th>
+      <th class="descricao">{{user.Codpostal}}</th>
+    </tr>
 
-    <div>
-      <label >NIF:</label>
-      <p>{{user.Nif}}</p>
-    </div>
+    <tr>
+      <th class="titulo">Morada:</th>
+      <th class="descricao">{{user.Morada}}</th>
+    </tr>
 
-    <div>
-      <label>Código Postal:</label>
-      <p>{{user.Codpostal}}</p>
-    </div>
+    <tr>
+      <th class="titulo">Telemóvel:</th>
+      <th class="descricao">{{user.Telemovel}}</th>
+    </tr>
 
-    <div>
-      <label>Morada:</label>
-      <p>{{user.Morada}}</p>
-    </div>
-
-    <div>
-      <label >Telemóvel:</label>
-      <p>{{user.Telemovel}}</p>
-    </div>
-
-    <div>
-      <label >Função</label>
-      <p>{{user.Funcao}}</p>
-    </div>
+    <tr>
+      <th class="titulo">Função</th>
+      <th class="descricao">{{user.Funcao}}</th>
+    </tr>
+  </table>
 
   <app-footer></app-footer>
 </main>
