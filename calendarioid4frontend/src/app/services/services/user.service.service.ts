@@ -24,4 +24,19 @@ export class UserServiceService {
 
     return this.http.put<User>(this.baseServerUrl+"Utilizador/Edituser/"+user.id ,user);
   }
+
+  DisableUser(id:String){
+
+    return this.http.put(this.baseServerUrl+"Utilizador/Disableuser/"+id,'no body');
+  }
+
+  EnableUser(id:String){
+
+    return this.http.put(this.baseServerUrl+"Utilizador/Enableuser/"+id,'no body');
+  }
+
+  getAprovadores(id : string): Observable<any> {
+
+    return this.http.get(this.baseServerUrl+"Utilizador/Getaprovadores/"+id);
+  }
 }

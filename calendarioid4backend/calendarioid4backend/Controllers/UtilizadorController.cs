@@ -39,12 +39,12 @@ namespace calendarioid4backend.Controllers
         [HttpGet]
         public async Task<ActionResult> GetUsers()
         {
-            var utilizadores = await Context.Utilizadors.ToListAsync();
+            var utilizadores = await Context.Utilizadors.Include(p=>p.AprovadorUtilizadors).ToListAsync();
             return Ok(utilizadores);
-           /* return Ok(await Context.Utilizadors
-                //.Include(p => p.Ausencia)
-                //.Include(p => p.AprovadorUtilizadors)
-                //.Include(p => p.Estado)
+           /*return Ok(await Context.Utilizadors
+                .Include(p => p.Ausencia)
+                .Include(p => p.AprovadorUtilizadors)
+                .Include(p => p.Estado)
                 .ToListAsync());*/
         }
 
@@ -199,6 +199,89 @@ namespace calendarioid4backend.Controllers
             }
         }
 
+        [HttpPut("Disableuser/{id}")]
+        public async Task<IActionResult> DisableUser(int id)
+        {
+            try
+            {
+
+                var user = await Context.Utilizadors.FindAsync(id);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                user.Idutilizadorultimaedicao = 1;//precisa de ser alterado para o user que atualizar
+                user.Dataultimaedicao = DateTime.Now;
+                user.Estadoid = 2;
+
+                await Context.SaveChangesAsync();
+
+                return Ok(user);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpPut("Enableuser/{id}")]
+        public async Task<IActionResult> EnableUser(int id)
+        {
+            try
+            {
+
+                var user = await Context.Utilizadors.FindAsync(id);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                user.Idutilizadorultimaedicao = 1;//precisa de ser alterado para o user que atualizar
+                user.Dataultimaedicao = DateTime.Now;
+                user.Estadoid = 1;
+
+                await Context.SaveChangesAsync();
+
+                return Ok(user);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet("Getaprovadores/{id}")]
+        public async Task<ActionResult<List<Utilizador>>> GetAprovadores(int id)
+        {
+            try
+            {
+                Utilizador utilizador = await Context.Utilizadors.FirstOrDefaultAsync(u => u.Id == id);
+
+                if (utilizador == null)
+                {
+                    return NotFound();
+                }
+                var aprovadoresID = await Context.Aprovadors.FirstOrDefaultAsync(a=> a.Utilizadorid == utilizador.Id);
+
+                if (aprovadoresID == null)
+                {
+                    return NoContent();
+                }
+                Utilizador aprovadores = await Context.Utilizadors.FirstOrDefaultAsync(a => a.Id == aprovadoresID.Id);
+                
+
+                return Ok(aprovadores);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
         /*public String Encodepassword(String password)
            {
                string passwordHash = BCrypt.Net.BCrypt.HashPassword(password);

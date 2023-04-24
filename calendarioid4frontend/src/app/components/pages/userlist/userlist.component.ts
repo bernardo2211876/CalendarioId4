@@ -16,11 +16,6 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class UserlistComponent implements OnInit{
   data:  any;
-  /*users: any[] =[] ;
-
-  showContent: any;
-  dtoptions:DataTables.Settings={};
-  dttrigger:Subject<any>= new Subject<any>();*/
 
   displayedColumns: string[] = ['Id', 'Nome', 'Email', 'Nif','Codpostal','Morada','Telemovel','Funcao','EstadoId', 'Funcionalidades'];
   dataSource!: MatTableDataSource<any>;
@@ -45,36 +40,6 @@ export class UserlistComponent implements OnInit{
     }
     this.carregarUsers();
 
-    //this.carregarUsers();
-    //this._cdref.detectChanges();
-
-    /*this.dtoptions = {
-      serverSide: true,     // Set the flag
-      ajax: (dataTablesParameters: any, callback) => {
-        this.userService.getAllUsers()
-          .get<DataTablesResponse>(
-            'https://xtlncifojk.eu07.qoddiapp.com/',
-            dataTablesParameters, {}
-          ).subscribe(resp => {
-            callback({
-              recordsTotal: resp.recordsTotal,
-              recordsFiltered: resp.recordsFiltered,
-              data: resp.data
-            });
-          });
-      },
-      columns: [{
-        title: 'ID',
-        data: 'id'
-      }, {
-        title: 'First name',
-        data: 'firstName'
-      }, {
-        title: 'Last name',
-        data: 'lastName'
-      }]
-    };*/
-
   }
 
 
@@ -86,7 +51,6 @@ export class UserlistComponent implements OnInit{
        this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort= this.sort;
         this.dataSource.paginator= this.paginator;
-        //this.dttrigger.next(null);
       },
       error: (err)=>{
         console.log(err);
@@ -106,10 +70,31 @@ export class UserlistComponent implements OnInit{
   }
 
   enableUser(id : String){
-
+    this.userService.EnableUser(id)
+    .subscribe({
+      next:(res)=>{
+        this._toastservice.success(
+          'Utilizador ativado com sucesso',
+          'Utilizador Ativado'
+        )
+        this._cdref.detectChanges();
+        this.carregarUsers();
+      }
+    });
   }
 
   disableUser(id : String){
+    this.userService.DisableUser(id)
+    .subscribe({
+      next:(res)=>{
+        this._toastservice.success(
+          'Utilizador desativado com sucesso',
+          'Utilizador desativo'
+        )
+        this._cdref.detectChanges();
+        this.carregarUsers();
+      }
+    });
 
   }
 
