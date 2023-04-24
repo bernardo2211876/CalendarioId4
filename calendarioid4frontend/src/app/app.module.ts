@@ -36,10 +36,11 @@ import { NavbarComponent } from './components/partials/navbar/navbar.component';
 import { UserlistComponent } from './components/pages/userlist/userlist.component';
 import { UsereditComponent } from './components/pages/useredit/useredit.component';
 import { DataTablesModule } from 'angular-datatables';
-
-
-
-
+import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { UserviewComponent } from './components/pages/userview/userview.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { DataTablesModule } from 'angular-datatables';
     ForbiddenPageComponent,
     NavbarComponent,
     UserlistComponent,
-    UsereditComponent
+    UsereditComponent,
+    UserviewComponent
 
   ],
   imports: [
@@ -82,6 +84,10 @@ import { DataTablesModule } from 'angular-datatables';
     MatButtonModule,
     MatIconModule,
     DataTablesModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
     ToastrModule.forRoot({
       timeOut:3000,
       positionClass:'toast-bottom-right',

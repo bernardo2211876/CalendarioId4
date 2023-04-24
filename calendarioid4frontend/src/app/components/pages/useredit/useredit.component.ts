@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { Toast, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/services/auth.service';
 import { UserServiceService } from 'src/app/services/services/user.service.service';
 import { User } from 'src/app/shared/models/user.model';
@@ -45,7 +45,7 @@ export class UsereditComponent implements OnInit {
     Estadoid: 0
   };
   constructor(private _route: ActivatedRoute, private userService: UserServiceService, private _router: Router,
-    private _authService: AuthService,private  _toastservice: ToastrService){
+    private _authService: AuthService,private  _toastservice: ToastrService, private _cdref : ChangeDetectorRef){
 
   }
 
@@ -60,9 +60,10 @@ export class UsereditComponent implements OnInit {
       this._router.navigateByUrl('/dashboard');
     }
     this.carregarUser();
+    //this._cdref.detectChanges();
   }
 
-  carregarUser(){
+ public carregarUser(){
     this._route.paramMap.subscribe({
       next:(params)=>{
         const id = params.get('id');
