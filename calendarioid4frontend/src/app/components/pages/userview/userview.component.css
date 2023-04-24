@@ -1,0 +1,20 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.titulo{
+ width: 250px;
+}
+
+.descricao{
+  font-weight: 400;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color: rgba(235, 235, 235, 0.867);}
