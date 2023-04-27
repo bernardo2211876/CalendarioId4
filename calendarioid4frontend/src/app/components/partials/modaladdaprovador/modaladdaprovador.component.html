@@ -1,0 +1,19 @@
+
+<h1 mat-dialog-title>Adicionar Aprovador</h1>
+<form [formGroup]="addAprovadorForm">
+<div mat-dialog-content>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Utilizadores</mat-label>
+    <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option.Nome}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button mat-dialog-close cdkFocusInitial>Adicionar</button>
+</div>
+</form>

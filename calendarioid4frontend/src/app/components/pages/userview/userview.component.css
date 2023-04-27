@@ -18,3 +18,13 @@ th, td {
 }
 
 tr:hover {background-color: rgba(235, 235, 235, 0.867);}
+
+.btn-secondary{
+  background-color: rgb(232, 232, 232);
+  color: black;
+}
+
+.btn-secondary:hover{
+  background-color: rgb(189, 189, 189);
+  color: black;
+}

@@ -26,13 +26,22 @@
     <div class="mb-3 mb-lg-0">
       <h1 class="h4">Visualizar Utilizador</h1>
     </div>
-    <div><a [routerLink]="['/userlist']" routerLinkActive="router-link-active" class="btn btn-outline-gray"><i
+    <div><a class="btn btn-secondary" role="button" [routerLink]="['/userlist']" routerLinkActive="router-link-active" ><i
           class="fa-solid fa-list"></i>&nbsp;Lista de Utilizador</a></div>
+
   </div>
   <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
   <br />
   <table>
+    <tr>
+      <th class="titulo">Data última edição:</th>
+      <th class="descricao">{{user.Dataultimaedicao | date:'MMMM d, y, h:mm:ss'}}</th>
+    </tr>
+    <tr>
+      <th class="titulo">Responsável pela última edição:</th>
+      <th class="descricao">{{user.Idutilizadorultimaedicao}}</th>
+    </tr>
     <tr>
       <th class="titulo">Nome:</th>
       <th class="descricao">{{user.Nome}}</th>
@@ -63,37 +72,40 @@
       <th class="descricao">{{user.Funcao}}</th>
     </tr>
   </table>
+  <br/>
+  <br/>
 
   <div class="main-body">
-
-    <mat-form-field>
+    <div class="d-flex justify-content-between w-100 flex-wrap">
+   <mat-form-field>
       <mat-label>Filter </mat-label>
       <input style="background-color: rgb(255, 255, 255);" matInput (keyup)="applyFilter($event)" placeholder="" #input>
       <br />
     </mat-form-field>
+    <div><a (click)="OpenDialog('1000ms','500ms')" class="btn btn-secondary"><i class="fa-solid fa-circle-plus"></i>&nbsp;Adicionar Aprovador</a></div>
+  </div>
 
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort *ngIf="dataSource!=null">
 
-        <!-- ID Column -->
         <ng-container matColumnDef="Id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
           <td mat-cell *matCellDef="let row"> {{row.Id}} </td>
         </ng-container>
 
-        <!-- Progress Column -->
+
         <ng-container matColumnDef="Nome">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
           <td mat-cell *matCellDef="let row"> {{row.Nome}} </td>
         </ng-container>
 
-        <!-- Name Column -->
+
         <ng-container matColumnDef="Email">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
           <td mat-cell *matCellDef="let row"> {{row.Email}} </td>
         </ng-container>
 
-        <!-- Fruit Column -->
+
         <ng-container matColumnDef="Nif">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> NIF </th>
           <td mat-cell *matCellDef="let row"> {{row.Nif}} </td>
@@ -126,12 +138,13 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-        <!-- Row shown when there is no matching data. -->
 
       </table>
 
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     </div>
+
+
   </div>
 
   <!--<p *ngIf="!users || users.length <= 0">Não foram encontrados Utilizadores</p>-->

@@ -22,7 +22,7 @@ export class UserServiceService {
 
   updateUser(user:any):Observable<User>{
 
-    return this.http.put<User>(this.baseServerUrl+"Utilizador/Edituser/"+user.id ,user);
+    return this.http.put<User>(this.baseServerUrl+"Utilizador/Edituser/"+user.Id ,user);
   }
 
   DisableUser(id:String){
