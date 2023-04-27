@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -7,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/services/auth.service';
 import { UserServiceService } from 'src/app/services/services/user.service.service';
 import { User } from 'src/app/shared/models/user.model';
+import { ModaladdaprovadorComponent } from '../../partials/modaladdaprovador/modaladdaprovador.component';
 
 @Component({
   selector: 'app-userview',
@@ -15,9 +17,9 @@ import { User } from 'src/app/shared/models/user.model';
 })
 export class UserviewComponent implements OnInit {
 
-
   data:any;
-  user:User={
+  user:any;
+  /*user:User={
     Id :0,
 
     Idutilizadorcriador:0,
@@ -47,7 +49,7 @@ export class UserviewComponent implements OnInit {
     IsAdmin: true,
 
     Estadoid: 0
-  };
+  };*/
 
   displayedColumns: String[] = ['Id', 'Nome', 'Email', 'Nif','Codpostal','Morada','Telemovel','Funcao','EstadoId'];
   dataSource!: MatTableDataSource<any>;
@@ -57,7 +59,8 @@ export class UserviewComponent implements OnInit {
 
 
   constructor(private _route: ActivatedRoute, private userService: UserServiceService, private _router: Router,
-    private _authService: AuthService,private  _toastservice: ToastrService, private _cdref : ChangeDetectorRef){
+    private _authService: AuthService,private  _toastservice: ToastrService, private _cdref : ChangeDetectorRef
+    ,private dialog:MatDialog){
 
   }
 
@@ -103,6 +106,7 @@ export class UserviewComponent implements OnInit {
                 this.dataSource = new MatTableDataSource(res);
                 this.dataSource.sort= this.sort;
                 this.dataSource.paginator= this.paginator;
+
               },
               error(error){
                 console.log(error);
@@ -121,5 +125,13 @@ export class UserviewComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  OpenDialog(enteranimation:any,exitanimation:any){
+    this.dialog.open(ModaladdaprovadorComponent,{
+      enterAnimationDuration:enteranimation,
+      exitAnimationDuration:exitanimation,
+      width:"50%"
+    })
   }
 }

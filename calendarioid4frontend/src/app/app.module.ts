@@ -40,7 +40,10 @@ import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { UserviewComponent } from './components/pages/userview/userview.component';
+import { ModaladdaprovadorComponent } from './components/partials/modaladdaprovador/modaladdaprovador.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,8 @@ import { UserviewComponent } from './components/pages/userview/userview.componen
     NavbarComponent,
     UserlistComponent,
     UsereditComponent,
-    UserviewComponent
+    UserviewComponent,
+    ModaladdaprovadorComponent
 
   ],
   imports: [
@@ -88,6 +92,8 @@ import { UserviewComponent } from './components/pages/userview/userview.componen
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDialogModule,
+    MatAutocompleteModule,
     ToastrModule.forRoot({
       timeOut:3000,
       positionClass:'toast-bottom-right',
