@@ -21,16 +21,16 @@ export class ModaladdaprovadorComponent {
     this.options=[];
   }
   ngOnInit() {
-    this.carregarUsers();
+   this.carregarUsers();
     this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith('e'),
+      startWith(''),
       map(value => {
         const name = typeof value === 'string' ? value : value?.Nome;
         return name ? this._filter(name as string) : this.options.slice();
       }),
     );
   }
-  ngAfterViewInit(): void { this.myControl .setValue(''); }
+ // ngAfterViewInit(): void { this.myControl .setValue(''); }
 
   carregarUsers(){
     this.userService.getAllUsers()

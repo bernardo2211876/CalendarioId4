@@ -260,7 +260,7 @@ namespace calendarioid4backend.Controllers
         {
             try
             {
-                Utilizador utilizador = await Context.Utilizadors.FirstAsync(u => u.Id == id);
+                Utilizador utilizador = await Context.Utilizadors.FirstOrDefaultAsync(u => u.Id == id);
 
                 if (utilizador == null)
                 {
@@ -282,11 +282,7 @@ namespace calendarioid4backend.Controllers
                 return BadRequest(e);
             }
         }
-        /*public String Encodepassword(String password)
-           {
-               string passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
-               return passwordHash;
-           }*/
+       
 
 
 

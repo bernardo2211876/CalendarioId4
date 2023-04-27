@@ -8,6 +8,7 @@ import { User } from 'src/app/shared/models/user.model';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { resetNormalizeCache } from '@angular-devkit/core';
 
 @Component({
   selector: 'app-userlist',
@@ -48,7 +49,7 @@ export class UserlistComponent implements OnInit{
     this.userService.getAllUsers()
     .subscribe({
       next: (res)=> {
-       this.dataSource = new MatTableDataSource();
+       this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort= this.sort;
         this.dataSource.paginator= this.paginator;
       },

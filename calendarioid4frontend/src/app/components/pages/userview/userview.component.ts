@@ -65,7 +65,7 @@ export class UserviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.data = this._authService.loadCurrentUser();
+   this.data = this._authService.loadCurrentUser();
     if(this.data.isAdmin=='False')
     {
       this._toastservice.warning(
