@@ -1,8 +1,4 @@
-
 .content {
   min-height: 100%;
-}
-.content{
-  min-height: 575px;
   position: relative;
 }
