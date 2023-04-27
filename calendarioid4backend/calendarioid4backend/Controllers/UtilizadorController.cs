@@ -260,7 +260,7 @@ namespace calendarioid4backend.Controllers
         {
             try
             {
-                Utilizador utilizador = await Context.Utilizadors.FirstOrDefaultAsync(u => u.Id == id);
+                Utilizador utilizador = await Context.Utilizadors.FirstAsync(u => u.Id == id);
 
                 if (utilizador == null)
                 {
@@ -270,7 +270,7 @@ namespace calendarioid4backend.Controllers
 
                 if (aprovadoresID == null)
                 {
-                    return NoContent();
+                    return Ok(204);
                 }
                 Utilizador aprovadores = await Context.Utilizadors.FirstOrDefaultAsync(a => a.Id == aprovadoresID.Id);
                 
