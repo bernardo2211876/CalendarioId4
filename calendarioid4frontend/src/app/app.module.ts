@@ -32,6 +32,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserModule } from '@angular/platform-browser';
 import { PageNotFoudComponent } from './components/pages/page-not-foud/page-not-foud.component';
 import { ForbiddenPageComponent } from './components/pages/forbidden-page/forbidden-page.component';
+import { GridButtonsComponent } from './components/partials/grid-buttons/grid-buttons.component';
+import { MatGridListModule} from '@angular/material/grid-list';
 import { NavbarComponent } from './components/partials/navbar/navbar.component';
 import { UserlistComponent } from './components/pages/userlist/userlist.component';
 import { UsereditComponent } from './components/pages/useredit/useredit.component';
@@ -44,6 +46,17 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { UserviewComponent } from './components/pages/userview/userview.component';
 import { ModaladdaprovadorComponent } from './components/partials/modaladdaprovador/modaladdaprovador.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { CalendarComponent } from './components/partials/calendar/calendar.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import   interactionPlugin from '@fullcalendar/interaction';
+import   dayGridPlugin from '@fullcalendar/daygrid';
+import { Calendar2Component } from './components/partials/calendar2/calendar2.component';
+
+//FullCalendarModule.registerPlugins([interactionPlugin, dayGridPlugin]);
 
 @NgModule({
   declarations: [
@@ -70,7 +83,11 @@ import { ModaladdaprovadorComponent } from './components/partials/modaladdaprova
     UserlistComponent,
     UsereditComponent,
     UserviewComponent,
-    ModaladdaprovadorComponent
+    ModaladdaprovadorComponent,
+    GridButtonsComponent,
+    NavbarComponent,
+    CalendarComponent,
+    Calendar2Component,
 
   ],
   imports: [
@@ -86,6 +103,7 @@ import { ModaladdaprovadorComponent } from './components/partials/modaladdaprova
     FormsModule,
     MatProgressBarModule,
     MatButtonModule,
+    MatGridListModule,
     MatIconModule,
     DataTablesModule,
     MatTableModule,
@@ -94,12 +112,21 @@ import { ModaladdaprovadorComponent } from './components/partials/modaladdaprova
     MatInputModule,
     MatDialogModule,
     MatAutocompleteModule,
+    NgbModalModule,
+    FullCalendarModule,
     ToastrModule.forRoot({
       timeOut:3000,
       positionClass:'toast-bottom-right',
-      newestOnTop:false
-    })
+      newestOnTop:false}),
+
+
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory}),
+
   ],
+
   providers: [
     AuthService,
     {provide:HTTP_INTERCEPTORS, useClass:LoadingInterceptor, multi: true},

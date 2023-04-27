@@ -40,6 +40,7 @@ const routes: Routes = [
   {path:'userview/:id', component: UserviewComponent, canActivate: [AuthGuard]},
   {path:'forbidden', component:ForbiddenPageComponent},
   {path:'**', pathMatch: 'full', component: PageNotFoudComponent},
+
 ];
 
 @NgModule({
