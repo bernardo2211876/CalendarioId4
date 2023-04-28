@@ -51,9 +51,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarComponent } from './components/partials/calendar/calendar.component';
-import { FullCalendarModule } from '@fullcalendar/angular';
-import   interactionPlugin from '@fullcalendar/interaction';
-import   dayGridPlugin from '@fullcalendar/daygrid';
+import { FullCalendarModule } from '@fullcalendar/angular'; 
 import { Calendar2Component } from './components/partials/calendar2/calendar2.component';
 
 //FullCalendarModule.registerPlugins([interactionPlugin, dayGridPlugin]);
