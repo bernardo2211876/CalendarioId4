@@ -39,4 +39,9 @@ export class UserServiceService {
 
     return this.http.get(this.baseServerUrl+"Utilizador/Getaprovadores/"+id);
   }
+
+  getnaoAprovadores(id : string): Observable<any> {
+
+    return this.http.get(this.baseServerUrl+"Utilizador/Getnaoaprovadores/"+id);
+  }
 }

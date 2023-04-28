@@ -131,7 +131,10 @@ export class UserviewComponent implements OnInit {
     this.dialog.open(ModaladdaprovadorComponent,{
       enterAnimationDuration:enteranimation,
       exitAnimationDuration:exitanimation,
-      width:"50%"
+      width:"50%",
+      data:{
+        iduser:this.user.Id
+      }
     })
   }
 }

@@ -282,11 +282,42 @@ namespace calendarioid4backend.Controllers
                 return BadRequest(e);
             }
         }
-       
 
+        [HttpGet("Getnaoaprovadores/{id}")]
+        public async Task<ActionResult<List<Utilizador>>> GetnaoAprovadores(int id)
+        {
+            try
+            {
+                Utilizador utilizador = await Context.Utilizadors.FirstOrDefaultAsync(u => u.Id == id);
 
+                if (utilizador == null)
+                {
+                    return NotFound();
+                }
+                var aprovadoresID = await Context.Aprovadors.FirstOrDefaultAsync(a => a.Utilizadorid == utilizador.Id);
+                if(aprovadoresID == null)
+                {
+                    return (await Context.Utilizadors.Where(u => u.Id != utilizador.Id).ToListAsync());
+                }
+                
+                Utilizador aprovadores = await Context.Utilizadors.FirstOrDefaultAsync(a => a.Id == aprovadoresID.Id);
+                var naoaprovadores = await Context.Utilizadors.Where(na => na.Id != aprovadores.Id && na.Id != utilizador.Id).ToListAsync();
 
+                return Ok(naoaprovadores);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
 
 
     }
+
+
+
+
+
+
 }
+
