@@ -53,6 +53,9 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarComponent } from './components/partials/calendar/calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular'; 
 import { Calendar2Component } from './components/partials/calendar2/calendar2.component';
+import { FeriasComponent } from './components/pages/ferias/ferias.component';
+import { TeletrabalhoComponent } from './components/pages/teletrabalho/teletrabalho.component';
+import { AusenciasComponent } from './components/pages/ausencias/ausencias.component';
 
 //FullCalendarModule.registerPlugins([interactionPlugin, dayGridPlugin]);
 
@@ -86,6 +89,9 @@ import { Calendar2Component } from './components/partials/calendar2/calendar2.co
     NavbarComponent,
     CalendarComponent,
     Calendar2Component,
+    FeriasComponent,
+    TeletrabalhoComponent,
+    AusenciasComponent,
 
   ],
   imports: [
