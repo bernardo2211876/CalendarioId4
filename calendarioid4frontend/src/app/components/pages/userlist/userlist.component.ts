@@ -28,8 +28,6 @@ export class UserlistComponent implements OnInit{
     ,private _toastservice: ToastrService,private _router: Router) {}
 
   ngOnInit(): void {
-
-
     this.data = this._authService.loadCurrentUser();
     if(this.data.isAdmin=='False')
     {
@@ -49,7 +47,8 @@ export class UserlistComponent implements OnInit{
     this.userService.getAllUsers()
     .subscribe({
       next: (res)=> {
-       this.dataSource = new MatTableDataSource(res);
+        console.log(typeof(res));
+       this.dataSource = new MatTableDataSource(res);debugger
         this.dataSource.sort= this.sort;
         this.dataSource.paginator= this.paginator;
       },

@@ -55,5 +55,33 @@ namespace calendarioid4backend.Controllers
 
 
         }
+
+        [AllowAnonymous]
+        [HttpPost("RemoverAprovacao")]
+        public async Task<IActionResult> RemoverAprovacao()
+        {
+            try
+            {
+                Task<string> task = null;
+                using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
+                {
+                    task = reader.ReadToEndAsync();
+                };
+
+                var aprovacao = JsonConvert.DeserializeObject<Aprovador>(task.Result);
+
+                Aprovador aprovadorremover = await Context.Aprovadors.FirstOrDefaultAsync(a => a.Utilizadorid == aprovacao.Utilizadorid && a.Aprovadorid == aprovacao.Aprovadorid);
+                Context.Aprovadors.Remove(aprovadorremover);
+                Context.SaveChanges();
+                return Ok(200);
+
+            }
+            catch (Exception ex)
+            {
+                return Ok("Error" + ex);
+            }
+
+
+        }
     }
 }

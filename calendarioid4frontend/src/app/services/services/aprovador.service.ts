@@ -9,8 +9,16 @@ export class AprovadorService {
   constructor(private http: HttpClient) { }
 
   criarAprovador(id:any,ida:any){
-    
+
     return this.http.post(this.baseServerUrl+"Aprovador/AdicionarAprovacao",{
+      utilizadorid:id,
+      aprovadorid:ida
+    });
+  }
+
+  RemoveAprovador(id:any,ida:any){
+    debugger
+    return this.http.post(this.baseServerUrl+"Aprovador/RemoverAprovacao",{
       utilizadorid:id,
       aprovadorid:ida
     });

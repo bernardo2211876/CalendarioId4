@@ -17,6 +17,7 @@ th, td {
   border-bottom: 1px solid #ddd;
 }
 
+
 tr:hover {background-color: rgba(235, 235, 235, 0.867);}
 
 .btn-secondary{
@@ -27,4 +28,10 @@ tr:hover {background-color: rgba(235, 235, 235, 0.867);}
 .btn-secondary:hover{
   background-color: rgb(189, 189, 189);
   color: black;
+}
+
+.btndisable{
+  padding: 0;
+border: none;
+background: none;
 }

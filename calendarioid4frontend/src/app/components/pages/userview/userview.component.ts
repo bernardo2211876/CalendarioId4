@@ -9,113 +9,93 @@ import { AuthService } from 'src/app/services/services/auth.service';
 import { UserServiceService } from 'src/app/services/services/user.service.service';
 import { User } from 'src/app/shared/models/user.model';
 import { ModaladdaprovadorComponent } from '../../partials/modaladdaprovador/modaladdaprovador.component';
+import { AprovadorService } from 'src/app/services/services/aprovador.service';
 
 @Component({
   selector: 'app-userview',
   templateUrl: './userview.component.html',
-  styleUrls: ['./userview.component.css']
+  styleUrls: ['./userview.component.css'],
 })
 export class UserviewComponent implements OnInit {
-
-  data:any;
-  user:any;
-  /*user:User={
-    Id :0,
-
-    Idutilizadorcriador:0,
-
-    Datacriacao: '',
-
-    Idutilizadorultimaedicao: 0,
-
-    Dataultimaedicao: '',
-
-    Nome: '',
-
-    Email: '',
-
-    Password: '',
-
-    Nif: 0,
-
-    Codpostal: '',
-
-    Morada: '',
-
-    Telemovel: 0,
-
-    Funcao: '',
-
-    IsAdmin: true,
-
-    Estadoid: 0
-  };*/
-
-  displayedColumns: String[] = ['Id', 'Nome', 'Email', 'Nif','Codpostal','Morada','Telemovel','Funcao','EstadoId'];
+  id: any;
+  data: any;
+  user: any;
+  existsuser:boolean = false;
+  existsaprovadores:boolean = false;
+  displayedColumns: String[] = [
+    'Id',
+    'Nome',
+    'Email',
+    'Nif',
+    'Codpostal',
+    'Morada',
+    'Telemovel',
+    'Funcao',
+    'Funcionalidades',
+  ];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-
-  constructor(private _route: ActivatedRoute, private userService: UserServiceService, private _router: Router,
-    private _authService: AuthService,private  _toastservice: ToastrService, private _cdref : ChangeDetectorRef
-    ,private dialog:MatDialog){
-
-  }
+  constructor(
+    private _route: ActivatedRoute,
+    private userService: UserServiceService,
+    private _aprovadorService: AprovadorService,
+    private _router: Router,
+    private _authService: AuthService,
+    private _toastservice: ToastrService,
+    private _cdref: ChangeDetectorRef,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-   this.data = this._authService.loadCurrentUser();
-    if(this.data.isAdmin=='False')
-    {
+    this.data = this._authService.loadCurrentUser();
+    if (this.data.isAdmin == 'False') {
       this._toastservice.warning(
         'Necessita de ser admin para aceder a esta página',
         'Acesso negado'
-      )
+      );
       this._router.navigateByUrl('/dashboard');
     }
-    this.carregarUser();
-    this.carregarAprovadores();
+
+    this._route.paramMap.subscribe({
+      next: (params) => {
+        this.id = params.get('id');
+      },
+    });
+
+    this.carregarUser(this.id);
+    this.carregarAprovadores(this.id);
   }
 
-  public carregarUser(){
-    this._route.paramMap.subscribe({
-      next:(params)=>{
-        const id = params.get('id');
-        if(id){
-            this.userService.getUser(id)
-            .subscribe({
-              next:(res)=> {
-                this.user=res;
-              }
-            })
-        }
-      }
-    })
+  public carregarUser(id) {
+    if (id)
+    {
+      this.userService.getUser(id).subscribe({
+        next: (res) => {
+          this.user = res;
+          this.existsuser=true;
+        },
+      });
+    }
   }
 
-  public carregarAprovadores(){
-    this._route.paramMap.subscribe({
-      next:(params)=>{
-        const id = params.get('id');
-        if(id){
-            this.userService.getAprovadores(id)
-            .subscribe({
-              next:(res)=> {
-
-                this.dataSource = new MatTableDataSource(res);
-                this.dataSource.sort= this.sort;
-                this.dataSource.paginator= this.paginator;
-
-              },
-              error(error){
-                console.log(error);
-              }
-
-            })
-        }
-      }
-    })
+  public carregarAprovadores(id) {
+    if (id) {
+      this.userService.getAprovadores(id).subscribe({
+        next: (res) => {
+          console.log(typeof(res));
+          this.dataSource = new MatTableDataSource(res);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+          this.existsaprovadores=true;
+        },
+        error(error) {
+          console.log(error);
+        },
+      });
+    }
   }
 
   applyFilter(event: Event) {
@@ -127,14 +107,28 @@ export class UserviewComponent implements OnInit {
     }
   }
 
-  OpenDialog(enteranimation:any,exitanimation:any){
-    this.dialog.open(ModaladdaprovadorComponent,{
-      enterAnimationDuration:enteranimation,
-      exitAnimationDuration:exitanimation,
-      width:"50%",
-      data:{
-        iduser:this.user.Id
+  OpenDialog(enteranimation: any, exitanimation: any) {
+    this.dialog.open(ModaladdaprovadorComponent, {
+      enterAnimationDuration: enteranimation,
+      exitAnimationDuration: exitanimation,
+      width: '50%',
+      data: {
+        iduser: this.user.Id,
+      },
+    });
+  }
+
+  RemoveAprovador(id){
+    this._aprovadorService.RemoveAprovador(this.user.Id,id)
+    .subscribe({
+      next:(res)=>{
+        this._toastservice.success(
+          'Aprovador removido com sucesso',
+          'Aprovador removido'
+        )
+        this._cdref.detectChanges();
+        this.carregarAprovadores(this.id);
       }
-    })
+    });
   }
 }
