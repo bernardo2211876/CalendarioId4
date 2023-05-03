@@ -85,7 +85,6 @@ export class UserviewComponent implements OnInit {
     if (id) {
       this.userService.getAprovadores(id).subscribe({
         next: (res) => {
-          console.log(typeof(res));
           this.dataSource = new MatTableDataSource(res);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;

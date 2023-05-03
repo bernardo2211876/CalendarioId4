@@ -47,8 +47,7 @@ export class UserlistComponent implements OnInit{
     this.userService.getAllUsers()
     .subscribe({
       next: (res)=> {
-        console.log(typeof(res));
-       this.dataSource = new MatTableDataSource(res);debugger
+       this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort= this.sort;
         this.dataSource.paginator= this.paginator;
       },
