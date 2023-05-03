@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, map, startWith } from 'rxjs';
+import { AprovadorService } from 'src/app/services/services/aprovador.service';
 import { UserServiceService } from 'src/app/services/services/user.service.service';
 import { User } from 'src/app/shared/models/user.model';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modaladdaprovador',
@@ -10,19 +14,22 @@ import { User } from 'src/app/shared/models/user.model';
   styleUrls: ['./modaladdaprovador.component.css']
 })
 export class ModaladdaprovadorComponent {
-  myControl = new FormControl<string | User>('');
+  aprovador = new FormControl<string | User>('',Validators.required)
   options : any[];
   filteredOptions!: Observable<User[]>;
-  addAprovadorForm!: FormGroup;
+
   /**
    *
    */
-  constructor(private userService: UserServiceService) {
+  constructor(private _userService: UserServiceService, private _aprovadorService: AprovadorService,private _toastservice:ToastrService,
+    private _router:Router,@Inject(MAT_DIALOG_DATA) public data: any, private _dialog:MatDialog) {
     this.options=[];
   }
+
+
   ngOnInit() {
-   this.carregarUsers();
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+   this.carregarNaoAprovadores();
+    this.filteredOptions = this.aprovador.valueChanges.pipe(
       startWith(''),
       map(value => {
         const name = typeof value === 'string' ? value : value?.Nome;
@@ -32,8 +39,8 @@ export class ModaladdaprovadorComponent {
   }
  // ngAfterViewInit(): void { this.myControl .setValue(''); }
 
-  carregarUsers(){
-    this.userService.getAllUsers()
+  carregarNaoAprovadores(){
+    this._userService.getnaoAprovadores(this.data.iduser)
     .subscribe({
       next: (res)=> {
        this.options=res;
@@ -55,4 +62,24 @@ export class ModaladdaprovadorComponent {
 
     return this.options.filter(option => option.Nome.toLowerCase().includes(filterValue));
   }
+
+  aprovadorSubmited(){
+    this._aprovadorService.criarAprovador(this.data.iduser ,(<any>this.aprovador.value).Id)
+    .subscribe(res=>{
+      if(res == 200){
+        this._toastservice.success(
+          'O aprovador foi adicionado com sucesso',
+          'Aprovador Adicionado'
+        )
+      }else{
+        this._toastservice.error(
+          'O aprovador não foi adicionado com sucesso',
+          'Ocorreu um erro'
+        )
+      }
+      this.carregarNaoAprovadores();
+      this._dialog.closeAll();
+    });
+  }
+
 }

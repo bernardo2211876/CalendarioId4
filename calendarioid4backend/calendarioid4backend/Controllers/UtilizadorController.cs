@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.AspNetCore.Authorization;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace calendarioid4backend.Controllers
 {
@@ -255,12 +256,13 @@ namespace calendarioid4backend.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet("Getaprovadores/{id}")]
-        public async Task<ActionResult<List<Utilizador>>> GetAprovadores(int id)
+        public async Task<ActionResult> GetAprovadores(int id)
         {
             try
             {
-                Utilizador utilizador = await Context.Utilizadors.FirstOrDefaultAsync(u => u.Id == id);
+                var utilizador = await Context.Utilizadors.FirstOrDefaultAsync(u => u.Id == id);
 
                 if (utilizador == null)
                 {
@@ -272,9 +274,11 @@ namespace calendarioid4backend.Controllers
                 {
                     return Ok(204);
                 }
-                Utilizador aprovadores = await Context.Utilizadors.FirstOrDefaultAsync(a => a.Id == aprovadoresID.Id);
-                
 
+                
+                var aprovadores = await Context.Utilizadors.Where(a => a.Id == aprovadoresID.Aprovadorid).ToListAsync() ;
+                
+                
                 return Ok(aprovadores);
             }
             catch (Exception e)
@@ -282,11 +286,42 @@ namespace calendarioid4backend.Controllers
                 return BadRequest(e);
             }
         }
-       
 
+        [HttpGet("Getnaoaprovadores/{id}")]
+        public async Task<ActionResult<List<Utilizador>>> GetnaoAprovadores(int id)
+        {
+            try
+            {
+                Utilizador utilizador = await Context.Utilizadors.FirstOrDefaultAsync(u => u.Id == id);
 
+                if (utilizador == null)
+                {
+                    return NotFound();
+                }
+                var aprovadoresID = await Context.Aprovadors.FirstOrDefaultAsync(a => a.Utilizadorid == utilizador.Id);
+                if(aprovadoresID == null)
+                {
+                    return (await Context.Utilizadors.Where(u => u.Id != utilizador.Id).ToListAsync());
+                }
+                
+                Utilizador aprovadores = await Context.Utilizadors.FirstOrDefaultAsync(a => a.Id == aprovadoresID.Aprovadorid);
+                Utilizador naoaprovadores = await Context.Utilizadors.FirstOrDefaultAsync(na => na.Id != aprovadores.Id && na.Id != utilizador.Id);
 
+                return Ok(naoaprovadores);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
 
 
     }
+
+
+
+
+
+
 }
+

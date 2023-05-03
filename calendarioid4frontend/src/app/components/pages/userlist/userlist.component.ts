@@ -28,8 +28,6 @@ export class UserlistComponent implements OnInit{
     ,private _toastservice: ToastrService,private _router: Router) {}
 
   ngOnInit(): void {
-
-
     this.data = this._authService.loadCurrentUser();
     if(this.data.isAdmin=='False')
     {
