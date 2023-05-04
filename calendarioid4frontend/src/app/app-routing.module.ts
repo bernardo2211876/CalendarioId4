@@ -19,6 +19,7 @@ import { ForbiddenPageComponent } from './components/pages/forbidden-page/forbid
 import { UserlistComponent } from './components/pages/userlist/userlist.component';
 import { UsereditComponent } from './components/pages/useredit/useredit.component';
 import { UserviewComponent } from './components/pages/userview/userview.component';
+import { TeletrabalhoComponent } from './components/pages/teletrabalho/teletrabalho.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -38,6 +39,7 @@ const routes: Routes = [
   {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path:'useredit/:id', component: UsereditComponent, canActivate: [AuthGuard]},
   {path:'userview/:id', component: UserviewComponent, canActivate: [AuthGuard]},
+  {path:'teletrabalho', component: TeletrabalhoComponent, canActivate: [AuthGuard]},
   {path:'forbidden', component:ForbiddenPageComponent},
   {path:'**', pathMatch: 'full', component: PageNotFoudComponent},
 

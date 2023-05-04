@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using calendarioid4backend.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace calendarioid4backend.Controllers
 {
@@ -22,6 +26,57 @@ namespace calendarioid4backend.Controllers
                 .Include(p=>p.Estado)
                 .Include(p=>p.Tipo)
                 .ToListAsync());
+        }
+
+        [AllowAnonymous]
+        [HttpPost("CreateAusencia")]
+        public async Task<IActionResult> CreateAusencia()
+        {
+            try
+            {
+                Task<string> task = null;
+                using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
+                {
+                    task = reader.ReadToEndAsync();
+                };
+
+                Ausencium newausencia = JsonConvert.DeserializeObject<Ausencium>(task.Result);
+
+                if(newausencia == null)
+                {
+                    return BadRequest();
+                }
+
+                //if(newausencia.tipoausencia)
+
+
+                // newuser.Password=Encriptacao.EncryptPassword(newuser.Password);
+                newausencia.Idutilizadorcriador = newausencia.Utilizadorid;//precisa de ser alterado para o user que atualizar
+                newausencia.Datacriacao = DateTime.Now;
+                newausencia.Idutilizadorultimaedicao = newausencia.Utilizadorid;//precisa de ser alterado para o user que atualizar
+                newausencia.Dataultimaedicao = DateTime.Now;
+
+                var existeaprovadores = await Context.Aprovadors.FirstOrDefaultAsync(a => a.Utilizadorid == newausencia.Utilizadorid);
+                
+                if(existeaprovadores == null)
+                {
+                    newausencia.Estadoid = 1;
+                }
+                else
+                {
+                    newausencia.Estadoid = 3;
+                }
+                
+                Context.Ausencia.Add(newausencia);
+                Context.SaveChanges();
+                return Ok(200);
+
+            }
+            catch (Exception ex)
+            {
+                return Ok("Error" + ex);
+            }
+
         }
 
 

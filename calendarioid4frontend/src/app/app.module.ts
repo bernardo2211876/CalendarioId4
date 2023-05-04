@@ -51,11 +51,21 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarComponent } from './components/partials/calendar/calendar.component';
-import { FullCalendarModule } from '@fullcalendar/angular'; 
+import { FullCalendarModule } from '@fullcalendar/angular';
 import { Calendar2Component } from './components/partials/calendar2/calendar2.component';
 import { FeriasComponent } from './components/pages/ferias/ferias.component';
 import { TeletrabalhoComponent } from './components/pages/teletrabalho/teletrabalho.component';
 import { AusenciasComponent } from './components/pages/ausencias/ausencias.component';
+import { MatDatepickerModule,MatDatepicker } from '@angular/material/datepicker';
+import { ModaladdausenciaComponent } from './components/partials/modaladdausencia/modaladdausencia.component';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
+} from '@angular-material-components/datetime-picker';
+import {DateTimePickerModule} from '@syncfusion/ej2-angular-calendars';
+import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 
 //FullCalendarModule.registerPlugins([interactionPlugin, dayGridPlugin]);
 
@@ -92,6 +102,7 @@ import { AusenciasComponent } from './components/pages/ausencias/ausencias.compo
     FeriasComponent,
     TeletrabalhoComponent,
     AusenciasComponent,
+    ModaladdausenciaComponent,
 
   ],
   imports: [
@@ -118,6 +129,14 @@ import { AusenciasComponent } from './components/pages/ausencias/ausencias.compo
     MatAutocompleteModule,
     NgbModalModule,
     FullCalendarModule,
+    MatDatepickerModule,
+    MatInputModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
+    DateTimePickerModule,
+    NgxMaterialTimepickerModule,
+    MtxDatetimepickerModule,
     ToastrModule.forRoot({
       timeOut:3000,
       positionClass:'toast-bottom-right',
