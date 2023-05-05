@@ -62,7 +62,7 @@ import { AuthService } from 'src/app/services/services/auth.service';
                 end: new Date(event.datahorafim),
                 meta: {event}
               }));
-              this.events = [...this.events, ...newEvents];debugger
+              this.events = [...this.events, ...newEvents];
           },
           error(error) {
             console.log(error);

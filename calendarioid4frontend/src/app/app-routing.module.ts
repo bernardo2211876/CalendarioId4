@@ -20,6 +20,8 @@ import { UserlistComponent } from './components/pages/userlist/userlist.componen
 import { UsereditComponent } from './components/pages/useredit/useredit.component';
 import { UserviewComponent } from './components/pages/userview/userview.component';
 import { TeletrabalhoComponent } from './components/pages/teletrabalho/teletrabalho.component';
+import { FeriasComponent } from './components/pages/ferias/ferias.component';
+import { AusenciasComponent } from './components/pages/ausencias/ausencias.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -40,6 +42,8 @@ const routes: Routes = [
   {path:'useredit/:id', component: UsereditComponent, canActivate: [AuthGuard]},
   {path:'userview/:id', component: UserviewComponent, canActivate: [AuthGuard]},
   {path:'teletrabalho', component: TeletrabalhoComponent, canActivate: [AuthGuard]},
+  {path:'ferias', component: FeriasComponent, canActivate: [AuthGuard]},
+  {path:'ausencias', component: AusenciasComponent, canActivate: [AuthGuard]},
   {path:'forbidden', component:ForbiddenPageComponent},
   {path:'**', pathMatch: 'full', component: PageNotFoudComponent},
 

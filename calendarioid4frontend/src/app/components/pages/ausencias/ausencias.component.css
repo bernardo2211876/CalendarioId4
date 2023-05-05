@@ -1,0 +1,22 @@
+
+
+.titulo{
+  width: auto;
+}
+
+
+.btn-secondary{
+  background-color: rgb(232, 232, 232);
+  color: black;
+}
+
+.btn-secondary:hover{
+  background-color: rgb(189, 189, 189);
+  color: black;
+}
+
+.btndisable{
+  padding: 0;
+border: none;
+background: none;
+}
