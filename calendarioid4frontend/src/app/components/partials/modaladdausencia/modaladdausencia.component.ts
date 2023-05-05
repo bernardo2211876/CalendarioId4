@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -17,18 +17,20 @@ import { AuthService } from 'src/app/services/services/auth.service';
 export class ModaladdausenciaComponent implements OnInit {
   currentDate: string;
   data:any;
+   now = new Date;
 
   constructor(private _toastservice:ToastrService,
     private _router:Router,@Inject(MAT_DIALOG_DATA) public input: any, private _dialog:MatDialog,private _authService:AuthService,
     private _ausenciaService: AusenciaService) {
-      const now = new Date;
-      this.currentDate = now.toISOString().slice(0, 16);;
+
+      this.currentDate = this.now.toISOString().slice(0, 16);;
   }
 
   ngOnInit(): void {
     this.data = this._authService.loadCurrentUser();
     this.ausenciaForm.get('utilizadorid')?.setValue(this.data.id);
     this.ausenciaForm.get('tipoid')?.setValue(this.input.tipoid);
+
   }
 
   ausenciaForm = new FormGroup({

@@ -79,6 +79,25 @@ namespace calendarioid4backend.Controllers
 
         }
 
+        [HttpGet("GetTeletrabalhos/{id}")]
+        public async Task<ActionResult<List<Ausencium>>> GetTeletrabalhos(int id)
+        {
+            try
+            {
+                var ausencia = await Context.Ausencia.Where(a => a.Utilizadorid == id  && a.Tipoid==2).ToListAsync();
+                if (ausencia == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(ausencia);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
 
 
 

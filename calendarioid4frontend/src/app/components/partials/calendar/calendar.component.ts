@@ -1,73 +1,73 @@
-import { Component } from '@angular/core';
-/*
 
+  import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { CalendarOptions } from '@fullcalendar/angular';
-*/
-import * as FullCalendar from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
+import {
+    Component,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    OnInit,
+  } from '@angular/core';
+  import {
+    CalendarEvent,
+    CalendarViewPeriod,
+    CalendarMonthViewBeforeRenderEvent,
+    CalendarWeekViewBeforeRenderEvent,
+    CalendarDayViewBeforeRenderEvent,
+    CalendarView,
+  } from 'angular-calendar';
+import { AusenciaService } from 'src/app/services/services/ausencia.service';
+import { AuthService } from 'src/app/services/services/auth.service';
+  //import { colors } from '../demo-utils/colors';
 
-@Component({
-  selector: 'app-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css'],
-})
+  @Component({
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-calendar',
+    templateUrl: './calendar.component.html',
+    styleUrls: ['./calendar.component.css'],
+  })
+  export class CalendarComponent implements OnInit{
+    view: CalendarView = CalendarView.Month;
+    myDate=new Date();
+    viewDate: Date = new Date();
+    data:any;
+    events: CalendarEvent[] = [];
 
-export class CalendarComponent {
-  /*
-  Events: any[] = [];
-  calendarOptions: CalendarOptions = {
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-    },
-    initialView: 'dayGridMonth',
-    weekends: true,
-    editable: true,
-    selectable: true,
-    selectMirror: true,
-    dayMaxEvents: true
-  };
+    period!: CalendarViewPeriod;
 
+    constructor(private cdr: ChangeDetectorRef, private _http: HttpClient,private _authService:AuthService, private _ausenciaService: AusenciaService) {}
 
-  constructor(private httpClient: HttpClient) {}
-  onDateClick(res: any) {
-    alert('Clicked on date : ' + res.dateStr);
-  }
-  ngOnInit() {
-    setTimeout(() => {
-      return this.httpClient
-        .get('http://localhost:8888/event.php')
-        .subscribe((res: any) => {
-          this.Events.push(res);
-          console.log(this.Events);
+    ngOnInit(): void {
+          this.data = this._authService.loadCurrentUser();
+          this.carregarTeletrabalho();
+          console.log(this.events);
+    }
+
+    beforeViewRender(
+      event:
+        | CalendarMonthViewBeforeRenderEvent
+        | CalendarWeekViewBeforeRenderEvent
+        | CalendarDayViewBeforeRenderEvent
+    ) {
+      this.period = event.period;
+      this.cdr.detectChanges();
+    }
+    //formatDate(event.datahorafim,'yyyy-MM-ddTHH:mm:ss.sssZ','en-US')
+    carregarTeletrabalho(){
+      if (this.data.id) {
+        this._ausenciaService.getTeletrabalhos(this.data.id).subscribe({
+          next: (res:any[]) => {
+            const newEvents = res.map(event=>({
+                title: "Teletrabalho",
+                start: new Date(event.datahorainicio),
+                end: new Date(event.datahorafim),
+                meta: {event}
+              }));
+              this.events = [...this.events, ...newEvents];debugger
+          },
+          error(error) {
+            console.log(error);
+          },
         });
-    }, 2200);
-    setTimeout(() => {
-      this.calendarOptions = {
-        initialView: 'dayGridMonth',
-        dateClick: this.onDateClick.bind(this),
-        events: this.Events,
-      };
-    }, 2500);
-    */
-    calendar: FullCalendar.Calendar; // Declare a calendar variable
-    calendario:any;
-     constructor(){
-      this.calendario=document.getElementById('calendar');
-      this.calendar = new FullCalendar.Calendar(this.calendario, {
-        plugins: [dayGridPlugin, timeGridPlugin],
-        initialView: 'dayGridMonth',
-        // ... other calendar options
-      });
-     }
-    ngOnInit() {
-      // Initialize the calendar and register plugin
-
-      // Alternatively, you can register plugins using the use() method
-      //FullCalendar.Calendar.use(dayGridPlugin);
-      //FullCalendar.Calendar.use(timeGridPlugin);
+      }
+    }
   }
-}

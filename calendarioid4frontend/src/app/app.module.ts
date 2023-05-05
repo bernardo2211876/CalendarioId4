@@ -141,14 +141,14 @@ import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
       timeOut:3000,
       positionClass:'toast-bottom-right',
       newestOnTop:false}),
-
-
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory}),
 
+
   ],
+  exports: [AppComponent],
 
   providers: [
     AuthService,

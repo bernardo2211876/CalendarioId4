@@ -12,4 +12,8 @@ export class AusenciaService {
 
     return this.http.post(this.baseServerUrl+"Ausencia/CreateAusencia",ausencia);
   }
+
+  getTeletrabalhos(id){
+    return this.http.get<any>(this.baseServerUrl+"Ausencia/GetTeletrabalhos/"+id);
+  }
 }

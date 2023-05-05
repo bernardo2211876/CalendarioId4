@@ -13,7 +13,7 @@
 <mat-form-field>
   <label for="floatingInput">Data e Hora de Ínicio</label>
   <input matInput type="datetime-local" id="datahorainicio"
-  formControlName="datahorainicio" [min]="currentDate" value="{{currentDate}}"  placeholder="start date">
+  formControlName="datahorainicio" [min]="currentDate" [value]="currentDate"  placeholder="start date">
 </mat-form-field>
 </div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -21,7 +21,7 @@
 <mat-form-field>
   <label for="floatingInput">Data e Hora de Fim</label>
   <input matInput type="datetime-local" id="datahorafim"
-  formControlName="datahorafim" [min]="currentDate" value="{{currentDate}}" placeholder="start date">
+  formControlName="datahorafim" [min]="currentDate" [value]="currentDate" placeholder="start date">
 </mat-form-field>
 </div>
 </div>
