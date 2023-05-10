@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Any;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -98,6 +99,107 @@ namespace calendarioid4backend.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [HttpPost("getAusenciasPendentes/{id}")]
+        public async Task<ActionResult> getAusenciasPendentes( int id)
+        {
+            try
+            {
+                Task<string> task = null;
+                using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
+                {
+                    task = reader.ReadToEndAsync();
+                };
+
+
+                Aprovador aprovador = JsonConvert.DeserializeObject<Aprovador>(task.Result);
+
+
+                var users = Context.Aprovadors.Where(a=>a.Aprovadorid==aprovador.Aprovadorid);
+                var userIds = users.Select(u => u.Utilizadorid).ToList();
+                /*var ausenciaspendentes = await Context.Ausencia
+                                         .Where(au => userIds.Contains(au.Utilizadorid) && au.Tipoid == id && au.Estadoid == 3)
+                                         .ToListAsync();*/
+                var ausenciaspendentes = await Context.Ausencia
+                                            .Where(au => userIds.Contains(au.Utilizadorid) && au.Tipoid == 2 && au.Estadoid == 3)
+                                            .Join(Context.Utilizadors,
+                                                ausencia => ausencia.Utilizadorid,
+                                                user => user.Id,
+                                                (ausencia, user) => new {
+                                                    Ausencia = ausencia,
+                                                    Nome = user.Nome
+                                                })
+                                            .ToListAsync();
+                /* var ausenciaspendentes = await Context.Ausencia.Where(au => users.Any(u => u.Id == au.Utilizadorid) 
+                 &&   au.Tipoid == 2  && au.Estadoid == 3).ToListAsync();*/
+
+                return Ok(ausenciaspendentes);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Error" + ex);
+            }
+
+        }
+
+
+
+        [HttpPut("Disableausencia/{id}")]
+        public async Task<IActionResult> Disableausencia(int id)
+        {
+            try
+            {
+
+                var ausencia = await Context.Ausencia.FindAsync(id);
+
+                if (ausencia == null)
+                {
+                    return NotFound();
+                }
+
+                ausencia.Idutilizadorultimaedicao = 1;//precisa de ser alterado para o user que atualizar
+                ausencia.Dataultimaedicao = DateTime.Now;
+                ausencia.Estadoid = 2;
+
+                await Context.SaveChangesAsync();
+
+                return Ok();
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpPut("acceptAusencia/{id}")]
+        public async Task<IActionResult> acceptAusencia(int id)
+        {
+            try
+            {
+
+                var ausencia = await Context.Ausencia.FindAsync(id);
+
+                if (ausencia == null)
+                {
+                    return NotFound();
+                }
+
+                ausencia.Idutilizadorultimaedicao = 1;//precisa de ser alterado para o user que atualizar
+                ausencia.Dataultimaedicao = DateTime.Now;
+                ausencia.Estadoid = 1;
+
+                await Context.SaveChangesAsync();
+
+                return Ok(ausencia);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
 
 
 

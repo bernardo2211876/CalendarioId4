@@ -66,6 +66,10 @@ import {
 } from '@angular-material-components/datetime-picker';
 import {DateTimePickerModule} from '@syncfusion/ej2-angular-calendars';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
+import { TeletrabalhoaprovComponent } from './components/pages/teletrabalhoaprov/teletrabalhoaprov.component';
+import { FeriasaprovComponent } from './components/pages/feriasaprov/feriasaprov.component';
+import { AusenciaaprovComponent } from './components/pages/ausenciaaprov/ausenciaaprov.component';
+
 
 //FullCalendarModule.registerPlugins([interactionPlugin, dayGridPlugin]);
 
@@ -103,6 +107,9 @@ import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
     TeletrabalhoComponent,
     AusenciasComponent,
     ModaladdausenciaComponent,
+    TeletrabalhoaprovComponent,
+    FeriasaprovComponent,
+    AusenciaaprovComponent,
 
   ],
   imports: [
@@ -145,7 +152,6 @@ import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory}),
-
 
   ],
   exports: [AppComponent],

@@ -22,6 +22,9 @@ import { UserviewComponent } from './components/pages/userview/userview.componen
 import { TeletrabalhoComponent } from './components/pages/teletrabalho/teletrabalho.component';
 import { FeriasComponent } from './components/pages/ferias/ferias.component';
 import { AusenciasComponent } from './components/pages/ausencias/ausencias.component';
+import { TeletrabalhoaprovComponent } from './components/pages/teletrabalhoaprov/teletrabalhoaprov.component';
+import { FeriasaprovComponent } from './components/pages/feriasaprov/feriasaprov.component';
+import { AusenciaaprovComponent } from './components/pages/ausenciaaprov/ausenciaaprov.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -44,6 +47,9 @@ const routes: Routes = [
   {path:'teletrabalho', component: TeletrabalhoComponent, canActivate: [AuthGuard]},
   {path:'ferias', component: FeriasComponent, canActivate: [AuthGuard]},
   {path:'ausencias', component: AusenciasComponent, canActivate: [AuthGuard]},
+  {path:'teletrabalhoaprov', component: TeletrabalhoaprovComponent, canActivate: [AuthGuard]},
+  {path:'feriasaprov', component: FeriasaprovComponent, canActivate: [AuthGuard]},
+  {path:'ausenciasaprov', component: AusenciaaprovComponent, canActivate: [AuthGuard]},
   {path:'forbidden', component:ForbiddenPageComponent},
   {path:'**', pathMatch: 'full', component: PageNotFoudComponent},
 

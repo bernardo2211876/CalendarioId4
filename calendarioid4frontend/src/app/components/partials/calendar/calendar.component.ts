@@ -62,7 +62,8 @@ import { AuthService } from 'src/app/services/services/auth.service';
                 end: new Date(event.datahorafim),
                 meta: {event}
               }));
-              this.events = [...this.events, ...newEvents];
+              this.events = this.events.concat(newEvents);// [...this.events, ...newEvents];
+              this.cdr.detectChanges();
           },
           error(error) {
             console.log(error);

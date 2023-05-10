@@ -17,7 +17,6 @@ export class AprovadorService {
   }
 
   RemoveAprovador(id:any,ida:any){
-    debugger
     return this.http.post(this.baseServerUrl+"Aprovador/RemoverAprovacao",{
       utilizadorid:id,
       aprovadorid:ida
