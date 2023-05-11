@@ -117,9 +117,7 @@ namespace calendarioid4backend.Controllers
 
                 var users = Context.Aprovadors.Where(a=>a.Aprovadorid==aprovador.Aprovadorid);
                 var userIds = users.Select(u => u.Utilizadorid).ToList();
-                /*var ausenciaspendentes = await Context.Ausencia
-                                         .Where(au => userIds.Contains(au.Utilizadorid) && au.Tipoid == id && au.Estadoid == 3)
-                                         .ToListAsync();*/
+                
                 var ausenciaspendentes = await Context.Ausencia
                                             .Where(au => userIds.Contains(au.Utilizadorid) && au.Tipoid == 2 && au.Estadoid == 3)
                                             .Join(Context.Utilizadors,
@@ -130,9 +128,8 @@ namespace calendarioid4backend.Controllers
                                                     Nome = user.Nome
                                                 })
                                             .ToListAsync();
-                /* var ausenciaspendentes = await Context.Ausencia.Where(au => users.Any(u => u.Id == au.Utilizadorid) 
-                 &&   au.Tipoid == 2  && au.Estadoid == 3).ToListAsync();*/
-
+               
+                // Oh Fábio és nabo
                 return Ok(ausenciaspendentes);
 
             }
