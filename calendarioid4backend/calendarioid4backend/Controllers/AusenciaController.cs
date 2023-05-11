@@ -99,6 +99,33 @@ namespace calendarioid4backend.Controllers
             }
         }
 
+
+        //-----------------------------------------------------------------------------------------------------
+
+        [HttpGet("GetAusencias/{id}")]
+        public async Task<ActionResult<List<Ausencium>>> GetAusencias(int id)
+        {
+            try
+            {
+                var ausencia = await Context.Ausencia.Where(a => a.Utilizadorid == id && a.Tipoid == 3).ToListAsync();
+                if (ausencia == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(ausencia);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        //-----------------------------------------------------------------------------------------------------
+
+
+
+
         [AllowAnonymous]
         [HttpPost("getAusenciasPendentes/{id}")]
         public async Task<ActionResult> getAusenciasPendentes( int id)
@@ -129,7 +156,6 @@ namespace calendarioid4backend.Controllers
                                                 })
                                             .ToListAsync();
                
-                // Oh Fábio és nabo
                 return Ok(ausenciaspendentes);
 
             }
