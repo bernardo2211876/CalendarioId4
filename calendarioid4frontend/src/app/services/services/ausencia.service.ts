@@ -25,8 +25,8 @@ export class AusenciaService {
 
 
   getAusenciasPendentes(aprovadorid,tipoausencia):Observable<any>{
-    return this.http.post(this.baseServerUrl+"Ausencia/getAusenciasPendentes/"+tipoausencia,{
-      aprovadorid:aprovadorid
+    return this.http.post(this.baseServerUrl+"Ausencia/getAusenciasPendentes/"+aprovadorid,{
+      tipoid:tipoausencia
     });
   }
 
