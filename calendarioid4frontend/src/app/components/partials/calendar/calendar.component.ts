@@ -1,5 +1,5 @@
 
-  import { formatDate } from '@angular/common';
+  import { DatePipe, formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
     Component,
@@ -34,12 +34,13 @@ import { AuthService } from 'src/app/services/services/auth.service';
 
     period!: CalendarViewPeriod;
 
-    constructor(private cdr: ChangeDetectorRef, private _http: HttpClient,private _authService:AuthService, private _ausenciaService: AusenciaService) {}
+    constructor(private cdr: ChangeDetectorRef, private _http: HttpClient,private _authService:AuthService,
+      private _ausenciaService: AusenciaService, private datePipe: DatePipe) {}
 
     ngOnInit(): void {
           this.data = this._authService.loadCurrentUser();
           this.carregarTeletrabalho();
-          console.log(this.events);
+          this.cdr.detectChanges();
     }
 
     beforeViewRender(
@@ -51,7 +52,7 @@ import { AuthService } from 'src/app/services/services/auth.service';
       this.period = event.period;
       this.cdr.detectChanges();
     }
-    //formatDate(event.datahorafim,'yyyy-MM-ddTHH:mm:ss.sssZ','en-US')
+
     carregarTeletrabalho(){
       if (this.data.id) {
         this._ausenciaService.getTeletrabalhos(this.data.id).subscribe({
@@ -62,7 +63,8 @@ import { AuthService } from 'src/app/services/services/auth.service';
                 end: new Date(event.datahorafim),
                 meta: {event}
               }));
-              this.events = this.events.concat(newEvents);// [...this.events, ...newEvents];
+
+              this.events = this.events.concat(newEvents);// this.events=[...this.events, ...newEvents];
               this.cdr.detectChanges();
           },
           error(error) {

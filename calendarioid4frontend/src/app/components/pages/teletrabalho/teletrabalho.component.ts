@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ModaladdaprovadorComponent } from '../../partials/modaladdaprovador/modaladdaprovador.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/services/auth.service';
@@ -20,7 +20,8 @@ export class TeletrabalhoComponent implements OnInit {
     private _router: Router,
     private _authService: AuthService,
     private _toastservice: ToastrService,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _cdtr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {

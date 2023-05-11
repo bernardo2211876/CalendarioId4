@@ -112,14 +112,14 @@ namespace calendarioid4backend.Controllers
                 };
 
 
-                Aprovador aprovador = JsonConvert.DeserializeObject<Aprovador>(task.Result);
+                Ausencium ausenciatipo = JsonConvert.DeserializeObject<Ausencium>(task.Result);
 
 
-                var users = Context.Aprovadors.Where(a=>a.Aprovadorid==aprovador.Aprovadorid);
+                var users = Context.Aprovadors.Where(a=>a.Aprovadorid==id);
                 var userIds = users.Select(u => u.Utilizadorid).ToList();
                 
                 var ausenciaspendentes = await Context.Ausencia
-                                            .Where(au => userIds.Contains(au.Utilizadorid) && au.Tipoid == 2 && au.Estadoid == 3)
+                                            .Where(au => userIds.Contains(au.Utilizadorid) && au.Tipoid == ausenciatipo.Tipoid && au.Estadoid == 3)
                                             .Join(Context.Utilizadors,
                                                 ausencia => ausencia.Utilizadorid,
                                                 user => user.Id,
