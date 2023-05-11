@@ -40,7 +40,7 @@ import { AuthService } from 'src/app/services/services/auth.service';
     ngOnInit(): void {
           this.data = this._authService.loadCurrentUser();
           this.carregarTeletrabalho();
-          this.cdr.detectChanges();
+          //this.cdr.detectChanges();
     }
 
     beforeViewRender(

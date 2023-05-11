@@ -71,7 +71,6 @@ import { FeriasaprovComponent } from './components/pages/feriasaprov/feriasaprov
 import { AusenciaaprovComponent } from './components/pages/ausenciaaprov/ausenciaaprov.component';
 
 
-//FullCalendarModule.registerPlugins([interactionPlugin, dayGridPlugin]);
 
 @NgModule({
   declarations: [
