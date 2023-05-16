@@ -74,7 +74,6 @@ import { AusenciaviewComponent } from './components/pages/ausenciaview/ausenciav
 
 
 
-//FullCalendarModule.registerPlugins([interactionPlugin, dayGridPlugin]);
 
 @NgModule({
   declarations: [
@@ -162,6 +161,7 @@ import { AusenciaviewComponent } from './components/pages/ausenciaview/ausenciav
 
   providers: [
     AuthService,
+    DatePipe,
     {provide:HTTP_INTERCEPTORS, useClass:LoadingInterceptor, multi: true},
     DatePipe
   ],

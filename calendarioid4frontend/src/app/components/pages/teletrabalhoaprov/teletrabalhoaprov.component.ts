@@ -43,7 +43,7 @@ export class TeletrabalhoaprovComponent implements OnInit {
     this._ausenciaService.getAusenciasPendentes(this.data.id,2)
     .subscribe({
       next: (res)=> {
-       this.dataSource = new MatTableDataSource(res);debugger
+       this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort= this.sort;
         this.dataSource.paginator= this.paginator;
       },

@@ -22,6 +22,12 @@ export class AusenciaService {
     return this.http.get<any>(this.baseServerUrl+"Ausencia/GetTeletrabalhos/"+id);
   }
 
+  getAusencias(id){
+    return this.http.get<any>(this.baseServerUrl+"Ausencia/GetAusencias/"+id);
+  }
+
+
+
   getAusenciasPendentes(aprovadorid,tipoausencia):Observable<any>{
     return this.http.post(this.baseServerUrl+"Ausencia/getAusenciasPendentes/"+aprovadorid,{
       tipoid:tipoausencia
