@@ -1,0 +1,45 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.titulo{
+  width: auto;
+}
+
+.descricao{
+  font-weight: 400;
+}
+
+
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+
+tr:hover {background-color: rgba(235, 235, 235, 0.867);}
+
+.btn-secondary{
+  background-color: rgb(232, 232, 232);
+  color: black;
+}
+
+.btn-secondary:hover{
+  background-color: rgb(189, 189, 189);
+  color: black;
+}
+
+.btndisable{
+  padding: 0;
+border: none;
+background: none;
+}
+
+.titulo2{
+  font-size: 23px;
+  font-weight: 400;
+
+}

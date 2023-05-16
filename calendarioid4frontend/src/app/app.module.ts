@@ -20,7 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from './services/services/auth.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
 import { MatProgressBarModule} from '@angular/material/progress-bar';
@@ -69,6 +69,9 @@ import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { TeletrabalhoaprovComponent } from './components/pages/teletrabalhoaprov/teletrabalhoaprov.component';
 import { FeriasaprovComponent } from './components/pages/feriasaprov/feriasaprov.component';
 import { AusenciaaprovComponent } from './components/pages/ausenciaaprov/ausenciaaprov.component';
+import { DatePipe } from '@angular/common';
+import { AusenciaviewComponent } from './components/pages/ausenciaview/ausenciaview.component';
+
 
 
 //FullCalendarModule.registerPlugins([interactionPlugin, dayGridPlugin]);
@@ -110,6 +113,7 @@ import { AusenciaaprovComponent } from './components/pages/ausenciaaprov/ausenci
     TeletrabalhoaprovComponent,
     FeriasaprovComponent,
     AusenciaaprovComponent,
+    AusenciaviewComponent,
 
   ],
   imports: [
@@ -159,6 +163,7 @@ import { AusenciaaprovComponent } from './components/pages/ausenciaaprov/ausenci
   providers: [
     AuthService,
     {provide:HTTP_INTERCEPTORS, useClass:LoadingInterceptor, multi: true},
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

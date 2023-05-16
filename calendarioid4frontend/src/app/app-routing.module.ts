@@ -25,6 +25,7 @@ import { AusenciasComponent } from './components/pages/ausencias/ausencias.compo
 import { TeletrabalhoaprovComponent } from './components/pages/teletrabalhoaprov/teletrabalhoaprov.component';
 import { FeriasaprovComponent } from './components/pages/feriasaprov/feriasaprov.component';
 import { AusenciaaprovComponent } from './components/pages/ausenciaaprov/ausenciaaprov.component';
+import { AusenciaviewComponent } from './components/pages/ausenciaview/ausenciaview.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -44,12 +45,14 @@ const routes: Routes = [
   {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path:'useredit/:id', component: UsereditComponent, canActivate: [AuthGuard]},
   {path:'userview/:id', component: UserviewComponent, canActivate: [AuthGuard]},
+  {path:'ausenciaview/:id', component: AusenciaviewComponent, canActivate: [AuthGuard]},
   {path:'teletrabalho', component: TeletrabalhoComponent, canActivate: [AuthGuard]},
   {path:'ferias', component: FeriasComponent, canActivate: [AuthGuard]},
   {path:'ausencias', component: AusenciasComponent, canActivate: [AuthGuard]},
   {path:'teletrabalhoaprov', component: TeletrabalhoaprovComponent, canActivate: [AuthGuard]},
   {path:'feriasaprov', component: FeriasaprovComponent, canActivate: [AuthGuard]},
   {path:'ausenciasaprov', component: AusenciaaprovComponent, canActivate: [AuthGuard]},
+
   {path:'forbidden', component:ForbiddenPageComponent},
   {path:'**', pathMatch: 'full', component: PageNotFoudComponent},
 

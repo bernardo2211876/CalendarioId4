@@ -1,0 +1,140 @@
+<app-header></app-header>
+<main class="content">
+
+  <!-- NAV BAR-->
+  <navbar></navbar>
+  <!------------------------------------------------------------------------------------------------------------------------------------------------------------->
+  <!-- NAV PAGES-->
+  <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+      <li class="breadcrumb-item">
+        <a href="#">
+          <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+            </path>
+          </svg>
+        </a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Visualizar Ausência</li>
+    </ol>
+  </nav>
+  <!------------------------------------------------------------------------------------------------------------>
+  <!-- TITULO -->
+  <div class="d-flex justify-content-between w-100 flex-wrap">
+    <div class="mb-3 mb-lg-0">
+      <h1 class="h4">Visualizar Ausência</h1>
+    </div>
+    <div><a class="btn btn-secondary" role="button" [routerLink]="['/userlist']" routerLinkActive="router-link-active" ><i
+          class="fa-solid fa-list"></i>&nbsp;Lista de Utilizador</a></div>
+
+  </div>
+  <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+  <div class="main-body">
+  <br />
+  <table *ngIf="existsausencia==true">
+    <tr>
+      <th class="titulo">Utilizador</th>
+      <th class="descricao">{{ausencia[0].nomeUtilizador}}</th>
+    </tr>
+    <tr>
+      <th class="titulo">Data última edição:</th>
+      <th class="descricao">{{ausencia[0].ausencia.Dataultimaedicao | date:'MMMM d, y, h:mm:ss'}}</th>
+    </tr>
+    <tr>
+      <th class="titulo">Responsável pela última edição:</th>
+      <th class="descricao">{{ausencia[0].nomeUtilizadorEdicao}}</th>
+    </tr>
+    <tr>
+      <th class="titulo">Tipo de Ausência:</th>
+      <th class="descricao">{{ausencia[0].ausencia.Tipoid}}</th>
+    </tr>
+
+    <tr>
+      <th class="titulo">Data e Hora de ínicio:</th>
+      <th class="descricao">{{ausencia[0].ausencia.Datahorainicio | date:'MMMM d, y, h:mm:ss'}}</th>
+    </tr>
+    <tr>
+      <th class="titulo">Data e Hora de ínicio:</th>
+      <th class="descricao">{{ausencia[0].ausencia.Datahorafim | date:'MMMM d, y, h:mm:ss'}}</th>
+    </tr>
+    <tr>
+      <th class="titulo">Motivo:</th>
+      <th class="descricao">{{ausencia[0].ausencia.Motivo}}</th>
+    </tr>
+  </table>
+  <br/>
+  <br/>
+
+  <div class="mb-3 mb-lg-0">
+    <h2 class="titulo2">Lista de Comentários</h2>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Filter </mat-label>
+    <input style="background-color: rgb(255, 255, 255);" matInput (keyup)="applyFilter($event)" placeholder="" #input>
+    <br />
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort *ngIf="dataSource!=null && existscomentarios==true">
+
+      <ng-container matColumnDef="datacriacao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data Comentário </th>
+        <td mat-cell *matCellDef="let row"> {{row.comentario.Datacriacao | date:'MMMM d, y, h:mm:ss'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Descrição </th>
+        <td mat-cell *matCellDef="let row"> {{row.comentario.Descricao}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+        <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
+      </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">Esta ausência não tem comentários</td>
+  </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+
+  <form class=" p-3 rounded-3" [formGroup]="comentarioForm" (ngSubmit)="comentarioSubmited()">
+
+    <div class="form-floating">
+      <input type="hidden" class="form-control" id="utilizadorid" placeholder="Bernardo Costa"
+      formControlName="utilizadorid" [(ngModel)]="userid">
+    </div>
+
+    <div class="form-floating">
+      <input type="hidden" class="form-control" id="ausenciaid" placeholder="Bernardo Costa"
+      formControlName="ausenciaid" [(ngModel)]="ausencia[0].ausencia.Id">
+    </div>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="descricao" placeholder="Bernardo Costa"
+      formControlName="descricao">
+      <label for="floatingInput">Comentário</label>
+      <div class="form-text text-danger" *ngIf="Descricao.errors?.['required'] && (Descricao.dirty || Descricao.touched)">
+        Comentário é obrigatório
+      </div>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="comentarioForm.invalid">Comentar</button>
+  </form>
+
+
+
+
+  </div>
+
+  <!--<p *ngIf="!users || users.length <= 0">Não foram encontrados Utilizadores</p>-->
+
+  <app-footer></app-footer>
+</main>
