@@ -59,8 +59,8 @@ import { AuthService } from 'src/app/services/services/auth.service';
           next: (res:any[]) => {
             const newEvents = res.map(event=>({
                 title: "Teletrabalho",
-                start: new Date(event.datahorainicio),
-                end: new Date(event.datahorafim),
+                start: new Date(event.Datahorainicio),
+                end: new Date(event.Datahorafim),
                 meta: {event}
               }));
 

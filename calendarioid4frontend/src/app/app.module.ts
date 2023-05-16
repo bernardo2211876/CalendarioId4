@@ -69,6 +69,7 @@ import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { TeletrabalhoaprovComponent } from './components/pages/teletrabalhoaprov/teletrabalhoaprov.component';
 import { FeriasaprovComponent } from './components/pages/feriasaprov/feriasaprov.component';
 import { AusenciaaprovComponent } from './components/pages/ausenciaaprov/ausenciaaprov.component';
+import { DatePipe } from '@angular/common'
 
 
 
@@ -157,6 +158,7 @@ import { AusenciaaprovComponent } from './components/pages/ausenciaaprov/ausenci
 
   providers: [
     AuthService,
+    DatePipe,
     {provide:HTTP_INTERCEPTORS, useClass:LoadingInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
