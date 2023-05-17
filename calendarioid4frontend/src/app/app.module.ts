@@ -20,7 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from './services/services/auth.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
 import { MatProgressBarModule} from '@angular/material/progress-bar';
@@ -72,6 +72,7 @@ import { AusenciaaprovComponent } from './components/pages/ausenciaaprov/ausenci
 import { DatePipe } from '@angular/common';
 import { CalendarFeriasComponent } from './components/partials/calendar-ferias/calendar-ferias.component';
 import { CalendarAusenciasComponent } from './components/partials/calendar-ausencias/calendar-ausencias.component'
+import { AusenciaviewComponent } from './components/pages/ausenciaview/ausenciaview.component';
 
 
 
@@ -114,6 +115,7 @@ import { CalendarAusenciasComponent } from './components/partials/calendar-ausen
     AusenciaaprovComponent,
     CalendarFeriasComponent,
     CalendarAusenciasComponent,
+    AusenciaviewComponent,
 
   ],
   imports: [
@@ -164,6 +166,7 @@ import { CalendarAusenciasComponent } from './components/partials/calendar-ausen
     AuthService,
     DatePipe,
     {provide:HTTP_INTERCEPTORS, useClass:LoadingInterceptor, multi: true},
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

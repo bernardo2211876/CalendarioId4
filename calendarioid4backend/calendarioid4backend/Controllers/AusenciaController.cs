@@ -29,6 +29,41 @@ namespace calendarioid4backend.Controllers
                 .ToListAsync());
         }
 
+        [HttpGet("GetAusencia/{id}")]
+        public async Task<ActionResult<List<Ausencium>>> GetAusencia(int id)
+        {
+            try
+            {
+                var ausencia = await Context.Ausencia.Where(u => u.Id == id)
+                                           .Join(Context.Utilizadors,
+                                                ausencia => ausencia.Utilizadorid,
+                                                user => user.Id,
+                                                (ausencia, user) => new {
+                                                    Ausencia = ausencia,
+                                                    NomeUtilizador = user.Nome
+                                                })
+                                           .Join(Context.Utilizadors,
+                                                ausencia => ausencia.Ausencia.Idutilizadorultimaedicao,
+                                                user => user.Id,
+                                                (ausencia, user) => new {
+                                                    Ausencia = ausencia.Ausencia, // Include Ausencia from previous join
+                                                    NomeUtilizador = ausencia.NomeUtilizador, // Include NomeUtilizador from previous join
+                                                    NomeUtilizadorEdicao = user.Nome
+                                                })
+                                                .ToListAsync();
+                if (ausencia == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(ausencia);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
         [AllowAnonymous]
         [HttpPost("CreateAusencia")]
         public async Task<IActionResult> CreateAusencia()
@@ -177,7 +212,7 @@ namespace calendarioid4backend.Controllers
                                                     Nome = user.Nome
                                                 })
                                             .ToListAsync();
-               
+
                 return Ok(ausenciaspendentes);
 
             }
