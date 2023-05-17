@@ -22,6 +22,10 @@ export class AusenciaService {
     return this.http.get<any>(this.baseServerUrl+"Ausencia/GetAusencias/"+id);
   }
 
+  getFerias(id){
+    return this.http.get<any>(this.baseServerUrl+"Ausencia/GetFerias/"+id);
+  }
+
 
 
   getAusenciasPendentes(aprovadorid,tipoausencia):Observable<any>{

@@ -69,7 +69,9 @@ import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { TeletrabalhoaprovComponent } from './components/pages/teletrabalhoaprov/teletrabalhoaprov.component';
 import { FeriasaprovComponent } from './components/pages/feriasaprov/feriasaprov.component';
 import { AusenciaaprovComponent } from './components/pages/ausenciaaprov/ausenciaaprov.component';
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
+import { CalendarFeriasComponent } from './components/partials/calendar-ferias/calendar-ferias.component';
+import { CalendarAusenciasComponent } from './components/partials/calendar-ausencias/calendar-ausencias.component'
 
 
 
@@ -110,6 +112,8 @@ import { DatePipe } from '@angular/common'
     TeletrabalhoaprovComponent,
     FeriasaprovComponent,
     AusenciaaprovComponent,
+    CalendarFeriasComponent,
+    CalendarAusenciasComponent,
 
   ],
   imports: [
