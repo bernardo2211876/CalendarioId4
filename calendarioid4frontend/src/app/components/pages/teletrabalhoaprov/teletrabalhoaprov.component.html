@@ -73,6 +73,7 @@
         <ng-container matColumnDef="Funcionalidades">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Funcionalidades</th>
           <td mat-cell *matCellDef="let row">
+            <a [routerLink]="['/ausenciaview',row.ausencia.Id]"><i class="fa-solid fa-eye"></i></a>&nbsp;&nbsp;
             <button class="btndisable"  (click)="acceptAusencia(row.ausencia.Id)"><i class="fa-solid fa-check" style="color:#5db44b ;"></i></button>&nbsp;&nbsp;
             <button class="btndisable"  (click)="declineAusencia(row.ausencia.Id)"><i class="fa-solid fa-xmark" style="color: #f00000;"></i></button>
           </td>

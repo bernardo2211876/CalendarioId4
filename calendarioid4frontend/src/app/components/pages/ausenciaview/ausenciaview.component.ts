@@ -43,7 +43,7 @@ export class AusenciaviewComponent implements OnInit{
     private _toastservice: ToastrService,
     private _cdref: ChangeDetectorRef,
     private dialog: MatDialog,
-    private location: Location
+
   ) {}
 
 
@@ -59,7 +59,7 @@ export class AusenciaviewComponent implements OnInit{
     });
 
     this.carregarAusencia(this.id);
-    this.carregarComentarios(2);
+    this.carregarComentarios(this.id);
   }
 
   comentarioForm = new FormGroup({
@@ -113,6 +113,7 @@ export class AusenciaviewComponent implements OnInit{
         )
       }
      });
+     this._cdref.detectChanges();
   }
 
 
