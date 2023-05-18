@@ -73,6 +73,7 @@ import { DatePipe } from '@angular/common';
 import { CalendarFeriasComponent } from './components/partials/calendar-ferias/calendar-ferias.component';
 import { CalendarAusenciasComponent } from './components/partials/calendar-ausencias/calendar-ausencias.component'
 import { AusenciaviewComponent } from './components/pages/ausenciaview/ausenciaview.component';
+import * as moment from 'moment';
 
 
 
