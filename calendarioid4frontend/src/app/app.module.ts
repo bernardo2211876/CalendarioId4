@@ -74,6 +74,7 @@ import { CalendarFeriasComponent } from './components/partials/calendar-ferias/c
 import { CalendarAusenciasComponent } from './components/partials/calendar-ausencias/calendar-ausencias.component'
 import { AusenciaviewComponent } from './components/pages/ausenciaview/ausenciaview.component';
 import * as moment from 'moment';
+import { DashboardCalendarComponent } from './components/partials/dashboard-calendar/dashboard-calendar.component';
 
 
 
@@ -117,6 +118,7 @@ import * as moment from 'moment';
     CalendarFeriasComponent,
     CalendarAusenciasComponent,
     AusenciaviewComponent,
+    DashboardCalendarComponent,
 
   ],
   imports: [

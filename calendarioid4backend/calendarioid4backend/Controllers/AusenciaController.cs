@@ -223,6 +223,34 @@ namespace calendarioid4backend.Controllers
 
         }
 
+        [AllowAnonymous]
+        [HttpGet("getAusenciasAceites")]
+        public async Task<ActionResult> getAusenciasAceites()
+        {
+            try
+            {
+               
+
+                var ausenciasaceites = await Context.Ausencia
+                                            .Where(au => au.Estadoid ==1)
+                                            .Join(Context.Utilizadors,
+                                                ausencia => ausencia.Utilizadorid,
+                                                user => user.Id,
+                                                (ausencia, user) => new {
+                                                    Ausencia = ausencia,
+                                                    Nome = user.Nome
+                                                })
+                                            .ToListAsync();
+
+                return Ok(ausenciasaceites);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Error" + ex);
+            }
+
+        }
 
 
         [HttpPut("Disableausencia/{id}")]

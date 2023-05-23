@@ -18,6 +18,10 @@ export class AusenciaService {
     return this.http.get<any>(this.baseServerUrl+"Ausencia/GetAusencia/"+id);
   }
 
+  getAusenciasAceites(){
+    return this.http.get<any>(this.baseServerUrl+"Ausencia/getAusenciasAceites");
+  }
+
   getTeletrabalhos(id){
     return this.http.get<any>(this.baseServerUrl+"Ausencia/GetTeletrabalhos/"+id);
   }

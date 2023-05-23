@@ -1,0 +1,34 @@
+<!--<mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate">
+</mwl-demo-utils-calendar-header>-->
+
+<div class="alert alert-warning" *ngIf="period?.events?.length === 0">
+  Não existem eventos este Mês
+</div>
+
+<br/>
+<ng-template #customCellTemplate let-day="day" let-locale="locale" let-view="view" let-period="period" let-weekendDays="weekendDays" let-allDayEventRows="allDayEventRows" let-hourSegmentHeight="hourSegmentHeight"></ng-template>
+
+<!--<div [ngSwitch]="view" >
+  <ng-container *ngFor="let userId of getEventsByUserKeys()">
+    <h3>User ID: {{ userId }}</h3>
+  <mwl-calendar-week-view
+  [viewDate]="viewDate"
+  [events]="eventsByUser[userId]"
+  (beforeViewRender)="beforeViewRender($event)"
+  (eventClicked)="handleEventClick($event)"
+  (allDayEventClicked)="handleAllDayEventClick($event)"
+  >
+  </mwl-calendar-week-view>
+</ng-container>
+</div>-->
+<div [ngSwitch]="view">
+  <ng-container *ngFor="let userId of getEventsByUserKeys()">
+    <h3>User ID: {{ userId }}</h3>
+    <div *ngFor="let day of getWeekDates(viewDate)">
+      <h4>{{ formatDate(day) }}</h4>
+      <div *ngFor="let event of getEventsByUserAndDate(userId, day)">
+        {{ event.title }}
+      </div>
+    </div>
+  </ng-container>
+</div>
