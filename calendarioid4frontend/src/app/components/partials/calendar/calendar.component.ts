@@ -117,12 +117,29 @@ import { AuthService } from 'src/app/services/services/auth.service';
     }
 
     viewEventDetails(eventid): void {
-
+      console.log('View event details:', eventid);
       this._router.navigate(['/ausenciaview', eventid]);
+      this.cdr.detectChanges();
     }
 
-    handleEventClick(event: CalendarEvent<any>): void {
+    handleEventClick({ event }: { event: CalendarEvent<any>; sourceEvent: MouseEvent | KeyboardEvent }): void {
+      console.log("entrou", event)
+      this.cdr.detectChanges();
       const eventId = event.meta.event.Id;
+      this.viewEventDetails(eventId);
+    }
+
+    handleAllDayEventClick(event: any ): void {
+      /*if (events.length === 1) {
+        // If there is only one event, handle it directly
+        const event = events[0];
+        const eventId = event.meta.event.Id;
+        this.viewEventDetails(eventId);
+        // Handle the event click as needed
+      } else {
+
+      }*/
+      const eventId = event.meta.event.Id;debugger
       this.viewEventDetails(eventId);
     }
 
