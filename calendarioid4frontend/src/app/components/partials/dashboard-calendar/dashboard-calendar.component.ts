@@ -19,10 +19,11 @@ interface EventColor {
   secondary: string;
 }
 
-interface WeekDate {
-  date: Date;
-  start: Date;
-  end: Date;
+
+
+interface LegendItem {
+  title: string;
+  color: string;
 }
 
 @Component({
@@ -31,92 +32,93 @@ interface WeekDate {
   styleUrls: ['./dashboard-calendar.component.css'],
 })
 export class DashboardCalendarComponent implements OnInit {
-  view: CalendarView = CalendarView.Week;
-  myDate = new Date();
+  view: CalendarView = CalendarView.Month;
+  myDate=new Date();
   viewDate: Date = new Date();
-  data: any;
+  data:any;
   events: CalendarEvent[] = [];
-  eventsByUser: Record<string, CalendarEvent<any>[]> = {};
+  activeDay: Date | null = null;
 
   period!: CalendarViewPeriod;
+  legendItems = [
+    { label: 'teletrabalho', colorClass: 'teletrabalho-color' },
+    { label: 'ausencias', colorClass: 'ausencias-color' },
+    { label: 'ferias', colorClass: 'ferias-color' }
+  ];
 
-  constructor(
-    private cdr: ChangeDetectorRef,
-    private _http: HttpClient,
-    private _authService: AuthService,
-    private _ausenciaService: AusenciaService,
-    private datePipe: DatePipe,
-    private _router: Router
-  ) {}
+  getItemClass(item: any): string {
+    return item.colorClass;
+  }
+
+  constructor(private cdr: ChangeDetectorRef, private _http: HttpClient,private _authService:AuthService,
+    private _ausenciaService: AusenciaService, private datePipe: DatePipe, private _router: Router) {}
+
 
   ngOnInit(): void {
-    this.data = this._authService.loadCurrentUser();
-    this.carregarTeletrabalho();
+        this.data = this._authService.loadCurrentUser();
+
+
+
+        this.carregarAusencias();
+        //this.cdr.detectChanges();
   }
 
   beforeViewRender(
-    event: CalendarMonthViewBeforeRenderEvent | CalendarWeekViewBeforeRenderEvent | CalendarDayViewBeforeRenderEvent
+    event:
+      | CalendarMonthViewBeforeRenderEvent
+      | CalendarWeekViewBeforeRenderEvent
+      | CalendarDayViewBeforeRenderEvent
   ) {
     this.period = event.period;
     this.cdr.detectChanges();
   }
 
-  carregarTeletrabalho() {
-    this._ausenciaService.getAusenciasAceites().subscribe({
-      next: (res: any[]) => {
-        const groupedEvents: Record<string, CalendarEvent<any>[]> = {};
+  carregarAusencias(){
+      this._ausenciaService.getAusenciasAceites().subscribe({
+        next: (res:any[]) => {
+          const newEvents = res.map(event=>{
+            let color: EventColor;
+            let title: string;
+            title =event.nome;
+            if (event.ausencia.Tipoid === 2) {
+              color = { primary: 'green', secondary: 'lightgreen' };
 
-        res.forEach((event) => {
-          const userId = event.ausencia.Utilizadorid;
-          if (!groupedEvents[userId]) {
-            groupedEvents[userId] = [];
-          }
+            } else if (event.ausencia.Tipoid === 3) {
+              color = { primary: 'red', secondary: '#FFAABB' };
 
-          let color: EventColor;
-          let title: string;
+            } else if (event.ausencia.Tipoid === 1) {
+              color = { primary: 'blue', secondary: 'lightblue' };
 
-          // Determine event color and title based on Estadoid
-          if (event.tipoid === 2) {
-            color = { primary: 'green', secondary: 'lightgreen' };
-            title = 'Teletrabalho';
-          } else if (event.Estadoid === 3) {
-            color = { primary: 'red', secondary: 'lightred' };
-            title = 'Ausência';
-          } else if (event.Estadoid === 1) {
-            color = { primary: 'blue', secondary: 'lightblue' };
-            title = 'Fêrias';
-          } else {
-            color = { primary: 'grey', secondary: 'lightgrey' };
-            title = 'Erro';
-          }
+            } else {
+              color = { primary: 'grey', secondary: 'lightgrey' };
+              title = 'Erro';
+            }
 
-          const newEvent = {
-            title: title,
-            start: new Date(event.Datahorainicio),
-            end: new Date(event.Datahorafim),
-            meta: { event },
-            color: color,
-            actions: [
-              {
-                label: 'Ver Detalhes',
-                onClick: ({ event }: { event: CalendarEvent }): void => {
-                  this.viewEventDetails(event.meta.event.Id);
-                },
-              },
-            ],
-          };
+            return {
+              title: title,
+              start: new Date(event.ausencia.Datahorainicio),
+              end: new Date(event.ausencia.Datahorafim),
+              meta: { event },
+              color:  color,
+              actions: [
+                {
+                  label: 'Ver Detalhes',
+                  onClick: ({ event }: { event: CalendarEvent }): void => {
+                    this.viewEventDetails(event.meta.event.ausencia.Id);
+                  }
+                }
+              ]
+            };
+          });
 
-          groupedEvents[userId].push(newEvent);
-        });
+            this.events = this.events.concat(newEvents);// this.events=[...this.events, ...newEvents];
+            this.cdr.detectChanges();
+        },
+        error(error) {
+          console.log(error);
+        },
+      });
 
-        this.events = ([] as CalendarEvent<any>[]).concat(...Object.values(groupedEvents));
-        this.eventsByUser = groupedEvents;
-        this.cdr.detectChanges();
-      },
-      error(error) {
-        console.log(error);
-      },
-    });
   }
 
   viewEventDetails(eventid): void {
@@ -126,9 +128,14 @@ export class DashboardCalendarComponent implements OnInit {
   }
 
   handleEventClick({ event }: { event: CalendarEvent<any>; sourceEvent: MouseEvent | KeyboardEvent }): void {
-    console.log('Event clicked:', event);
-    const eventId = event.meta.event.Id;
+    console.log("entrou", event)
+    this.cdr.detectChanges();
+    const eventId = event.meta.event.ausencia.Id;
     this.viewEventDetails(eventId);
+  }
+
+  handleAllDayEventClick(event: any ): void {
+    this.activeDay = event.start;
   }
 
   prevMonth(): void {
@@ -141,47 +148,5 @@ export class DashboardCalendarComponent implements OnInit {
 
   getCurrentMonthLabel(): string {
     return moment(this.viewDate).format('MMMM YYYY');
-  }
-
-  getEventsByUserKeys(): string[] {
-    return Object.keys(this.eventsByUser);
-  }
-
-  getWeekDates(viewDate: Date): WeekDate[] {
-    const startOfWeek = moment(viewDate).startOf('week');
-    const endOfWeek = moment(viewDate).endOf('week');
-
-    const dates: WeekDate[] = [];
-
-    let currentDate = startOfWeek.clone();
-
-    while (currentDate <= endOfWeek) {
-      dates.push({
-        date: currentDate.toDate(),
-        start: currentDate.clone().toDate(),
-        end: currentDate.clone().endOf('day').toDate(),
-      });
-      currentDate = currentDate.clone().add(1, 'day');
-    }
-
-    return dates;
-  }
-
-  getEventsByUserAndDate(userId: string, day: WeekDate): CalendarEvent<any>[] {
-    const events = this.eventsByUser[userId];
-    if (events) {
-      return events.filter((event) => {
-        if (event.start && event.end) {
-          return event.start >= day.start && event.end <= day.end;
-        }
-        return false;
-      });
-    }
-    return [];
-  }
-
-  formatDate(weekDate: WeekDate): string {
-    const date = weekDate.date instanceof Date ? weekDate.date : new Date(weekDate.date);
-    return this.datePipe.transform(date, 'EEEE, MMMM d') || '';
   }
 }

@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AusenciaService } from 'src/app/services/services/ausencia.service';
 import { AuthService } from 'src/app/services/services/auth.service';
 import { ComentarioService } from 'src/app/services/services/comentario.service';
+import { UserServiceService } from 'src/app/services/services/user.service.service';
 
 @Component({
   selector: 'app-ausenciaview',
@@ -22,6 +23,7 @@ export class AusenciaviewComponent implements OnInit{
   ausencia: any;
   existsausencia:boolean = false;
   existscomentarios:boolean = false;
+  isAusenciaaprovador:boolean=false;
 
   displayedColumns: String[] = [
     'datacriacao',
@@ -43,6 +45,7 @@ export class AusenciaviewComponent implements OnInit{
     private _toastservice: ToastrService,
     private _cdref: ChangeDetectorRef,
     private dialog: MatDialog,
+    private _userService: UserServiceService
 
   ) {}
 
@@ -59,7 +62,26 @@ export class AusenciaviewComponent implements OnInit{
     });
 
     this.carregarAusencia(this.id);
+    this.verifyAprovador(this.userid);
+
+
     this.carregarComentarios(this.id);
+  }
+
+  verifyAprovador(userid: any) {
+    if (userid)
+    {
+      this._userService.getAprovadores("2").subscribe({
+        next: (res) => {
+
+          res.forEach((aprovador: any) => {
+            if(userid==aprovador.Id){
+              this.isAusenciaaprovador=true;
+            }
+          });
+        },
+      });
+    }
   }
 
   comentarioForm = new FormGroup({
@@ -116,6 +138,33 @@ export class AusenciaviewComponent implements OnInit{
      this._cdref.detectChanges();
   }
 
+  acceptAusencia(id : String){
+    this._ausenciaService.acceptAusencia(id)
+    .subscribe({
+      next:(res)=>{
+        this._toastservice.success(
+          'Teletrabalho aceite com sucesso',
+          'Teletrabalho Aceite'
+        )
+        this._cdref.detectChanges();
+
+      }
+    });
+  }
+
+  declineAusencia(id : String){
+    this._ausenciaService.declineUser(id)
+    .subscribe({
+      next:(res)=>{
+        this._toastservice.success(
+          'Teletrabalho recusado com sucesso',
+          'Teletrabalho Recusado'
+        )
+        this._cdref.detectChanges();
+
+      }
+    });
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

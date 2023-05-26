@@ -63,6 +63,11 @@
       <th class="titulo">Motivo:</th>
       <th class="descricao">{{ausencia[0].ausencia.Motivo}}</th>
     </tr>
+    <tr>
+      <th class="titulo">Estado:</th>
+      <th class="descricao" *ngIf="isAusenciaaprovador && ausencia[0].ausencia.Estadoid==3"><button class="btndisable"  (click)="acceptAusencia(ausencia[0].ausencia.Id)"><i class="fa-solid fa-check" style="color:#5db44b ;"></i></button>&nbsp;&nbsp;
+        <button class="btndisable"  (click)="declineAusencia(ausencia[0].ausencia.Id)"><i class="fa-solid fa-xmark" style="color: #f00000;"></i></button></th>
+    </tr>
   </table>
   <br/>
   <br/>
@@ -82,7 +87,7 @@
 
       <ng-container matColumnDef="datacriacao">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Data Comentário </th>
-        <td mat-cell *matCellDef="let row"> {{row.comentario.Datacriacao | date:'MMMM d, y, h:mm:ss'}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.comentario?.Datacriacao | date:'MMMM d, y, h:mm:ss'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="descricao">
@@ -115,7 +120,7 @@
 
     <div class="form-floating">
       <input type="hidden" class="form-control" id="ausenciaid" placeholder="Bernardo Costa"
-      formControlName="ausenciaid" [(ngModel)]="ausencia[0].ausencia.Id">
+      formControlName="ausenciaid" [(ngModel)]="ausencia[0]?.ausencia.Id">
     </div>
 
     <div class="form-floating">
@@ -126,7 +131,7 @@
         Comentário é obrigatório
       </div>
     </div>
-  
+
     <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="comentarioForm.invalid">Comentar</button>
   </form>
 
