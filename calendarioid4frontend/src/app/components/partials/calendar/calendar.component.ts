@@ -152,6 +152,22 @@ import { AuthService } from 'src/app/services/services/auth.service';
     }
 
     getCurrentMonthLabel(): string {
-      return moment(this.viewDate).format('MMMM YYYY');
+      const monthNamesPt = [
+        'Janeiro',
+        'Fevereiro',
+        'Março',
+        'Abril',
+        'Maio',
+        'Junho',
+        'Julho',
+        'Agosto',
+        'Setembro',
+        'Outubro',
+        'Novembro',
+        'Dezembro'
+      ];
+      const month = monthNamesPt[this.viewDate.getMonth()];
+      const year = this.viewDate.getFullYear();
+      return `${month} ${year}`;
     }
   }

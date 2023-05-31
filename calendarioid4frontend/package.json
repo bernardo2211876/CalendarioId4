@@ -51,7 +51,7 @@
     "datatables.net": "^1.13.4",
     "datatables.net-dt": "^1.13.4",
     "datatables.net-responsive": "^2.4.1",
-    "date-fns": "^2.30.0",
+    "date-fns": "^2.0.0-alpha.28",
     "demo-utils": "^0.5.3",
     "fullcalendar": "^6.1.6",
     "jquery": "^3.6.4",

@@ -75,8 +75,11 @@ import { CalendarAusenciasComponent } from './components/partials/calendar-ausen
 import { AusenciaviewComponent } from './components/pages/ausenciaview/ausenciaview.component';
 import * as moment from 'moment';
 import { DashboardCalendarComponent } from './components/partials/dashboard-calendar/dashboard-calendar.component';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
 
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [

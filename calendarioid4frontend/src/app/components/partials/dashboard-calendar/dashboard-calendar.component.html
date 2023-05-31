@@ -11,7 +11,7 @@
   <button class="btn " (click)="nextMonth()"><i class="fa-solid fa-caret-right"></i></button>
 </div>
 <br/>
-<ng-template #customCellTemplate let-day="day" let-locale="locale" let-view="view" let-period="period" let-weekendDays="weekendDays" let-allDayEventRows="allDayEventRows" let-hourSegmentHeight="hourSegmentHeight"></ng-template>
+<ng-template #customCellTemplate let-day="day" let-locale="pt" let-view="view" let-period="period" let-weekendDays="weekendDays" let-allDayEventRows="allDayEventRows" let-hourSegmentHeight="hourSegmentHeight"></ng-template>
 
 <div [ngSwitch]="view" >
   <mwl-calendar-month-view
@@ -19,6 +19,7 @@
     [viewDate]="viewDate"
     [events]="events"
     [activeDayIsOpen]="true"
+    [locale]="'pt'"
     (beforeViewRender)="beforeViewRender($event)"
     (eventClicked)="handleEventClick($event)"
     (allDayEventClicked)="handleAllDayEventClick($event)"

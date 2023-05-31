@@ -103,9 +103,6 @@ namespace calendarioid4backend.Controllers
                 
                     Utilizador user = JsonConvert.DeserializeObject<Utilizador>(task.Result);
                 
-
-
-                
                 var userAvailable = Context.Utilizadors.Where(u => u.Email == user.Email && /*Encriptacao.DecryptPassword(*/u.Password == user.Password).FirstOrDefault();
                 bool isaprovador = true;
                 var aprovador = Context.Aprovadors.Where(a => a.Aprovadorid == userAvailable.Id);

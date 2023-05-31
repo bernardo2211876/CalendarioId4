@@ -148,7 +148,23 @@ export class CalendarAusenciasComponent implements OnInit{
   }
 
   getCurrentMonthLabel(): string {
-    return moment(this.viewDate).format('MMMM YYYY');
+    const monthNamesPt = [
+      'Janeiro',
+      'Fevereiro',
+      'Março',
+      'Abril',
+      'Maio',
+      'Junho',
+      'Julho',
+      'Agosto',
+      'Setembro',
+      'Outubro',
+      'Novembro',
+      'Dezembro'
+    ];
+    const month = monthNamesPt[this.viewDate.getMonth()];
+    const year = this.viewDate.getFullYear();
+    return `${month} ${year}`;
   }
 
 }
