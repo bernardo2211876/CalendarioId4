@@ -69,7 +69,7 @@ export class UserlistComponent implements OnInit{
   }
 
   enableUser(id : String){
-    this.userService.EnableUser(id)
+    this.userService.EnableUser(id,this.data.id)
     .subscribe({
       next:(res)=>{
         this._toastservice.success(
@@ -83,7 +83,7 @@ export class UserlistComponent implements OnInit{
   }
 
   disableUser(id : String){
-    this.userService.DisableUser(id)
+    this.userService.DisableUser(id,this.data.id)
     .subscribe({
       next:(res)=>{
         this._toastservice.success(

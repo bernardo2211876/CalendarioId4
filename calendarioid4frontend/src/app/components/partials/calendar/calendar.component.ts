@@ -85,8 +85,8 @@ import { AuthService } from 'src/app/services/services/auth.service';
                 title= 'Pendente';
               } else {
                 // Default color if estadoid is not 1, 2, or 3
-                color = { primary: 'blue', secondary: 'lightblue' };
-                title= 'Erro';
+                color = { primary: 'gray', secondary: 'lightgray' };
+                title= 'Cancelado';
               }
 
               return {

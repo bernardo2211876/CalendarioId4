@@ -8,11 +8,13 @@ export class AprovadorService {
   baseServerUrl="https://localhost:7272/api/";
   constructor(private http: HttpClient) { }
 
-  criarAprovador(id:any,ida:any){
+  criarAprovador(id:any,ida:any,idcreate:any){
 
     return this.http.post(this.baseServerUrl+"Aprovador/AdicionarAprovacao",{
       utilizadorid:id,
-      aprovadorid:ida
+      aprovadorid:ida,
+      idutilizadorultimaedicao:idcreate,
+      idutilizadorcriador:idcreate
     });
   }
 

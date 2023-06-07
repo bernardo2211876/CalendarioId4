@@ -39,9 +39,7 @@ namespace calendarioid4backend.Controllers
                 Aprovador newaprovador = JsonConvert.DeserializeObject<Aprovador>(task.Result);
 
                 // newuser.Password=Encriptacao.EncryptPassword(newuser.Password);
-                newaprovador.Idutilizadorcriador = 1;//precisa de ser alterado para o user que atualizar
                 newaprovador.Datacriacao = DateTime.Now;
-                newaprovador.Idutilizadorultimaedicao = 1;//precisa de ser alterado para o user que atualizar
                 newaprovador.Dataultimaedicao = DateTime.Now;
                 Context.Aprovadors.Add(newaprovador);
                 Context.SaveChanges();

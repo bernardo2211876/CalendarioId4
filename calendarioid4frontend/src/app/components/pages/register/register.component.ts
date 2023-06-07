@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators ,ReactiveFormsModule} from '@angular
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/services/auth.service';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -30,6 +32,8 @@ export class RegisterComponent implements OnInit {
   }
 
   registerForm = new FormGroup({
+    idutilizadorcriador: new FormControl(""),
+    idutilizadorultimaedicao: new FormControl(""),
     nome: new FormControl("", [
       Validators.required,
     ]),
@@ -87,6 +91,12 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  get Idutilizadorcriador(): FormControl {
+    return this.registerForm.get('idutilizadorcriador') as FormControl;
+  }
+  get Idutilizadorultimaedicao(): FormControl {
+    return this.registerForm.get('idutilizadorultimaedicao') as FormControl;
+  }
   get Nome(): FormControl {
     return this.registerForm.get('nome') as FormControl;
   }

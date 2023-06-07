@@ -148,7 +148,6 @@ export class DashboardCalendarComponent implements OnInit {
   }
 
   getCurrentMonthLabel(): string {
-    //return moment(this.viewDate).format('MMMM YYYY');
     const monthNamesPt = [
       'Janeiro',
       'Fevereiro',

@@ -64,7 +64,7 @@ export class AusenciaaprovComponent implements OnInit{
   }
 
   acceptAusencia(id : String){
-    this._ausenciaService.acceptAusencia(id)
+    this._ausenciaService.acceptAusencia(id,this.data.id)
     .subscribe({
       next:(res)=>{
         this._toastservice.success(
@@ -78,7 +78,7 @@ export class AusenciaaprovComponent implements OnInit{
   }
 
   declineAusencia(id : String){
-    this._ausenciaService.declineUser(id)
+    this._ausenciaService.declineAusencia(id,this.data.id)
     .subscribe({
       next:(res)=>{
         this._toastservice.success(

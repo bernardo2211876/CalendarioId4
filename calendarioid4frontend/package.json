@@ -88,5 +88,14 @@
     "nx": "16.2.2",
     "nx-cloud": "latest",
     "typescript": "~4.8.2"
-  }
+  },
+    "build": {
+      "builder": "@angular-devkit/build-angular:browser",
+      "options": {
+        "allowedCommonJsDependencies": [
+          "lodash"
+        ]
+      }
+    }
+
 }

@@ -42,13 +42,24 @@ export class AusenciaService {
     });
   }
 
-  acceptAusencia(id:String){
+  acceptAusencia(id:String,idedit:String){
 
-    return this.http.put(this.baseServerUrl+"Ausencia/Acceptausencia/"+id,'no body');
+    return this.http.put(this.baseServerUrl+"Ausencia/Acceptausencia/"+id,{
+      idutilizadorultimaedicao:idedit,
+    });
   }
 
-  declineUser(id:String){
+  declineAusencia(id:String,idedit:String){
 
-    return this.http.put(this.baseServerUrl+"Ausencia/Disableausencia/"+id,'no body');
+    return this.http.put(this.baseServerUrl+"Ausencia/Disableausencia/"+id,{
+      idutilizadorultimaedicao:idedit,
+    });
+  }
+
+  cancelAusencia(id:String,idedit:String){
+
+    return this.http.put(this.baseServerUrl+"Ausencia/Cancelausencia/"+id,{
+      idutilizadorultimaedicao:idedit,
+    });
   }
 }

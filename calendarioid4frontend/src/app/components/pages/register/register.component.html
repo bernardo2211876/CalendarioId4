@@ -29,6 +29,15 @@
 <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <form class=" p-3 rounded-3" [formGroup]="registerForm" (ngSubmit)="registerSubmited()">
 
+    <div class="form-floating">
+        <input type="text" class="form-control" id="idutilizadorcriador" placeholder=""
+        formControlName="idutilizadorcriador" [hidden]="true" [(ngModel)]="this.data.id" >
+    </div>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="idutilizadorultimaedicao" placeholder=""
+      formControlName="idutilizadorultimaedicao" [hidden]="true" [(ngModel)]="this.data.id" >
+    </div>
 
     <div class="form-floating">
       <input type="text" class="form-control" id="nome" placeholder="Bernardo Costa"
@@ -78,6 +87,8 @@
         O nif tem de ter 9 caracteres
       </div>
     </div>
+
+
 
     <div class="form-floating">
       <input type="text" class="form-control" id="codpostal" placeholder="2490-427"

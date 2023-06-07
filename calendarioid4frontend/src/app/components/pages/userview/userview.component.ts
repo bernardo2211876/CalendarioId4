@@ -130,4 +130,24 @@ export class UserviewComponent implements OnInit {
       }
     });
   }
+
+  formatDateTime(dateTime: string): string {
+    const date = new Date(dateTime);
+    const day = date.getDate();
+    const month = this.getMonthName(date.getMonth());
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+
+    return `${day} de ${month}, ${year}, ${hours}:${minutes}:${seconds}`;
+  }
+
+  getMonthName(monthIndex: number): string {
+    const monthNamesPt = [
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+    return monthNamesPt[monthIndex];
+  }
 }

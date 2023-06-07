@@ -50,6 +50,25 @@ namespace calendarioid4backend.Controllers
                                                     NomeUtilizador = ausencia.NomeUtilizador, // Include NomeUtilizador from previous join
                                                     NomeUtilizadorEdicao = user.Nome
                                                 })
+                                           .Join(Context.TipoAusencia,
+                                                ausencia => ausencia.Ausencia.Tipoid,
+                                                tipoausencia => tipoausencia.Id,
+                                                (Ausencia, tipoausencia) => new {
+                                                    Ausencia.Ausencia, // Include Ausencia from previous join
+                                                    Ausencia.NomeUtilizador, // Include NomeUtilizador from previous join
+                                                    Ausencia.NomeUtilizadorEdicao,
+                                                    tipodesignacao=tipoausencia.Designacao
+                                                })
+                                           .Join(Context.EstadoAusencia,
+                                                ausencia => ausencia.Ausencia.Estadoid,
+                                                estadoausencia => estadoausencia.Id,
+                                                (Ausencia, estadoausencia) => new {
+                                                    Ausencia.Ausencia, // Include Ausencia from previous join
+                                                    Ausencia.NomeUtilizador, // Include NomeUtilizador from previous join
+                                                    Ausencia.NomeUtilizadorEdicao,
+                                                    Ausencia.tipodesignacao,
+                                                    estadodesignacao=estadoausencia.Designacao
+                                                })
                                                 .ToListAsync();
                 if (ausencia == null)
                 {
@@ -87,9 +106,9 @@ namespace calendarioid4backend.Controllers
 
 
                 // newuser.Password=Encriptacao.EncryptPassword(newuser.Password);
-                newausencia.Idutilizadorcriador = newausencia.Utilizadorid;//precisa de ser alterado para o user que atualizar
+                newausencia.Idutilizadorcriador = newausencia.Utilizadorid;
                 newausencia.Datacriacao = DateTime.Now;
-                newausencia.Idutilizadorultimaedicao = newausencia.Utilizadorid;//precisa de ser alterado para o user que atualizar
+                newausencia.Idutilizadorultimaedicao = newausencia.Utilizadorid;
                 newausencia.Dataultimaedicao = DateTime.Now;
 
                 var existeaprovadores = await Context.Aprovadors.FirstOrDefaultAsync(a => a.Utilizadorid == newausencia.Utilizadorid);
@@ -266,7 +285,6 @@ namespace calendarioid4backend.Controllers
                     return NotFound();
                 }
 
-                ausencia.Idutilizadorultimaedicao = 1;//precisa de ser alterado para o user que atualizar
                 ausencia.Dataultimaedicao = DateTime.Now;
                 ausencia.Estadoid = 2;
 
@@ -294,7 +312,6 @@ namespace calendarioid4backend.Controllers
                     return NotFound();
                 }
 
-                ausencia.Idutilizadorultimaedicao = 1;//precisa de ser alterado para o user que atualizar
                 ausencia.Dataultimaedicao = DateTime.Now;
                 ausencia.Estadoid = 1;
 
@@ -311,5 +328,36 @@ namespace calendarioid4backend.Controllers
 
 
 
-    }
+    
+
+        [HttpPut("cancelAusencia/{id}")]
+        public async Task<IActionResult> cancelAusencia(int id)
+        {
+            try
+            {
+
+                var ausencia = await Context.Ausencia.FindAsync(id);
+
+                if (ausencia == null)
+                {
+                    return NotFound();
+                }
+
+                ausencia.Dataultimaedicao = DateTime.Now;
+                ausencia.Estadoid = 4;
+
+                await Context.SaveChangesAsync();
+
+                return Ok(ausencia);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+
+
+}
 }

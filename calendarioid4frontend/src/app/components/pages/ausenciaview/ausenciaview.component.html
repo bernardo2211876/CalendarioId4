@@ -38,7 +38,7 @@
     </tr>
     <tr>
       <th class="titulo">Data última edição:</th>
-      <th class="descricao">{{ausencia[0].ausencia.Dataultimaedicao | date:'MMMM d, y, h:mm:ss'}}</th>
+      <th class="descricao">{{ formatDateTime(ausencia[0].ausencia.Dataultimaedicao) }}</th>
     </tr>
     <tr>
       <th class="titulo">Responsável pela última edição:</th>
@@ -46,16 +46,16 @@
     </tr>
     <tr>
       <th class="titulo">Tipo de Ausência:</th>
-      <th class="descricao">{{ausencia[0].ausencia.Tipoid}}</th>
+      <th class="descricao">{{ausencia[0].tipodesignacao}}</th>
     </tr>
 
     <tr>
       <th class="titulo">Data e Hora de ínicio:</th>
-      <th class="descricao">{{ausencia[0].ausencia.Datahorainicio | date:'MMMM d, y, h:mm:ss'}}</th>
+      <th class="descricao">{{ formatDateTime(ausencia[0].ausencia.Datahorainicio) }}</th>
     </tr>
     <tr>
       <th class="titulo">Data e Hora de ínicio:</th>
-      <th class="descricao">{{ausencia[0].ausencia.Datahorafim | date:'MMMM d, y, h:mm:ss'}}</th>
+      <th class="descricao">{{ formatDateTime(ausencia[0].ausencia.Datahorafim) }}</th>
     </tr>
     <tr>
       <th class="titulo">Motivo:</th>
@@ -63,8 +63,19 @@
     </tr>
     <tr>
       <th class="titulo">Estado:</th>
-      <th class="descricao" *ngIf="isAusenciaaprovador && ausencia[0].ausencia.Estadoid==3"><button class="btndisable"  (click)="acceptAusencia(ausencia[0].ausencia.Id)"><i class="fa-solid fa-check" style="color:#5db44b ;"></i></button>&nbsp;&nbsp;
-        <button class="btndisable"  (click)="declineAusencia(ausencia[0].ausencia.Id)"><i class="fa-solid fa-xmark" style="color: #f00000;"></i></button></th>
+      <th class="descricao">{{ausencia[0].estadodesignacao}}</th>
+    </tr>
+    <tr>
+      <th class="titulo">Funcionalidades:</th>
+      <th class="descricao" >
+        <div class="aceitarrejeitar" *ngIf="isAusenciaaprovador && ausencia[0].ausencia.Estadoid==3">
+        <button class="btndisable"  (click)="acceptAusencia(ausencia[0].ausencia.Id)"><i class="fa-solid fa-check" style="color:#5db44b ;" title="Aceitar"></i></button>&nbsp;&nbsp;
+        <button class="btndisable"  (click)="declineAusencia(ausencia[0].ausencia.Id)"><i class="fa-solid fa-xmark" style="color: #f00000;" title="Rejeitar"></i></button>
+        </div>
+        <div class="cancelar" *ngIf="ausencia[0].ausencia.Utilizadorid==this.userid && ausencia[0].ausencia.Estadoid != 4">
+          <button class="btndisable"  (click)="cancelAusencia(ausencia[0].ausencia.Id)"><i class="fa-solid fa-ban" style="color: #f00000;" title="Cancelar"></i></button>&nbsp;&nbsp;
+          </div>
+      </th>
     </tr>
   </table>
   <br/>
@@ -85,7 +96,7 @@
 
       <ng-container matColumnDef="datacriacao">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Data Comentário </th>
-        <td mat-cell *matCellDef="let row"> {{row.comentario?.Datacriacao | date:'MMMM d, y, h:mm:ss'}} </td>
+        <td mat-cell *matCellDef="let row"> {{formatDateTime(row.comentario?.Datacriacao)}} </td>
       </ng-container>
 
       <ng-container matColumnDef="descricao">

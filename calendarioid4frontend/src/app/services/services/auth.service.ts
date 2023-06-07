@@ -17,6 +17,7 @@ baseServerUrl="https://localhost:7272/api/";
 jwtHelperService = new JwtHelperService();
 
   registerUser(user:any){
+    console.log(user);debugger
     return this.http.post(this.baseServerUrl+"Utilizador/CreateUser",user);
   }
 

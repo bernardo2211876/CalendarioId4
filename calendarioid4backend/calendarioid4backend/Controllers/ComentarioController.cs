@@ -75,13 +75,9 @@ namespace calendarioid4backend.Controllers
                     return BadRequest();
                 }
 
-                //if(newausencia.tipoausencia)
-
-
-                // newuser.Password=Encriptacao.EncryptPassword(newuser.Password);
-                newcomentario.Idutilizadorcriador = newcomentario.Utilizadorid;//precisa de ser alterado para o user que atualizar
+                newcomentario.Idutilizadorcriador = newcomentario.Utilizadorid;
                 newcomentario.Datacriacao = DateTime.Now;
-                newcomentario.Idutilizadorultimaedicao = newcomentario.Utilizadorid;//precisa de ser alterado para o user que atualizar
+                newcomentario.Idutilizadorultimaedicao = newcomentario.Utilizadorid;
                 newcomentario.Dataultimaedicao = DateTime.Now;
 
                 

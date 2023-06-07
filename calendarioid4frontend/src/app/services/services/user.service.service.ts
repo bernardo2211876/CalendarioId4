@@ -25,14 +25,18 @@ export class UserServiceService {
     return this.http.put<User>(this.baseServerUrl+"Utilizador/Edituser/"+user.Id ,user);
   }
 
-  DisableUser(id:String){
+  DisableUser(id:String,idedit:String){
 
-    return this.http.put(this.baseServerUrl+"Utilizador/Disableuser/"+id,'no body');
+    return this.http.put(this.baseServerUrl+"Utilizador/Disableuser/"+id,{
+      idutilizadorultimaedicao:idedit,
+    });
   }
 
-  EnableUser(id:String){
+  EnableUser(id:String,idedit:String){
 
-    return this.http.put(this.baseServerUrl+"Utilizador/Enableuser/"+id,'no body');
+    return this.http.put(this.baseServerUrl+"Utilizador/Enableuser/"+id,{
+      idutilizadorultimaedicao:idedit,
+    });
   }
 
   getAprovadores(id : string): Observable<any> {
