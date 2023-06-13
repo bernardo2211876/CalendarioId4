@@ -136,15 +136,15 @@ export class AusenciaviewComponent implements OnInit{
       }
      });
      this._cdref.detectChanges();
-  }
+    }
 
   acceptAusencia(id : String){
-    this._ausenciaService.acceptAusencia(id)
+    this._ausenciaService.acceptAusencia(id,this.userid)
     .subscribe({
       next:(res)=>{
         this._toastservice.success(
-          'Teletrabalho aceite com sucesso',
-          'Teletrabalho Aceite'
+          'Ausência aceite com sucesso',
+          'Ausência Aceite'
         )
         this._cdref.detectChanges();
 
@@ -153,17 +153,51 @@ export class AusenciaviewComponent implements OnInit{
   }
 
   declineAusencia(id : String){
-    this._ausenciaService.declineUser(id)
+    this._ausenciaService.declineAusencia(id,this.userid)
     .subscribe({
       next:(res)=>{
         this._toastservice.success(
-          'Teletrabalho recusado com sucesso',
-          'Teletrabalho Recusado'
+          'Ausência recusado com sucesso',
+          'Ausência Recusado'
         )
         this._cdref.detectChanges();
 
       }
     });
+  }
+
+  cancelAusencia(id : String){
+    this._ausenciaService.cancelAusencia(id,this.userid)
+    .subscribe({
+      next:(res)=>{
+        this._toastservice.success(
+          'Ausência cancelada com sucesso',
+          'Ausência Cancelada'
+        )
+        this._cdref.detectChanges();
+
+      }
+    });
+  }
+
+  formatDateTime(dateTime: string): string {
+    const date = new Date(dateTime);
+    const day = date.getDate();
+    const month = this.getMonthName(date.getMonth());
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+
+    return `${day} de ${month}, ${year}, ${hours}:${minutes}:${seconds}`;
+  }
+
+  getMonthName(monthIndex: number): string {
+    const monthNamesPt = [
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+    return monthNamesPt[monthIndex];
   }
 
   applyFilter(event: Event) {

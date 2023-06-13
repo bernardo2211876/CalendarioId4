@@ -85,8 +85,8 @@ import { AuthService } from 'src/app/services/services/auth.service';
                 title= 'Pendente';
               } else {
                 // Default color if estadoid is not 1, 2, or 3
-                color = { primary: 'blue', secondary: 'lightblue' };
-                title= 'Erro';
+                color = { primary: 'gray', secondary: 'lightgray' };
+                title= 'Cancelado';
               }
 
               return {
@@ -152,6 +152,22 @@ import { AuthService } from 'src/app/services/services/auth.service';
     }
 
     getCurrentMonthLabel(): string {
-      return moment(this.viewDate).format('MMMM YYYY');
+      const monthNamesPt = [
+        'Janeiro',
+        'Fevereiro',
+        'Março',
+        'Abril',
+        'Maio',
+        'Junho',
+        'Julho',
+        'Agosto',
+        'Setembro',
+        'Outubro',
+        'Novembro',
+        'Dezembro'
+      ];
+      const month = monthNamesPt[this.viewDate.getMonth()];
+      const year = this.viewDate.getFullYear();
+      return `${month} ${year}`;
     }
   }

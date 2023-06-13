@@ -1,6 +1,6 @@
 import { DatePipe, formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   CalendarEvent,
@@ -32,12 +32,13 @@ interface LegendItem {
   styleUrls: ['./dashboard-calendar.component.css'],
 })
 export class DashboardCalendarComponent implements OnInit {
-  view: CalendarView = CalendarView.Month;
+  @Input() view: CalendarView = CalendarView.Month;
   myDate=new Date();
   viewDate: Date = new Date();
   data:any;
   events: CalendarEvent[] = [];
   activeDay: Date | null = null;
+  @Input() locale!: string;
 
   period!: CalendarViewPeriod;
   legendItems = [
@@ -147,6 +148,22 @@ export class DashboardCalendarComponent implements OnInit {
   }
 
   getCurrentMonthLabel(): string {
-    return moment(this.viewDate).format('MMMM YYYY');
+    const monthNamesPt = [
+      'Janeiro',
+      'Fevereiro',
+      'Março',
+      'Abril',
+      'Maio',
+      'Junho',
+      'Julho',
+      'Agosto',
+      'Setembro',
+      'Outubro',
+      'Novembro',
+      'Dezembro'
+    ];
+    const month = monthNamesPt[this.viewDate.getMonth()];
+    const year = this.viewDate.getFullYear();
+    return `${month} ${year}`;
   }
 }

@@ -7,6 +7,7 @@ import { AprovadorService } from 'src/app/services/services/aprovador.service';
 import { UserServiceService } from 'src/app/services/services/user.service.service';
 import { User } from 'src/app/shared/models/user.model';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import { AuthService } from 'src/app/services/services/auth.service';
 
 @Component({
   selector: 'app-modaladdaprovador',
@@ -16,18 +17,20 @@ import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 export class ModaladdaprovadorComponent {
   aprovador = new FormControl<string | User>('',Validators.required)
   options : any[];
+  data1 : any;
   filteredOptions!: Observable<User[]>;
 
   /**
    *
    */
   constructor(private _userService: UserServiceService, private _aprovadorService: AprovadorService,private _toastservice:ToastrService,
-    private _router:Router,@Inject(MAT_DIALOG_DATA) public data: any, private _dialog:MatDialog) {
+    private _router:Router,@Inject(MAT_DIALOG_DATA) public data: any, private _dialog:MatDialog, private _authService: AuthService) {
     this.options=[];
   }
 
 
   ngOnInit() {
+    this.data1 = this._authService.loadCurrentUser();
    this.carregarNaoAprovadores();
     this.filteredOptions = this.aprovador.valueChanges.pipe(
       startWith(''),
@@ -64,7 +67,7 @@ export class ModaladdaprovadorComponent {
   }
 
   aprovadorSubmited(){
-    this._aprovadorService.criarAprovador(this.data.iduser ,(<any>this.aprovador.value).Id)
+    this._aprovadorService.criarAprovador(this.data.iduser ,(<any>this.aprovador.value).Id, this.data1.id)
     .subscribe(res=>{
       if(res == 200){
         this._toastservice.success(

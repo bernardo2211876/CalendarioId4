@@ -1,6 +1,17 @@
 
 <h1 mat-dialog-title>Adicionar Aprovador</h1>
 <form (ngSubmit)="aprovadorSubmited()">
+
+  <div class="form-floating">
+    <input type="text" class="form-control" id="idutilizadorcriador" placeholder=""
+    formControlName="idutilizadorcriador" [hidden]="true" [(ngModel)]="this.data.id" >
+</div>
+
+<div class="form-floating">
+  <input type="text" class="form-control" id="idutilizadorultimaedicao" placeholder=""
+  formControlName="idutilizadorultimaedicao" [hidden]="true" [(ngModel)]="this.data.id" >
+</div>
+
 <div mat-dialog-content>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Utilizadores</mat-label>

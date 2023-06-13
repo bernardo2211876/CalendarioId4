@@ -36,40 +36,40 @@
   <table *ngIf="existsuser==true">
     <tr>
       <th class="titulo">Data última edição:</th>
-      <th class="descricao">{{user.Dataultimaedicao | date:'MMMM d, y, h:mm:ss'}}</th>
+      <th class="descricao">{{formatDateTime(user[0].utilizador.Dataultimaedicao)}}</th>
     </tr>
     <tr>
       <th class="titulo">Responsável pela última edição:</th>
-      <th class="descricao">{{user.Idutilizadorultimaedicao}}</th>
+      <th class="descricao">{{user[0].nomeutilizadorlastedit}}</th>
     </tr>
     <tr>
       <th class="titulo">Nome:</th>
-      <th class="descricao">{{user.Nome}}</th>
+      <th class="descricao">{{user[0].utilizador.Nome}}</th>
     </tr>
 
     <tr>
       <th class="titulo">Email:</th>
-      <th class="descricao">{{user.Email}}</th>
+      <th class="descricao">{{user[0].utilizador.Email}}</th>
     </tr>
     <tr>
       <th class="titulo">NIF:</th>
-      <th class="descricao">{{user.Nif}}</th>
+      <th class="descricao">{{user[0].utilizador.Nif}}</th>
     </tr>
     <tr>
       <th class="titulo">Código Postal:</th>
-      <th class="descricao">{{user.Codpostal}}</th>
+      <th class="descricao">{{user[0].utilizador.Codpostal}}</th>
     </tr>
     <tr>
       <th class="titulo">Morada:</th>
-      <th class="descricao">{{user.Morada}}</th>
+      <th class="descricao">{{user[0].utilizador.Morada}}</th>
     </tr>
     <tr>
       <th class="titulo">Telemóvel:</th>
-      <th class="descricao">{{user.Telemovel}}</th>
+      <th class="descricao">{{user[0].utilizador.Telemovel}}</th>
     </tr>
     <tr>
       <th class="titulo">Função</th>
-      <th class="descricao">{{user.Funcao}}</th>
+      <th class="descricao">{{user[0].utilizador.Funcao}}</th>
     </tr>
   </table>
   <br/>

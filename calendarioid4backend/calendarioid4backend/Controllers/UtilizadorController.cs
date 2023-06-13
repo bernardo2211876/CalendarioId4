@@ -71,9 +71,7 @@ namespace calendarioid4backend.Controllers
                 }
 
                // newuser.Password=Encriptacao.EncryptPassword(newuser.Password);
-                newuser.Idutilizadorcriador = 1;//precisa de ser alterado para o user que atualizar
                 newuser.Datacriacao = DateTime.Now;
-                newuser.Idutilizadorultimaedicao = 1;//precisa de ser alterado para o user que atualizar
                 newuser.Dataultimaedicao = DateTime.Now;
                 newuser.Estadoid = 1;
                 Context.Utilizadors.Add(newuser);
@@ -102,9 +100,6 @@ namespace calendarioid4backend.Controllers
 
                 
                     Utilizador user = JsonConvert.DeserializeObject<Utilizador>(task.Result);
-                
-
-
                 
                 var userAvailable = Context.Utilizadors.Where(u => u.Email == user.Email && /*Encriptacao.DecryptPassword(*/u.Password == user.Password).FirstOrDefault();
                 bool isaprovador = true;
@@ -146,7 +141,15 @@ namespace calendarioid4backend.Controllers
         {
             try
             {
-                Utilizador utilizador = await Context.Utilizadors.FirstOrDefaultAsync(u => u.Id == id);
+                var utilizador = await Context.Utilizadors.Where(u => u.Id == id)
+                                .Join(Context.Utilizadors,
+                                                utilizador => utilizador.Idutilizadorultimaedicao,
+                                                user => user.Id,
+                                                (utilizador, user) => new {
+                                                    Utilizador = utilizador,
+                                                    Nomeutilizadorlastedit = user.Nome
+                                                })
+                                                .ToListAsync(); ;
                 if (utilizador == null)
                 {
                     return NotFound();
@@ -179,7 +182,7 @@ namespace calendarioid4backend.Controllers
                     return NotFound();
                 }
 
-                user.Idutilizadorultimaedicao = 1;//precisa de ser alterado para o user que atualizar
+
                 user.Dataultimaedicao = DateTime.Now;
                 user.Nome=useredit.Nome;
                 user.Email = useredit.Email;
@@ -213,7 +216,6 @@ namespace calendarioid4backend.Controllers
                     return NotFound();
                 }
 
-                user.Idutilizadorultimaedicao = 1;//precisa de ser alterado para o user que atualizar
                 user.Dataultimaedicao = DateTime.Now;
                 user.Estadoid = 2;
 
@@ -241,7 +243,6 @@ namespace calendarioid4backend.Controllers
                     return NotFound();
                 }
 
-                user.Idutilizadorultimaedicao = 1;//precisa de ser alterado para o user que atualizar
                 user.Dataultimaedicao = DateTime.Now;
                 user.Estadoid = 1;
 
