@@ -55,10 +55,7 @@ export class LoginComponent implements OnInit {
           'Sessão iniciada'
         )
         this.router.navigateByUrl('/dashboard');
-
       }
-
-
     });
   }
 

@@ -60,7 +60,7 @@
     "moment": "^2.29.4",
     "ngx-bootstrap": "^10.2.0",
     "ngx-fixed-settings-bar": "^13.0.1",
-    "ngx-material-timepicker": "^5.5.3",
+    "ngx-material-timepicker": "^5.5.2",
     "ngx-toastr": "^16.1.1",
     "perfect-scrollbar": "^1.5.5",
     "popper.js": "^1.16.1",
