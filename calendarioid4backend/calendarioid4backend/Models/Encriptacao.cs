@@ -5,32 +5,26 @@ namespace calendarioid4backend.Models
     public class Encriptacao
     {
 
-        public static string EncryptPassword(string password)
+        public static string HashPassword(string password)
         {
             if (string.IsNullOrEmpty(password))
             {
-                return null;
+                throw new ArgumentException("Password cannot be null or empty.");
             }
-            else
-            {
-                byte[] storePassword = ASCIIEncoding.UTF8.GetBytes(password);
-                string encryptedPassword = Convert.ToBase64String(storePassword);
-                return encryptedPassword;
-            }
+
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+            return hashedPassword;
         }
 
-        public static string DecryptPassword(string password)
+        public static bool VerifyPassword(string password, string hashedPassword)
         {
-            if (string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(hashedPassword))
             {
-                return null;
+                return false;
             }
-            else
-            {
-                byte[] encryptedPassword = Convert.FromBase64String(password);
-                string decryptedPassword = ASCIIEncoding.ASCII.GetString(encryptedPassword);
-                return decryptedPassword;
-            }
+
+            bool passwordMatches = BCrypt.Net.BCrypt.Verify(password, hashedPassword);
+            return passwordMatches;
         }
     }
 }

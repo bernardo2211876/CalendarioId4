@@ -13,6 +13,8 @@ import { User } from 'src/app/shared/models/user.model';
 })
 export class UsereditComponent implements OnInit {
   data:any;
+  id:any;
+  userloginisequal:boolean = false;
   user:User={
     Id :0,
 
@@ -51,10 +53,19 @@ export class UsereditComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = this._authService.loadCurrentUser();
-    if(this.data.isAdmin=='False')
+    this._route.paramMap.subscribe({
+      next:(params)=>{
+         this.id = params.get('id');
+      }});
+
+      if(this.id == this.data.id){
+        this.userloginisequal==true;
+      }
+
+    if(this.data.isAdmin=='False' || this.userloginisequal == true)
     {
       this._toastservice.warning(
-        'Necessita de ser admin para aceder a esta página',
+        'Necessita de ser admin ou ser a edição dos seus dados para aceder a esta página',
         'Acesso negado'
       )
       this._router.navigateByUrl('/dashboard');
@@ -64,11 +75,8 @@ export class UsereditComponent implements OnInit {
   }
 
  public carregarUser(){
-    this._route.paramMap.subscribe({
-      next:(params)=>{
-        const id = params.get('id');
-        if(id){
-            this.userService.getUser(id)
+        if(this.id){
+            this.userService.getUser(this.id)
             .subscribe({
               next:(res)=> {
                 this.user=res;
@@ -76,8 +84,6 @@ export class UsereditComponent implements OnInit {
             })
         }
       }
-    })
-  }
 
   updateUser(){
 

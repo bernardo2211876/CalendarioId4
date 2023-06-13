@@ -126,3 +126,5 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('isAdmin') as FormControl;
   }
 }
+
+

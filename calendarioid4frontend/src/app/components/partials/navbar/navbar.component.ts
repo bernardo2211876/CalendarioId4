@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
 
 
 
-  
+
   Logout(){
     this.authService.removeToken();
     this.router.navigateByUrl('/login');

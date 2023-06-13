@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace calendarioid4backend.Models;
@@ -21,6 +22,7 @@ public partial class Utilizador
     [JsonPropertyName("Email")]
     public string Email { get; set; } = null!;
     [JsonPropertyName("Password")]
+    [MaxLength(200)]
     public string Password { get; set; } = null!;
     [JsonPropertyName("Nif")]
     public int Nif { get; set; }

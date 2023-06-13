@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Threading.Tasks;
 using System.Collections;
+using Microsoft.Extensions.Options;
 
 namespace calendarioid4backend.Controllers
 {
@@ -51,39 +52,36 @@ namespace calendarioid4backend.Controllers
 
         [AllowAnonymous]
         [HttpPost("CreateUser")]
-        
         public IActionResult Create()
         {
             try
             {
                 Task<string> task = null;
-            using (StreamReader reader =  new StreamReader(Request.Body, Encoding.UTF8))
-            {
-                task = reader.ReadToEndAsync();
-            };
-             
-            Utilizador newuser= JsonConvert.DeserializeObject<Utilizador>(task.Result);
-                
-            
-                if (Context.Utilizadors.Where(u => u.Email == newuser.Email).FirstOrDefault() != null)
+                using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
+                {
+                    task = reader.ReadToEndAsync();
+                }
+
+                Utilizador newuser = JsonConvert.DeserializeObject<Utilizador>(task.Result);
+
+                if (Context.Utilizadors.Any(u => u.Email == newuser.Email))
                 {
                     return Ok(58);
                 }
 
-               // newuser.Password=Encriptacao.EncryptPassword(newuser.Password);
+                newuser.Password = Encriptacao.HashPassword(newuser.Password);
                 newuser.Datacriacao = DateTime.Now;
                 newuser.Dataultimaedicao = DateTime.Now;
                 newuser.Estadoid = 1;
                 Context.Utilizadors.Add(newuser);
                 Context.SaveChanges();
-                return Ok(200);
 
+                return Ok(200);
             }
             catch (Exception ex)
             {
-                return Ok("Error"+ex);
+                return Ok("Error: " + ex);
             }
-            
         }
 
         [AllowAnonymous]
@@ -96,46 +94,37 @@ namespace calendarioid4backend.Controllers
                 using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
                 {
                     task = reader.ReadToEndAsync();
-                };
-
-                
-                    Utilizador user = JsonConvert.DeserializeObject<Utilizador>(task.Result);
-                
-                var userAvailable = Context.Utilizadors.Where(u => u.Email == user.Email && /*Encriptacao.DecryptPassword(*/u.Password == user.Password).FirstOrDefault();
-                bool isaprovador = true;
-                var aprovador = Context.Aprovadors.Where(a => a.Aprovadorid == userAvailable.Id);
-                if(!aprovador.Any())
-                {
-                     isaprovador = false;
                 }
-               
-                //bool passwordequal = BCrypt.Net.BCrypt.Verify(user.Password, userAvailable.Password);
 
+                Utilizador user = JsonConvert.DeserializeObject<Utilizador>(task.Result);
 
-                if (userAvailable != null)
+                var userAvailable = Context.Utilizadors.FirstOrDefault(u => u.Email == user.Email);
+                if (userAvailable != null && Encriptacao.VerifyPassword(user.Password, userAvailable.Password))
                 {
+                    bool isAprovador = Context.Aprovadors.Any(a => a.Aprovadorid == userAvailable.Id);
+
                     var token = new JwtService(Config).GenerateToken(
                         userAvailable.Id.ToString(),
                         userAvailable.Nome,
                         userAvailable.Email,
                         userAvailable.Telemovel.ToString(),
                         userAvailable.IsAdmin.ToString(),
-                        isaprovador.ToString()
-                        );
+                        isAprovador.ToString()
+                    );
+
                     Token res = new Token() { token = token };
                     return Ok(res);
-                  
                 }
-                return Ok(400);
 
-            }catch(Exception ex)
-            {
-                return BadRequest("Error"+ex);
+                return Ok(400);
             }
-            
+            catch (Exception ex)
+            {
+                return BadRequest("Error: " + ex);
+            }
         }
 
-       
+
         [HttpGet("Getuser/{id}")]
         public async Task<ActionResult<List<Utilizador>>> GetUser(int id)
         {

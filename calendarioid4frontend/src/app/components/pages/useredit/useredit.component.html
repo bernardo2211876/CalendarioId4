@@ -34,10 +34,10 @@
     <input type="text" class="form-control" id="idutilizadorultimaedicao" placeholder=""
     formControlName="idutilizadorultimaedicao" [hidden]="true" [(ngModel)]="this.data.id" >
   </div>
-  
+
     <div class="form-floating">
       <input type="text" class="form-control" id="nome"
-      formControlName="nome" [(ngModel)]="user.Nome" >
+      formControlName="nome" [(ngModel)]="user[0].utilizador.Nome" >
       <label for="floatingInput">Nome</label>
       <div class="form-text text-danger" *ngIf="Nome.errors?.['required'] && (Nome.dirty || Nome.touched)">
         Nome é obrigatório
@@ -46,7 +46,7 @@
 
     <div class="form-floating">
       <input type="email" class="form-control" id="email"
-      formControlName="email" [(ngModel)]="user.Email">
+      formControlName="email" [(ngModel)]="user[0].utilizador.Email">
       <label for="floatingInput">Email</label>
       <div class="form-text text-danger" *ngIf="Email.errors?.['required'] && (Email.dirty || Email.touched)">
         Email é obrigatório
@@ -62,7 +62,7 @@
 
     <div class="form-floating">
       <input type="text" class="form-control" id="nif"
-      formControlName="nif" [(ngModel)]="user.Nif">
+      formControlName="nif" [(ngModel)]="user[0].utilizador.Nif">
       <label for="floatingInput">NIF</label>
       <div class="form-text text-danger" *ngIf="Nif.errors?.['required'] && (Nif.dirty || Nif.touched)">
         NIF é obrigatório
@@ -74,7 +74,7 @@
 
     <div class="form-floating">
       <input type="text" class="form-control" id="codpostal"
-      formControlName="codpostal" [(ngModel)]="user.Codpostal">
+      formControlName="codpostal" [(ngModel)]="user[0].utilizador.Codpostal">
       <label for="floatingInput">Código Postal</label>
       <div class="form-text text-danger" *ngIf="Codpostal.errors?.['required'] && (Codpostal.dirty || Codpostal.touched)">
         Código Postal é obrigatório
@@ -83,7 +83,7 @@
 
     <div class="form-floating">
       <input type="text" class="form-control" id="morada"
-      formControlName="morada" [(ngModel)]="user.Morada">
+      formControlName="morada" [(ngModel)]="user[0].utilizador.Morada">
       <label for="floatingInput">Morada</label>
       <div class="form-text text-danger" *ngIf="Morada.errors?.['required'] && (Morada.dirty || Morada.touched)">
         Morada é obrigatório
@@ -92,7 +92,7 @@
 
     <div class="form-floating">
       <input type="text" class="form-control" id="telemovel"
-      formControlName="telemovel" [(ngModel)]="user.Telemovel">
+      formControlName="telemovel" [(ngModel)]="user[0].utilizador.Telemovel">
       <label for="floatingInput">Contacto Telefónico</label>
       <div class="form-text text-danger" *ngIf="Telemovel.errors?.['required'] && (Telemovel.dirty || Telemovel.touched)">
         Contacto Telefónico é obrigatório
@@ -104,7 +104,7 @@
 
     <div class="form-floating">
       <input type="text" class="form-control" id="funcao"
-      formControlName="funcao" [(ngModel)]="user.Funcao">
+      formControlName="funcao" [(ngModel)]="user[0].utilizador.Funcao">
       <label for="floatingInput">Função</label>
       <div class="form-text text-danger" *ngIf="Funcao.errors?.['required'] && (Funcao.dirty || Funcao.touched)">
         Função é obrigatório
