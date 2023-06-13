@@ -16,6 +16,8 @@ namespace calendarioid4backend.Controllers
             Context = context;
         }
 
+        
+        
         [HttpGet]
         public async Task<ActionResult<List<TipoAusencium>>> GetTipoAusencia()
         {
