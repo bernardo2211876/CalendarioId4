@@ -31,7 +31,7 @@ public partial class Id4calendariobdContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=192.168.16.11\\SQL2019LAB;database=id4calendariobd;Integrated Security=False;User ID=id4calendariouser;Password=Id4Cal123!;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        => optionsBuilder.UseSqlServer("Data Source=192.168.16.11\\SQL2019LAB;Initial Catalog=id4calendariobd;User Id=id4calendariouser;Password=Id4Cal123!;trusted_connection=false;encrypt=false;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -120,6 +120,7 @@ public partial class Id4calendariobdContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("dataultimaedicao");
             entity.Property(e => e.Descricao)
+                .IsRequired()
                 .HasMaxLength(250)
                 .IsUnicode(false)
                 .HasColumnName("descricao");
@@ -146,6 +147,7 @@ public partial class Id4calendariobdContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.Designacao)
+                .IsRequired()
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("designacao");
@@ -159,6 +161,7 @@ public partial class Id4calendariobdContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.Designacao)
+                .IsRequired()
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("designacao");
@@ -170,6 +173,7 @@ public partial class Id4calendariobdContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Designacao)
+                .IsRequired()
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("designacao");
@@ -181,6 +185,7 @@ public partial class Id4calendariobdContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Codpostal)
+                .IsRequired()
                 .HasMaxLength(8)
                 .IsUnicode(false)
                 .HasColumnName("codpostal");
@@ -191,11 +196,13 @@ public partial class Id4calendariobdContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("dataultimaedicao");
             entity.Property(e => e.Email)
+                .IsRequired()
                 .HasMaxLength(90)
                 .IsUnicode(false)
                 .HasColumnName("email");
             entity.Property(e => e.Estadoid).HasColumnName("estadoid");
             entity.Property(e => e.Funcao)
+                .IsRequired()
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("funcao");
@@ -203,16 +210,18 @@ public partial class Id4calendariobdContext : DbContext
             entity.Property(e => e.Idutilizadorultimaedicao).HasColumnName("idutilizadorultimaedicao");
             entity.Property(e => e.IsAdmin).HasColumnName("isAdmin");
             entity.Property(e => e.Morada)
+                .IsRequired()
                 .HasMaxLength(150)
                 .IsUnicode(false)
                 .HasColumnName("morada");
             entity.Property(e => e.Nif).HasColumnName("nif");
             entity.Property(e => e.Nome)
+                .IsRequired()
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("nome");
             entity.Property(e => e.Password)
-                .HasMaxLength(50)
+                .HasMaxLength(150)
                 .IsUnicode(false)
                 .HasColumnName("password");
             entity.Property(e => e.Telemovel).HasColumnName("telemovel");

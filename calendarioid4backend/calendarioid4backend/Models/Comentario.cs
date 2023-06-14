@@ -17,13 +17,13 @@ public partial class Comentario
     [JsonPropertyName("Dataultimaedicao")]
     public DateTime Dataultimaedicao { get; set; }
     [JsonPropertyName("Descricao")]
-    public string Descricao { get; set; } = null!;
+    public string Descricao { get; set; }
     [JsonPropertyName("Utilizadorid")]
     public int Utilizadorid { get; set; }
     [JsonPropertyName("Ausenciaid")]
     public int Ausenciaid { get; set; }
-    [JsonIgnore]
-    public virtual Ausencium Ausencia { get; set; } = null!;
-    [JsonIgnore]
-    public virtual Utilizador Utilizador { get; set; } = null!;
+
+    public virtual Ausencium Ausencia { get; set; }
+
+    public virtual Utilizador Utilizador { get; set; }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace calendarioid4backend.Models;
@@ -18,22 +17,21 @@ public partial class Utilizador
     [JsonPropertyName("Dataultimaedicao")]
     public DateTime? Dataultimaedicao { get; set; }
     [JsonPropertyName("Nome")]
-    public string Nome { get; set; } = null!;
+    public string Nome { get; set; }
     [JsonPropertyName("Email")]
-    public string Email { get; set; } = null!;
+    public string Email { get; set; }
     [JsonPropertyName("Password")]
-    [MaxLength(200)]
-    public string Password { get; set; } = null!;
+    public string Password { get; set; }
     [JsonPropertyName("Nif")]
     public int Nif { get; set; }
     [JsonPropertyName("Codpostal")]
-    public string Codpostal { get; set; } = null!;
+    public string Codpostal { get; set; }
     [JsonPropertyName("Morada")]
-    public string Morada { get; set; } = null!;
+    public string Morada { get; set; }
     [JsonPropertyName("Telemovel")]
     public int Telemovel { get; set; }
     [JsonPropertyName("Funcao")]
-    public string Funcao { get; set; } = null!;
+    public string Funcao { get; set; }
     [JsonPropertyName("IsAdmin")]
     public bool IsAdmin { get; set; }
     [JsonPropertyName("Estadoid")]
@@ -47,5 +45,5 @@ public partial class Utilizador
 
     public virtual ICollection<Comentario> Comentarios { get; } = new List<Comentario>();
 
-    public virtual EstadoUtilizador Estado { get; set; } = null!;
+    public virtual EstadoUtilizador Estado { get; set; }
 }

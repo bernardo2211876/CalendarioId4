@@ -23,17 +23,17 @@ public partial class Ausencium
     [JsonPropertyName("Datahorafim")]
     public DateTime Datahorafim { get; set; }
     [JsonPropertyName("Motivo")]
-    public string? Motivo { get; set; }
+    public string Motivo { get; set; }
     [JsonPropertyName("Utilizadorid")]
     public int Utilizadorid { get; set; }
     [JsonPropertyName("Estadoid")]
     public int Estadoid { get; set; }
 
     public virtual ICollection<Comentario> Comentarios { get; } = new List<Comentario>();
+ 
+    public virtual EstadoAusencium Estado { get; set; }
+    
+    public virtual TipoAusencium Tipo { get; set; }
 
-    public virtual EstadoAusencium Estado { get; set; } = null!;
-
-    public virtual TipoAusencium Tipo { get; set; } = null!;
-    [JsonIgnore]
-    public virtual Utilizador Utilizador { get; set; } = null!;
+    public virtual Utilizador Utilizador { get; set; }
 }

@@ -6,9 +6,10 @@ namespace calendarioid4backend.Models;
 
 public partial class EstadoAusencium
 {
+    [JsonPropertyName("Id")]
     public int Id { get; set; }
+    [JsonPropertyName("Designacao")]
+    public string Designacao { get; set; }
 
-    public string Designacao { get; set; } = null!;
-    [JsonIgnore]
     public virtual ICollection<Ausencium> Ausencia { get; } = new List<Ausencium>();
 }

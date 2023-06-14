@@ -69,7 +69,7 @@ namespace calendarioid4backend.Controllers
                     return Ok(58);
                 }
 
-                newuser.Password = Encriptacao.HashPassword(newuser.Password);
+                newuser.Password = Encriptacao.HashPassword(newuser.Password.ToString());
                 newuser.Datacriacao = DateTime.Now;
                 newuser.Dataultimaedicao = DateTime.Now;
                 newuser.Estadoid = 1;
