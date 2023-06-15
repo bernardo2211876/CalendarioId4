@@ -41,13 +41,8 @@ namespace calendarioid4backend.Controllers
         [HttpGet]
         public async Task<ActionResult> GetUsers()
         {
-            var utilizadores = await Context.Utilizadors.Include(p=>p.AprovadorUtilizadors).ToListAsync();
+            var utilizadores = await Context.Utilizadors.ToListAsync();
             return Ok(utilizadores);
-           /*return Ok(await Context.Utilizadors
-                .Include(p => p.Ausencia)
-                .Include(p => p.AprovadorUtilizadors)
-                .Include(p => p.Estado)
-                .ToListAsync());*/
         }
 
         [AllowAnonymous]

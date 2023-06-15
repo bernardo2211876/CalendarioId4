@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
   loginSubmited(){
     this.authService.loginUser(this.loginForm.getRawValue())
     .subscribe( (res: any)=>{
-
        if(res == 400){
         this.toastservice.error(
           'Credencias inválidas',
