@@ -207,7 +207,7 @@ public partial class Id4calendariobdContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("funcao");
             entity.Property(e => e.Idutilizadorcriador).HasColumnName("idutilizadorcriador");
-            entity.Property(e => e.Idutilizadorultimaedicao).HasColumnName("idutilizadorultimaedicao");
+            entity.Property(e => e.Utilizadorultimaedicao).HasColumnName("idutilizadorultimaedicao");
             entity.Property(e => e.IsAdmin).HasColumnName("isAdmin");
             entity.Property(e => e.Morada)
                 .IsRequired()

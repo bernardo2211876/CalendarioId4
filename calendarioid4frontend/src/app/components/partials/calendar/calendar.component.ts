@@ -84,7 +84,7 @@ import { AuthService } from 'src/app/services/services/auth.service';
                 color = { primary: 'grey', secondary: 'lightgrey' };
                 title= 'Pendente';
               } else {
-                // Default color if estadoid is not 1, 2, or 3
+                // Gray color for estadoid == 4
                 color = { primary: 'gray', secondary: 'lightgray' };
                 title= 'Cancelado';
               }
@@ -117,7 +117,6 @@ import { AuthService } from 'src/app/services/services/auth.service';
     }
 
     viewEventDetails(eventid): void {
-      console.log('View event details:', eventid);
       this._router.navigate(['/ausenciaview', eventid]);
       this.cdr.detectChanges();
     }
@@ -139,7 +138,7 @@ import { AuthService } from 'src/app/services/services/auth.service';
       } else {
 
       }*/
-      const eventId = event.meta.event.Id;debugger
+      const eventId = event.meta.event.Id;
       this.viewEventDetails(eventId);
     }
 

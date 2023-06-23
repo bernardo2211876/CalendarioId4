@@ -13,7 +13,7 @@ public partial class Utilizador
     [JsonPropertyName("Datacriacao")]
     public DateTime Datacriacao { get; set; }
     [JsonPropertyName("Idutilizadorultimaedicao")]
-    public int Idutilizadorultimaedicao { get; set; }
+    public int Utilizadorultimaedicao { get; set; }
     [JsonPropertyName("Dataultimaedicao")]
     public DateTime? Dataultimaedicao { get; set; }
     [JsonPropertyName("Nome")]

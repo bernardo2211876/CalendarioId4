@@ -44,7 +44,7 @@ namespace calendarioid4backend.Controllers
             var utilizadores = await Context.Utilizadors.ToListAsync();
             return Ok(utilizadores);
         }
-
+         
         [AllowAnonymous]
         [HttpPost("CreateUser")]
         public IActionResult Create()
@@ -127,13 +127,15 @@ namespace calendarioid4backend.Controllers
             {
                 var utilizador = await Context.Utilizadors.Where(u => u.Id == id)
                                 .Join(Context.Utilizadors,
-                                                utilizador => utilizador.Idutilizadorultimaedicao,
+                                                utilizador => utilizador.Utilizadorultimaedicao,
                                                 user => user.Id,
                                                 (utilizador, user) => new {
                                                     Utilizador = utilizador,
                                                     Nomeutilizadorlastedit = user.Nome
                                                 })
-                                                .ToListAsync(); ;
+                                                .ToListAsync();
+
+
                 if (utilizador == null)
                 {
                     return NotFound();
