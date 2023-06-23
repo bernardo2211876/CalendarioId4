@@ -24,7 +24,7 @@
      <h1 class="h4">Registar Utilizador</h1>
      <p class="mb-0">Nesta página é possível criar uma conta de utilizador</p>
   </div>
-  <div><a [routerLink]="['/userlist']" routerLinkActive="router-link-active"  class="btn btn-outline-gray"><i class="fa-solid fa-list"></i>&nbsp;Lista de Utilizador</a></div>
+  <div><a [routerLink]="['/userlist']" routerLinkActive="router-link-active"  class="btn btn-outline-gray btn-secondary"><i class="fa-solid fa-list"></i>&nbsp;Lista de Utilizador</a></div>
 </div>
 <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <form class=" p-3 rounded-3" [formGroup]="registerForm" (ngSubmit)="registerSubmited()">
@@ -148,7 +148,7 @@
   </div>
 
 
-    <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="registerForm.invalid">Registar</button>
+    <button class="w-100 btn btu btn-lg btn-primary" type="submit" [disabled]="registerForm.invalid">Registar</button>
 
   </form>
   <app-footer></app-footer>
